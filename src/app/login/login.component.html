@@ -1,0 +1,22 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Log in</mat-card-title>
+      </mat-card-header>
+  
+      <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Username" class="form-control" name="userName" [(ngModel)]="form.userName" required #userName="ngModel">
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width">
+            <input matInput type="password" placeholder="Password" class="form-control" name="password" [(ngModel)]="form.password" required #password="ngModel">
+          </mat-form-field>
+        </mat-card-content>
+        <button mat-stroked-button color="accent" class="btn-block" type="submit">Log in</button>
+      </form>
+    </mat-card>
+  
+  </div>

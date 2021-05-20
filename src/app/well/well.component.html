@@ -1,0 +1,52 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+  
+    
+   
+  
+    <!-- Well name Column -->
+    <ng-container matColumnDef="wellName">
+      <th mat-header-cell *matHeaderCellDef>  Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.WellName}} </td>
+    </ng-container>
+  
+    <!-- Well Type Column -->
+    <ng-container matColumnDef="wellType">
+      <th mat-header-cell *matHeaderCellDef>  Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.WellType}} </td>
+    </ng-container>
+
+    
+       <!-- navigate to Well Column -->
+       <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element"> <button mat-raised-button class="btn btn-primary-outline pull-right" (click)="getWellData(element.Id);">&nbsp;<mat-icon>show_chart</mat-icon>&nbsp; Well Data</button></td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+  </table>
+
+<!--<div id="button">
+  <button mat-raised-button color="primary" type="button" class="btn" (click)="onClickbutton($event)">View Well(s)</button>
+</div> <input type="hidden" value="{{element.ProjectId}}">-->
+  

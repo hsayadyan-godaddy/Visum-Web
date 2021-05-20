@@ -1,0 +1,72 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+  
+    
+   
+  
+    <!-- Project name Column -->
+    <ng-container matColumnDef="projectName">
+      <th mat-header-cell *matHeaderCellDef> Project Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.ProjectName}} </td>
+    </ng-container>
+  
+    <!-- Country Column -->
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef> Country </th>
+      <td mat-cell *matCellDef="let element"> {{element.Country}} </td>
+    </ng-container>
+
+    <!-- reservoir Column -->
+    <ng-container matColumnDef="reservoir">
+      <th mat-header-cell *matHeaderCellDef> Reservoir </th>
+      <td mat-cell *matCellDef="let element"> {{element.Reservoir}} </td>
+    </ng-container>
+
+     <!-- Pad Column -->
+     <ng-container matColumnDef="pad">
+      <th mat-header-cell *matHeaderCellDef> Pad / Platform </th>
+      <td mat-cell *matCellDef="let element"> {{element.Pad}} </td>
+    </ng-container>
+
+     <!-- API Column -->
+     <ng-container matColumnDef="api">
+      <th mat-header-cell *matHeaderCellDef> API </th>
+      <td mat-cell *matCellDef="let element"> {{element.API}} </td>
+    </ng-container>
+
+     <!-- Field Column -->
+     <ng-container matColumnDef="field">
+      <th mat-header-cell *matHeaderCellDef> Field </th>
+      <td mat-cell *matCellDef="let element"> {{element.Field}} </td>
+    </ng-container>
+
+       <!-- navigate to Well Column -->
+       <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element"> <button mat-raised-button class="btn btn-primary-outline pull-right" (click)="getProjectDetails(element.Id);">&nbsp;<mat-icon>info</mat-icon>&nbsp; Project Details</button></td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+  </table>
+
+  
