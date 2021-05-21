@@ -5,13 +5,34 @@ import { Color, Label  } from 'ng2-charts';
 import { Subscription } from 'rxjs';
 import { SharedService } from '../shared.service';
 
+
+export interface WellData {
+  WellId: string;
+  WellName : string ;
+  WellType: string;
+  ProjectName: string;
+  Status: string
+}
+
+
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
+
+
 export class ViewComponent implements OnInit {
 private eventSubsciption$ : Subscription;
+
+ dataSource : WellData = {
+WellName : '',
+ProjectName : '',
+Status : '',
+WellType : '',
+WellId: ''
+};  
+
 
   public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Weel  A' },
@@ -62,12 +83,16 @@ private eventSubsciption$ : Subscription;
   ) { }
 
   ngOnInit()  {
-    this.eventSubsciption$ = this.sharedService.getServerSentEvent().subscribe(event =>
+ this.getWellData();
+ var pid = this.actRoute.snapshot.paramMap.get('id');
+    this.eventSubsciption$ = this.sharedService.getServerSentEvent(pid).subscribe(event =>
     {
         let data = JSON.parse(event.data);
         console.log(data);
         this.pushEventToChartData(data);
-      })
+      });
+      
+     
   }
   pushEventToChartData(event: any) : void {
     this.lineChartData[0].data.push(event.data);
@@ -77,5 +102,14 @@ private eventSubsciption$ : Subscription;
   getLabel(event: any): string {
     return `${event.window}`;
   };
+
+  getWellData(){
+    this.dataSource.WellName = '';
+    var pid = this.actRoute.snapshot.paramMap.get('id');
+    this.sharedService.getWellById(pid).subscribe((data:WellData)=>{
+      console.log(data);
+      this.dataSource = data;
+    })
+  }
   
 }

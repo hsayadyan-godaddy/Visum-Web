@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SharedService {
-  
 
   readonly AppUrl = "http://localhost:5000/api";
   readonly url = "http://localhost:9092"
@@ -18,10 +17,10 @@ export class SharedService {
     private _zone : NgZone
   ){}
 
-  getServerSentEvent() : Observable<any> { // url:string well id
+  getServerSentEvent(id: string) : Observable<any> { // url:string well id
 
     return Observable.create(observer => {
-      const eventSource = this.getEventSource(this.url);
+      const eventSource = this.getEventSource(this.AppUrl+"/Data/"+id);
       eventSource.onmessage = event => {
         this._zone.run(()=> {
           observer.next(event);
@@ -49,7 +48,10 @@ export class SharedService {
     return this.http.get(this.AppUrl + "/well/wells/"+ projectId )
   }
  
-
+  getWellById(pid: string) : Observable<any> {
+    return this.http.get(this.AppUrl + "/well/welldata/"+ pid );
+  }
+  
   //getWellData(wellId)  : Observable<any> {
     //return this.http.get(this.KafkaUrl )
   //}

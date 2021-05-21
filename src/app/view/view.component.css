@@ -1,5 +1,12 @@
 .flex {
     
     position: relative;
-    margin: 5% 5% 0 60%;
+    margin: 5% 40% 0 10%;
+}
+
+
+.welldata {
+    position: relative;
+    width: 20%;
+    margin: 5% 0 0 10%;
 }
