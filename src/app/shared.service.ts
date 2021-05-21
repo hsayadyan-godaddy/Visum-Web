@@ -2,7 +2,6 @@ import { Injectable, NgZone } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { Router } from '@angular/router';
-import { Project } from './projects/projects.component';
 
 @Injectable({
   providedIn: 'root'

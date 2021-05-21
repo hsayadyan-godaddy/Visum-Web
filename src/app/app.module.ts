@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SharedService} from './shared.service'
+import { SharedService} from './shared.service';
 import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/aouthconfig.interceptor';
 import { ProjectsComponent } from './projects/projects.component';
