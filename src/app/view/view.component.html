@@ -23,13 +23,20 @@
                   [chartType]="lineChartType"></canvas>
       </div>
     </div>
-    <div class="flex-item">
-      <table class="table table-responsive table-condensed">
+
+<br>
+    <div >
+      <table>
         <tr>
-          <th *ngFor="let label of lineChartLabels">{{label}}</th>
+          <th>Time</th>
+          <th>Pressure</th>
+          <th>Temperature</th>
         </tr>
-        <tr *ngFor="let d of lineChartData; let i=index" [class]="'line-'+i">
-          <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+        <tr *ngFor="let d of wellDataList; let i=index;" [class]="'line-'+i" >
+          
+          <td>{{d.DateTime}}</td>
+          <td>{{d.Pressure}}</td>
+          <td>{{d.Temperature}}</td>
         </tr>
       </table>
     </div>
