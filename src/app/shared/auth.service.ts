@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map }  from 'rxjs/operators';
 import { HttpClient , HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router }  from '@angular/router';
-
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +14,7 @@ export class AuthService {
 endpoint: string  = "http://localhost:5000/api";
 headers = new HttpHeaders().set('Content-Type','application/json');
 currentUser = {};
+public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 constructor(
   private http: HttpClient,
@@ -24,11 +25,11 @@ constructor(
 signIn(user: User){
   return this.http.post<any>(`${this.endpoint}/account/login`, user,  { headers : this.headers})
   .subscribe((res: any)=> {
+    localStorage.setItem('user_name',user.userName)
     localStorage.setItem('access_token', res.token)
-    //this.getUserProfile(res._id).subscribe((res)=> {
-     // this.currentUser = res;
-      this.router.navigate(['projects/']);
-    //})
+    this.isUserLoggedIn.next(true);
+    this.router.navigate(['projects/']);
+    
   })
 }
 
@@ -38,7 +39,7 @@ getToken(){
 
 get isLoggedIn() : boolean {
   let authToken = localStorage.getItem('access_token');
-  return (authToken !== null || authToken !== 'null' || authToken !== undefined) ? true : false;
+  return (authToken == null) ? false : true;
 }
 
   logout() {

@@ -1,0 +1,41 @@
+<div class="menu_icon" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen" opened>
+    <button mat-icon-button (click)="onToolbarMenuToggle()" id="toolbarMenu">
+        <img src="../../../../assets/images/play-arrow.svg">
+    </button>
+</div>
+<mat-sidenav-container id="sidenavContainer" fullscreen>
+    <mat-sidenav mode="side" #sidenav id="sidenav" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen"
+        opened>
+        <mat-list role="list">
+            <mat-list-item title="Home" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'home'}"
+                (click)="router.navigate(['/home']);isActive = 'home'">
+                <span class="discrepancies" style="padding-right: 10%;">
+                    <img src="assets/images/home.png">
+                </span>
+                <div *ngIf="isMenuOpen">Home</div>
+            </mat-list-item>
+            <mat-list-item title="project" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'project'}"
+                (click)="router.navigate(['/projects']);isActive = 'project'">
+                <span  class="discrepancies" style="padding-right: 10%;">
+                    <img src="assets/images/layers.png">
+                </span>
+                <div *ngIf="isMenuOpen">Project</div>
+            </mat-list-item>
+            
+            <mat-list-item title="well" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'well'}"
+                (click)="router.navigate(['/well/609d8252c62d2a1a325fa221']);isActive = 'well'">
+                <span class="discrepancies" style="padding-right: 10%;">
+                    <img src="assets/images/water-well.png">
+                </span>
+                <div *ngIf="isMenuOpen">Well</div>
+            </mat-list-item>
+            
+
+        </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
+        <div class="main_content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

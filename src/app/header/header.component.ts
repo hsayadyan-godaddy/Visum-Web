@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef,OnDestroy } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 import { Observable, of } from 'rxjs';
+import {MediaMatcher} from '@angular/cdk/layout';
+import { FormControl } from '@angular/forms';
+import { TooltipPosition } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-header',
@@ -8,18 +11,28 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  isLoggedIn$: Observable<boolean>;
-
-
-  constructor(private authService: AuthService) { }
-
+  public positionOptions: TooltipPosition[] = ['left']; // Tooltip postion
+  // tslint:disable-next-line:typedef
+  public position = new FormControl(this.positionOptions[0]); 
+  userDisplayName = '';
+  isLoggedin:boolean=false;
+  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
+  
+  constructor(private authService: AuthService) {
+    this.authService.isUserLoggedIn.subscribe( value => {
+      this.isLoggedin = value;
+  });
+  }
+    
   ngOnInit() {
-    this.isLoggedIn$ = of(this.authService.isLoggedIn);
+   
+   this.isLoggedin = this.authService.isLoggedIn;
+   this.userDisplayName = localStorage.getItem('user_name');
   }
 
   onLogout() {
     this.authService.logout();
+    this.isLoggedin = false;
   }
 
 }
