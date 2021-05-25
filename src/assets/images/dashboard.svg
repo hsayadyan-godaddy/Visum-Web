@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="18px" height="14.523px" viewBox="0 2 18 14.523" enable-background="new 0 2 18 14.523" xml:space="preserve">
+<title>dashboard</title>
+<desc>Created with Sketch.</desc>
+<g id="Page-1">
+	<g id="Dashboard_1_" transform="translate(-24.000000, -144.000000)">
+		<g id="Left-nav" transform="translate(-4.000000, 89.000000)">
+			<g id="Dashboard" transform="translate(3.000000, 45.000000)">
+				<g id="h-dashboard" transform="translate(25.000000, 10.000000)">
+					<path id="Shape" fill="#046B99" d="M8.938,2C4.009,2,0,6.009,0,10.938c0,1.945,0.622,3.799,1.8,5.363l0.167,0.223h13.94
+						l0.168-0.223c1.177-1.564,1.8-3.418,1.8-5.363C17.875,6.009,13.866,2,8.938,2z M8.379,3.676h1.117v1.676H8.379V3.676z
+						 M3.352,11.496H1.676v-1.117h1.676V11.496z M4.593,7.383L3.408,6.198l0.79-0.79l1.185,1.184L4.593,7.383z M9.461,11.956
+						c-0.563,0.253-1.224,0.003-1.478-0.559c-0.253-0.563-1.28-5.551-1.28-5.551s3.063,4.069,3.316,4.632
+						C10.273,11.04,10.023,11.701,9.461,11.956z M13.282,7.383l-0.79-0.79l1.184-1.185l0.79,0.79L13.282,7.383z M14.523,11.496
+						v-1.117h1.676v1.117H14.523z"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

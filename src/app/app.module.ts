@@ -18,6 +18,8 @@ import { ViewComponent } from './view/view.component';
 import { HeaderComponent } from './header/header.component';
 import { ChartsModule } from 'ng2-charts';
 import { WellComponent } from './well/well.component';
+import { SidebarComponent } from "./sidebar/sidebar.component";
+import { FooterComponent } from "./footer/footer.component";
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { WellComponent } from './well/well.component';
     HomeComponent,
     ViewComponent,
     HeaderComponent,
-    WellComponent
+    WellComponent,
+    SidebarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,28 @@
 <!-- Toolbar -->
-<mat-toolbar color="primary" class="app-header" *ngIf=isLoggedIn$ >
-    <span class="fill-remaining-space"></span>
-    <span class="nav-tool-items">
-      <a mat-button routerLink="login" routerLinkActive="active">Log in</a>>
+<mat-toolbar style="background-color: rgba(128, 139, 150);"  class="app-header"  >
+  <span class="fill-remaining-space"></span>
+  <span class="nav-tool-items" *ngIf=!isLoggedin>
+    <a mat-button routerLink="login" routerLinkActive="active" >Log in</a>
+    
+  </span>
+  <span class="nav-tool-items"  *ngIf=isLoggedin>
+    <span class="logout">
+      <span class="bell-icon">
+        <mat-icon>notifications_none</mat-icon>
+      </span>
+       <button  mat-mini-fab matTooltip="{{userDisplayName}}" [matMenuTriggerFor]="menu" [matTooltipPosition]="position.value"  color="accent">
+        <mat-icon>perm_identity</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>power_settings_new</mat-icon>
+            <a (click)="onLogout()">Log Out</a>
+          </button>
+      </mat-menu>
     </span>
-  </mat-toolbar>
+    
+  </span>
+  
+</mat-toolbar>
 
 
