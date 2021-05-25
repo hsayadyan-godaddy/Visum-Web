@@ -1,0 +1,40 @@
+.example-card {
+    width: 300px;
+    margin: 5% 5% 5% 2%;
+    position: relative;
+    float:left; /* add this */
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: 10px 10px  gray;
+  }
+  
+  .example1-header-image {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAjVBMVEXMAAD////JAADNBATNBwf+/Pz++fnhaWnODAz77Oz429vPERH99vbrmprVLy/43t7SHx/RGRn0ycnibm7yvLzle3v31dXeWVnfYWHzwsLYPT3jdnb20dHxt7f65ubnh4fuqancTk7VKyvvsbHsoaHmgYHdU1PeXFzYPj7aR0fXNjbTJCTnhobpkpLuq6vNSbc7AAAE70lEQVR4nO2Xa3fqKhCGuYQkJmq8X6qm3q267f//eWcGSELUnnX64Xza77O6WgZmgBcGSIUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP4iNPHW0PrFakcFZhWo27x4euPVTb9WiZcKEZZf5qCId4ZWKmxqGc9htalaCP0c+NZN6ZcactLtuqYv6/86Bb1IkmToiuI+TsZnXy++xtSy8Esh+k0Tm3syd00vObumIk0CFrs7D38LPXdk7IU+jwO/+Z6mcw1rkvGFZKS78bRidc55zjaOetNhZ77r1Egpb1akVgsqr/1Uhx3JLHzTqm6yZkLmqDH7ZMZDdZctup/U9IcKy8pzRMZYRVnLzZyEmLQjO7m6Fu2aC63KzJXPbk+WtrNaSClNXAm5yK4fVKuHjI2JZZY6c1w3ecldOQmExEaWQzXoSmPq+RleBjUlz03luSEjUdGI+g7dvtTGl314GQ25q9j7xOxOk+S4OJbdvZ2v66wWQgtvGiGxm61We9eJkVNuYyFxKCQhMxRCA3WsEGmy9WxNP7R6sTyykLgRMiHDCjGyU1i67HZSRzZLVlFyYSR4PGeQyVpkj4UYO6dZyhm1sZ21hPTdoVFzahq5qW15picecEBBvxDSvfvOeuSyFT8KueicGXLVQ3ExHXA2XSMuU7SRJrEuebrrkDURJESaGSs5NJ2FQuTysGEOa/IZ2Zl9sftVlG4lfiVkt7/1+7dbnxfs8+cd2Xm9nHoPV05ZyIctqyMPUF1KdlGWfMSMPG85G080qTdCgoPnjzA7LXn6hvdL/0IIHTmL4UXMhTr9IGQu0ohIDza1OH1F7oTYVD7axPR3pl2NiReiC06wuXqTWs9CtDpLe7qUouMlD78TEvA9+FlImXH6Z5z/3b6bzrOQXi1k1ezIRd3oHuCYNztSzCzrskotzrHZeX7Z9XgfrypyQqpnNrJClvXb2zrsm60j4860F+Kf5E0jpFm68sPP5lnIVkV+uFOzI3NFR5n+ZnYvn4R82G1O6VJlIbzeprpH+UIc+TMyaR7apG2GZyT3dTe+a/p2MbPUVaWcFU9C+Ijm4q2Qta763zQ7MqdV/eTZbd/cWjfldpCv3xHlahkORDH0HPBpKXueh5XcmNG+ERJPLwvmcuTYD+splyvLkjubu2v0OOaacc9YbS+p9clhGxe2+uYt+HZxc24/cGsQ6YSY9jvisqH7+PPJnNZkFDnvSCOuKxbByydNvifLCWmvQHeg7t3w9aOOB3yNxpSvjgndWtNaiKmE7KQxYV8xP+IcR0JoqTPu1LR2hM9n+xPlzlU9FWQIXaOrMBc69hOl0ZXv+TcJaWWM7YWTsgUNTUeQrx17AGhxZS2ET/6Xn9rxqaslfWJw3MW+Bn1/rQSfKKMiy/peyLmcld/q1Jlls3t1ktWjnBXr6FJmNcVInENznd65cqiGs6KpztbLqf1k3R2Kjic7XPnD9kDjXP0UelSuUmtZZMWtuqqSSR3WKZdT/lT6Jt+d27GzHam81EIEX+b1PUplbWvC/zWszU0N4smsemnV0hesjVciSj2R+wYPR9BBuTVyEJamwn7HP8e15/k/ooPfvua/j6z/xQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/kr+AZlxVEEbl1psAAAAAElFTkSuQmCC');
+    background-size: cover;
+  }
+
+  .mat-footer {
+      text-align: left;
+      margin: 10px;
+  }
+
+  .active{
+      color: green;
+  }
+
+  .stopped {
+      color: red;
+  }
+  .inactive {
+      color: gray;
+  }
+
+  .example2-header-image {
+      background-image: url('https://www.towntalkradio.com/wp-content/uploads/2020/06/Untitled-design-5-3.jpg');
+      background-size: cover;
+      
+  }
+
+  .example3-header-image {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAkFBMVEX8/vwEAgTs7uyEgoR8fnz08vT8+vzs6uxsbmzU1tTc2twUFhRsamz09vTk5uR0cnQcGhwcHhwEBgScnpwMDgyMioy8urzk4uRUVlTMysy0trTExsRcXlx8enxkZmTEwsSkpqSUlpQkJiRMSkw0MjQkIiRERkQUEhSEhoRUUlRcWlwsKixMTkw8Ojx0dnQ0NjT5NCnqAAAEhUlEQVR4nO3W23aqOhQGYE4BBUXlKKgIth5qPbz/2605k4DQumz31V4X/zc6OgiEJJOZxBgGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADA/8/1LMvVl8KyhL49FY/7Bl2L7oWpJbxpVxJUcg2XXqQ68v9U17JE26xlySpdDSEbdh9F2YbqU98SbduWmD7G5hp/524dO83Utd/Ydu2p8dGl7dTqvtfYTmy1b2S2Y2ddk7XtOLnhOzbXl39NvRWGKG07HasqRWo7mRvqx/x3arauyJzeHaegG03Xht2UU26DL0vRji3NXwRipaaZ2Oq6fDfND9V7nZhkr6Ia703zOm7fmNEDx2tLByqt3NLsey+N/Gya81JViQPTHE2LL1XC2+BGY8WLfnlRG/5ZXn2Wrh7bInsRiKBAjif9rany0pfhXVVz6oG/o0D8QSBdft6oVBjZYFDmRORr6rcXyGxaRIMq53AzDGT8OWzjM/fX6upQ6LHttz9k5Hsg3PeCek5kifsYZsQeBiIzshtN2Bu9tszD74FQlUjWqA5U5W1c8jWP/kovjrbxnMesKlxlSvKzjqnyVUZeBsIZSc61tFnoQHJuqeExTn6TkRVnJDp7YRhaYUPDXodPAqHRH2XZLamfg2qP0xKrWhTIvlBrL6PrIOaMRHt6ObBD+ZEXqx8yYiaLOVkcIx3IhlbI3drSk6D4TUbk1NqNCH1ueil9MrXG3I/HwYYl3TjkTwJZ62atJa2wmNsIqhE3HYtfZaSPA5HTlZYYNWd+/CIjhTFc7PPGfZ6RaFIxeieqxJNAZnqTF9RHUPsVJ6O4UJX3LLv/Yo1wRoJeRiY8mrSJechJqTMyCMT+PrXM4CDdKZuXgr/m/MViv+tnw0CqNpB1m5Gj7Zb8WS/p9Yep1V8jt70MpJD7R7CYy/3w4D7JyKn7feymVvRWrEhRc49xXvEqUzN+lLSLvbcn1c8CuetdPfxs1wj9MlgNj+Nz8V92rTsHMq0GXSaxzMi8GkmbFQdy1SVbHNqpFd1TqaKog0bw1L5XE65En8fcqKm1mY1usxlPlqX7JZCaAonWI7XQqO5c7lpHh7aeWaKG8uMaaQMp5fZb7njH29zIhod5zftbfCAnXGsXPqZWNA+C45ynp7mrDd68ejKXA0ksWu1eWPL2G34JZLwbLtbdWGeE1uhS3fpx1xr8sq/OEW+OnrRa8FP+Zf9bIM9+2aMqN/Iq6d25CWNlttuvUcyfbL+u3X/BPKYu/7InDj9bHVQgrzJCZy0n1RXoPOPU45jOQEV7KqypUIcN/Vd/dlpkTldyGsEV+Kz1uGc7DW3Vrh/Plh+Xj4/L8nKr6fPzWUtnPkwdp1bbBTXm6I09LE/6Bfo7lZ7BbZ/k0NzsJHvzjRfomKoPrHxMpcOmJQ+r7VPP8iw+eWpc8LoSnYmFOtr27lme2gncfKx5+rBrtXud6C6pt8dRWrQvjH1LVevO0moEr06/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwr/sDh8lYwbQp+3EAAAAASUVORK5CYII=');
+background-size: cover;
+}

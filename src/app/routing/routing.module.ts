@@ -5,13 +5,14 @@ import { HomeComponent } from '../home/home.component';
 import { ProjectsComponent } from '../projects/projects.component';
 import { ViewComponent } from '../view/view.component';
 import { WellComponent } from '../well/well.component';
+import { AuthGuard } from '../shared/auth.guard';
 
 const routes: Routes = [
-  { path: 'home' , component: HomeComponent},
-  { path: 'projects', component: ProjectsComponent},
-  { path: 'well/:id', component: WellComponent},
+  { path: 'home' , component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard]},
+  { path: 'well/:id', component: WellComponent, canActivate: [AuthGuard]},
   { path: '' , redirectTo:'/home',pathMatch:'full'},
-  { path:'view/:id', component: ViewComponent}
+  { path:'view/:id', component: ViewComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

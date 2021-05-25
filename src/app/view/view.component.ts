@@ -45,7 +45,6 @@ wellDataList: WellData[]= [];
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
     scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
       xAxes: [{
         type: 'time',
        ticks: {
