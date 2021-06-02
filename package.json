@@ -1,5 +1,5 @@
 {
-  "name": "visum-web",
+  "name": "Product-web",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^12.0.1",
-    "@angular/cli": "~12.0.1",
+    "@angular/cli": "^12.0.2",
     "@angular/compiler-cli": "~12.0.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",

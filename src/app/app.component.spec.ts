@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'VisumWeb'`, () => {
+  it(`should have as title 'ProductWeb'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('VisumWeb');
+    expect(app.title).toEqual('ProductWeb');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('VisumWeb app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('ProductWeb app is running!');
   });
 });
