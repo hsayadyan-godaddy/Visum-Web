@@ -6,11 +6,13 @@ import { ProjectsComponent } from '../projects/projects.component';
 import { ViewComponent } from '../view/view.component';
 import { WellComponent } from '../well/well.component';
 import { AuthGuard } from '../shared/auth.guard';
+import { TimechartsComponent } from '../timecharts/timecharts.component';
 
 const routes: Routes = [
   { path: 'home' , component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard]},
   { path: 'well/:id', component: WellComponent, canActivate: [AuthGuard]},
+  { path: 'timecharts', component: TimechartsComponent},
   { path: '' , redirectTo:'/home',pathMatch:'full'},
   { path:'view/:id', component: ViewComponent, canActivate: [AuthGuard]}
 ];

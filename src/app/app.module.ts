@@ -20,7 +20,10 @@ import { ChartsModule } from 'ng2-charts';
 import { WellComponent } from './well/well.component';
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { FooterComponent } from "./footer/footer.component";
-
+import { TimechartsComponent } from './timecharts/timecharts.component';
+import { PlotlyModule } from 'angular-plotly.js';
+import * as PlotlyJS from 'plotly.js-dist';
+PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,8 @@ import { FooterComponent } from "./footer/footer.component";
     HeaderComponent,
     WellComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    TimechartsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +46,7 @@ import { FooterComponent } from "./footer/footer.component";
     FlexLayoutModule,
     HttpClientModule,
     ChartsModule,
+    PlotlyModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch : 'full'},
       {path: 'login', component: LoginComponent},

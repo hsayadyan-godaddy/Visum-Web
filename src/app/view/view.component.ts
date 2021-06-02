@@ -102,9 +102,9 @@ wellDataList: WellData[]= [];
   }
   pushEventToChartData(event: any) : void {
     this.lineChartData[0].data.push(event.Pressure);
-    this.lineChartData[0].label = "Pressure";
+    //this.lineChartData[0].label = "Pressure";
     this.lineChartData[1].data.push(event.Temperature);
-    this.lineChartData[1].label = "Temperature";
+    //this.lineChartData[1].label = "Temperature";
     this.lineChartLabels.push(this.getLabel(event.DateTime))
   }
   
