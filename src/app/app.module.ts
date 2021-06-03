@@ -23,6 +23,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { TimechartsComponent } from './timecharts/timecharts.component';
 import { PlotlyModule } from 'angular-plotly.js';
 import * as PlotlyJS from 'plotly.js-dist';
+import { MonitoringComponent } from './monitoring/monitoring.component';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     WellComponent,
     SidebarComponent,
     FooterComponent,
-    TimechartsComponent
+    TimechartsComponent,
+    MonitoringComponent
   ],
   imports: [
     BrowserModule,
