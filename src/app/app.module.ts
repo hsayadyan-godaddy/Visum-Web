@@ -24,6 +24,8 @@ import { TimechartsComponent } from './timecharts/timecharts.component';
 import { PlotlyModule } from 'angular-plotly.js';
 import * as PlotlyJS from 'plotly.js-dist';
 import { MonitoringComponent } from './monitoring/monitoring.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     HttpClientModule,
     ChartsModule,
     PlotlyModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch : 'full'},
       {path: 'login', component: LoginComponent},

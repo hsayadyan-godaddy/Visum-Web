@@ -1,0 +1,66 @@
+.monitoring {
+    width:100%;
+    margin: 5% 0 0 0;
+    padding: 0;
+    border: 1px solid black;
+}
+mat-grid-tile {
+    width: 33%;
+}
+.mat-select{
+    padding: 10px 0 0 0;
+}
+
+.datapicker {
+    padding: 10px 0 0 0;
+}
+mat-grid-list {
+    background-color: rgb(213, 211, 211);
+}
+
+.button-row {
+    display: table-cell;
+  }
+
+section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+  }
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  
+  .button-row .mat-button-base {
+    margin: 0 10px 0 0;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-container button {
+background-color: #a9a9a94d;
+  }
+
+  .div-depth-time button{
+      background-color: white;
+      width: 40px;
+      font-size: 12px;
+  }
+  .depth-flex-container {
+      left:5px;
+   display: flex;
+   position: absolute;
+  }
+
+  .depth-button-container {
+    position: relative;
+  }
