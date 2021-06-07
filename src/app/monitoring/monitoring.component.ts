@@ -32,14 +32,8 @@ export class MonitoringComponent implements OnInit {
     alert('Chart');
   }
 
-  onClickMD(){
-
-  }
-onClickTVD(){
-
-}
-onClickTVDSS(){
-  
+onClickBtn(name: string){
+alert(name);
 }
 
   ngOnInit(): void {

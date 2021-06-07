@@ -4,63 +4,55 @@
     padding: 0;
     border: 1px solid black;
 }
-mat-grid-tile {
-    width: 33%;
+.monitoring mat-grid-tile{
+    border-right: 1px solid gray;
 }
+.div-depth-time mat-grid-tile{
+    border-right: 1px solid gray;
+}
+
 .mat-select{
     padding: 10px 0 0 0;
 }
 
-.datapicker {
-    padding: 10px 0 0 0;
-}
+
 mat-grid-list {
-    background-color: rgb(213, 211, 211);
+    border: 1px solid rgb(220, 218, 218);;
+}
+.monitoring-grid-list {
+    background-color: rgb(220, 218, 218);
 }
 
-.button-row {
-    display: table-cell;
-  }
-
-section {
-    display: table;
-  }
-  
-  .example-label {
-    display: table-cell;
-    font-size: 14px;
-  }
-  .flex-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  
-  .button-row .mat-button-base {
+  .mat-button-base {
     margin: 0 10px 0 0;
   }
-  
-  .button-container {
-    display: flex;
-    justify-content: center;
-  }
 
-  .button-container button {
+  .monitoring button {
 background-color: #a9a9a94d;
   }
 
-  .div-depth-time button{
-      background-color: white;
-      width: 40px;
-      font-size: 12px;
-  }
-  .depth-flex-container {
-      left:5px;
-   display: flex;
-   position: absolute;
+  .div-timeline .mat-button-base{
+      height: 30px;
+      width: 30px;
+      font-size: 9px;
   }
 
-  .depth-button-container {
-    position: relative;
+  .div-timeline span{
+      font-size: 11px;
   }
+
+  .datapicker{
+      margin: 10px 0 0 0;
+      padding: 10px 0 0 0;
+  }
+
+.div-depth-time span{
+    display: block;
+    width: 50px;
+    margin: 0 0 0 -30px;
+}
+
+.monitoring-charts mat-grid-tile {
+    background: rgb(187, 204, 225);
+}
+
