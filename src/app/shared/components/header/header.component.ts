@@ -1,5 +1,5 @@
 import { Component, OnInit,ChangeDetectorRef,OnDestroy } from '@angular/core';
-import { AuthService } from '../shared/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Observable, of } from 'rxjs';
 import {MediaMatcher} from '@angular/cdk/layout';
 import { FormControl } from '@angular/forms';

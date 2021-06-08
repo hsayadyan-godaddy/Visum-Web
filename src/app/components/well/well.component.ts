@@ -1,7 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SharedService } from '../shared.service';
+import { SharedService } from '../../services/shared.service';
 
 
 export interface Well{

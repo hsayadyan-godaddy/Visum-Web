@@ -1,8 +1,8 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/auth.service'
-import { User } from '../shared/user';
+import { AuthService } from '../../services/auth.service'
+import { User } from '../../models/user';
 
 @Component({
   selector: 'login-form',

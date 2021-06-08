@@ -31,11 +31,11 @@
             </mat-list-item>
             
             <mat-list-item title="monitoring" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'monitoring'}"
-            (click)="router.navigate(['/monitoring']);isActive = 'monitoring'">
+            (click)="router.navigate(['/production-monitoring']);isActive = 'monitoring'">
             <span class="discrepancies" style="padding-right: 10%;">
                 <img src="assets/images/monitoring.png">
             </span>
-            <div *ngIf="isMenuOpen">Monitoring</div>
+            <div *ngIf="isMenuOpen">Production Monitoring</div>
         </mat-list-item>
 
         </mat-list>

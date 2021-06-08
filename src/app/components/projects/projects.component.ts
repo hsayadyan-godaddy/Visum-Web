@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SharedService } from '../shared.service';
+import { SharedService } from '../../services/shared.service';
 
 export interface Project {
   id: string,

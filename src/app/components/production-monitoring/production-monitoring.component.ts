@@ -3,10 +3,10 @@ import {FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-monitoring',
-  templateUrl: './monitoring.component.html',
-  styleUrls: ['./monitoring.component.css']
+  templateUrl: './production-monitoring.component.html',
+  styleUrls: ['./production-monitoring.component.css']
 })
-export class MonitoringComponent implements OnInit {
+export class ProductionMonitoringComponent implements OnInit {
   selected = 'Well1';
 
   range = new FormGroup({
