@@ -3,26 +3,27 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SharedService} from './shared.service';
+import { SharedService} from './services/shared.service';
 import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './shared/aouthconfig.interceptor';
-import { ProjectsComponent } from './projects/projects.component';
+import { AuthInterceptor } from './interceptor/aouthconfig.interceptor';
+import { ProjectsComponent } from './components/projects/projects.component';
 import { RoutingModule } from './routing/routing.module';
-import { HomeComponent } from './home/home.component';
-import { ViewComponent } from './view/view.component';
-import { HeaderComponent } from './header/header.component';
-import { ChartsModule } from 'ng2-charts';
-import { WellComponent } from './well/well.component';
-import { SidebarComponent } from "./sidebar/sidebar.component";
-import { FooterComponent } from "./footer/footer.component";
-import { TimechartsComponent } from './timecharts/timecharts.component';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { WellComponent } from './components/well/well.component';
+import { SidebarComponent } from "./shared/components/sidebar/sidebar.component";
+import { FooterComponent } from "./shared/components/footer/footer.component";
+import { TimechartsComponent } from './components/timecharts/timecharts.component';
 import { PlotlyModule } from 'angular-plotly.js';
 import * as PlotlyJS from 'plotly.js-dist';
+import { ProductionMonitoringComponent } from './components/production-monitoring/production-monitoring.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -30,12 +31,12 @@ PlotlyModule.plotlyjs = PlotlyJS;
     LoginComponent,
     ProjectsComponent,
     HomeComponent,
-    ViewComponent,
     HeaderComponent,
     WellComponent,
     SidebarComponent,
     FooterComponent,
-    TimechartsComponent
+    TimechartsComponent,
+    ProductionMonitoringComponent
   ],
   imports: [
     BrowserModule,
@@ -45,8 +46,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
-    ChartsModule,
     PlotlyModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch : 'full'},
       {path: 'login', component: LoginComponent},

@@ -1,0 +1,180 @@
+<div class="monitoring">
+   <mat-grid-list cols="3" class="monitoring-grid-list" rowHeight="50px">
+        <mat-grid-tile>
+            <mat-form-field appearance="fill" class="mat-select"> 
+                <mat-label>Select an option</mat-label>
+                <mat-select [(value)]="selected">
+                    <mat-option>None</mat-option>
+                    <mat-option value="Well1">Well 1</mat-option>
+                    <mat-option value="Well2">Well 2</mat-option>
+                    <mat-option value="Well3">Well 3</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-label>PRODUCTION MONITORING</mat-label>
+        </mat-grid-tile>
+        <mat-grid-tile>
+                    <div class="button-container">
+                      <button mat-mini-fab  aria-label="Compare" (click)="onClickCompare()">
+                        <mat-icon>compare</mat-icon>
+                      </button>
+                    </div>
+                    <div class="button-container">
+                      <button mat-mini-fab  aria-label="Comment" (click)="onClickComment()">
+                        <mat-icon>comment</mat-icon>
+                      </button>
+                    </div>
+                    <div class="button-container">
+                      <button mat-mini-fab  aria-label="Display" (click)="onClickDisplay()">
+                        <mat-icon>monitor</mat-icon>
+                      </button>
+                    </div>
+                    <div class="button-container">
+                      <button mat-mini-fab  aria-label="Chart" (click)="onClickChart()">
+                        <mat-icon>show_chart</mat-icon>
+                      </button>
+                  </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div class="div-depth-time">
+    <mat-grid-list cols="4" class="timeline-grid-list" rowHeight="50px">
+        <mat-grid-tile class="depth-tile">
+                      <div class="button-container">
+                        <button mat-raised-button  aria-label="MD" (click)="onClickBtn('MD')">
+                        MD
+                        </button>
+                      </div>
+                      <div class="button-container">
+                        <button mat-raised-button  aria-label="TVD" (click)="onClickBtn('TVD')">
+                          TVD
+                        </button>
+                      </div>
+                      <div class="button-container">
+                        <button mat-raised-button  aria-label="TVDSS" (click)="onClickBtn('TVDSS')">
+                         TVDSS
+                        </button>
+                      </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="div-timeline" colspan="2">
+                        <div class="button-container">
+                            <span>Historical Timeline</span>
+                          </div>
+                          <div class="button-container">
+                            <button mat-raised-button  aria-label="" (click)="onClickBtn('Visibility off')">
+                                <mat-icon>visibility_off</mat-icon>
+                            </button>
+                          </div> 
+                      <div class="button-container">
+                        <button mat-raised-button  aria-label="All" (click)="onClickBtn('All')">
+                        All
+                        </button>
+                      </div>
+                      <div class="button-container">
+                        <button mat-raised-button  aria-label="1Y" (click)="onClickBtn('1Y')">
+                          1Y
+                        </button>
+                      </div>
+                      <div class="button-container">
+                        <button mat-raised-button  aria-label="90D" (click)="onClickBtn('90D')">
+                         90D
+                        </button>
+                      </div>
+                      <div class="button-container">
+                        <button mat-raised-button  aria-label="60D" (click)="onClickBtn('60D')">
+                         60D
+                        </button>
+                      </div>
+                      <div class="button-container">
+                        <button mat-raised-button  aria-label="30D" (click)="onClickBtn('30D')">
+                         30D
+                        </button>
+                      </div>
+                      <div class="button-container">
+                        <button mat-raised-button  aria-label="7D" (click)="onClickBtn('7D')">
+                         7D
+                        </button>
+                      </div>
+                      <div class="button-container">
+                        <button mat-raised-button  aria-label="24H" (click)="onClickBtn('24H')">
+                         24H
+                        </button>
+                    </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <section class="datapicker">
+                <mat-form-field appearance="fill">
+                    <mat-label>Enter a date range</mat-label>
+                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                      <input matStartDate formControlName="start" placeholder="Start date">
+                      <input matEndDate formControlName="end" placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  
+                    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                  </mat-form-field>
+              </section>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+
+<div class="monitoring-charts">
+<mat-grid-list  cols="2"  rowHeight="3:1">
+    <mat-grid-tile  rowspan='2'>
+        <mat-grid-tile-header>
+            WELLBORE 2D PROFILE
+            
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="menu-btn">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>library_add</mat-icon>
+                  <span>Add</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>remove_circle_outline</mat-icon>
+                  <span>Remove</span>
+                </button>
+              </mat-menu>
+        </mat-grid-tile-header>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-grid-tile-header>ZONE FLOW ALLOCATION
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="menu-btn">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>library_add</mat-icon>
+                  <span>Add</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>remove_circle_outline</mat-icon>
+                  <span>Remove</span>
+                </button>
+            </mat-menu>
+        </mat-grid-tile-header>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-grid-tile-header>PRESSURE/FLOWRATE
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="menu-btn">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>library_add</mat-icon>
+                  <span>Add</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>remove_circle_outline</mat-icon>
+                  <span>Remove</span>
+                </button>
+            </mat-menu>
+        </mat-grid-tile-header>
+    </mat-grid-tile>
+</mat-grid-list>
+</div>
