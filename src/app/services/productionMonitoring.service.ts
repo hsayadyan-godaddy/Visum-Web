@@ -14,12 +14,12 @@ export class ProductionMonitoringService {
     private http: HttpClient
     ) { }
     
-    getWellNamesByUserId(id: string) : Observable<any>{
-      return this.http.get(this.AppUrl+"/????/"+id)
+    getWells() : Observable<any>{
+      return this.http.get(this.AppUrl+"/Wells/")
     }
 
     getDataByDepthType(type: string) : Observable<any>{
-      return this.http.get(this.AppUrl+"/???/"+type)
+      return this.http.get(this.AppUrl+"/Data/"+type)
     }
 
 }
