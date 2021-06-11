@@ -7,7 +7,7 @@ import { ZoneFlowData } from "./zone-flow-data";
 import { ZoneFlowTick } from "./zone-flow-tick";
 import { ZoneInfo } from "./zone-info";
 
-export class Productionmonitoring {
+export interface Productionmonitoring {
     Periodicity : Period;
     UnitOfMeasure : UnitOfMeasure;
     Depth : DepthType;

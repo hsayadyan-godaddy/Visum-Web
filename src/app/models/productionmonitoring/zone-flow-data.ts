@@ -1,4 +1,4 @@
-export class ZoneFlowData {
+export interface ZoneFlowData {
     ZoneNumber: number;
     oil: number[];
     water: number[];
