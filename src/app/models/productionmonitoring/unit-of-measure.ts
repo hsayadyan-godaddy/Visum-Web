@@ -1,6 +1,6 @@
 import { MeasureType } from "../../enums/measure-type";
 
-export class UnitOfMeasure {
+export interface UnitOfMeasure {
     SourceOfMeasure: MeasureType;
     label : string;
 }

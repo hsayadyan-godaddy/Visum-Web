@@ -1,4 +1,4 @@
-export class ZoneFlowTick {
+export interface ZoneFlowTick {
     Oil: number;
     Water: number;
     Gas: Number;
