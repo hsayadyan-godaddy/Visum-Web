@@ -124,8 +124,8 @@
 </div>
 
 <div class="monitoring-charts">
-<mat-grid-list  cols="2"  rowHeight="3:1">
-    <mat-grid-tile  rowspan='2'>
+<mat-grid-list  cols="3"  rowHeight="3:1">
+    <mat-grid-tile  rowspan='4'>
         <mat-grid-tile-header>
             WELLBORE 2D PROFILE
             
@@ -144,7 +144,7 @@
               </mat-menu>
         </mat-grid-tile-header>
     </mat-grid-tile>
-    <mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="2">
         <mat-grid-tile-header>ZONE FLOW ALLOCATION
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="menu-btn">
                 <mat-icon>more_vert</mat-icon>
@@ -161,7 +161,7 @@
             </mat-menu>
         </mat-grid-tile-header>
     </mat-grid-tile>
-    <mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="2"bcfbvfd>
         <mat-grid-tile-header>PRESSURE/FLOWRATE
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="menu-btn">
                 <mat-icon>more_vert</mat-icon>

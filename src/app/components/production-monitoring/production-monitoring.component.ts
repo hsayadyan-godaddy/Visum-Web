@@ -12,7 +12,7 @@ import { ProductionMonitoringService } from 'src/app/services/productionMonitori
 export class ProductionMonitoringComponent implements OnInit {
   selected = 'Well1';
   userId: string = "";
-wells : Well[];
+  wells : Well[];
 
 
   range = new FormGroup({
