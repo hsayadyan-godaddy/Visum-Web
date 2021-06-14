@@ -1,0 +1,59 @@
+<div class="monitoring-charts">
+    <mat-grid-list cols="3" rowHeight="3:1">
+      <mat-grid-tile rowspan='4'>
+        <mat-grid-tile-header>
+          WELLBORE 2D PROFILE
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="menu-btn">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>library_add</mat-icon>
+              <span>Add</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>remove_circle_outline</mat-icon>
+              <span>Remove</span>
+            </button>
+          </mat-menu>
+        </mat-grid-tile-header>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="2">
+        <mat-grid-tile-header>ZONE FLOW ALLOCATION
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="menu-btn">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>library_add</mat-icon>
+              <span>Add</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>remove_circle_outline</mat-icon>
+              <span>Remove</span>
+            </button>
+          </mat-menu>
+        </mat-grid-tile-header>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="2" bcfbvfd>
+        <mat-grid-tile-header>PRESSURE/FLOWRATE
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="menu-btn">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>library_add</mat-icon>
+              <span>Add</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>remove_circle_outline</mat-icon>
+              <span>Remove</span>
+            </button>
+          </mat-menu>
+        </mat-grid-tile-header>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  
+  
+  

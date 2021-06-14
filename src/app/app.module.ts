@@ -24,6 +24,9 @@ import * as PlotlyJS from 'plotly.js-dist';
 import { ProductionMonitoringComponent } from './components/production-monitoring/production-monitoring.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { WellSellectionWithButtonsComponent } from './shared/components/well-sellection-with-buttons/well-sellection-with-buttons.component';
+import { DepthTimeComponent } from './shared/components/depth-time/depth-time.component';
+import { MonitoringChartsComponent } from './shared/components/monitoring-charts/monitoring-charts.component';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ PlotlyModule.plotlyjs = PlotlyJS;
     SidebarComponent,
     FooterComponent,
     TimechartsComponent,
-    ProductionMonitoringComponent
+    ProductionMonitoringComponent,
+    WellSellectionWithButtonsComponent,
+    DepthTimeComponent,
+    MonitoringChartsComponent
   ],
   imports: [
     BrowserModule,

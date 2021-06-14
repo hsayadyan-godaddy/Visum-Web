@@ -11,26 +11,15 @@ import { ProductionMonitoringService } from 'src/app/services/productionMonitori
   styleUrls: ['./production-monitoring.component.css']
 })
 export class ProductionMonitoringComponent implements OnInit {
-  selected = 'Well1';
+  selected = '';
   userId: string = "";
   wells : Well[];
   pmData : Productionmonitoring;
-  date : string = "";
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+  
 
   constructor(
     private _pmService: ProductionMonitoringService
     ) { }
-
-  getWells() : void
-  {
-    this._pmService.getWells().subscribe((data: Well[])=>{
-      this.wells = data;
-    });
-  }
 
   //TODO rename
   getData() :  void
@@ -40,28 +29,13 @@ export class ProductionMonitoringComponent implements OnInit {
     });
   }
 
-  onClickCompare(){
-    alert('Compare');
-  }
-
-  onClickComment(){
-    alert('Comment');
-  }
-
-  onClickDisplay(){
-    alert('Display');
-  }
-
-  onClickChart(){
-    alert('Chart');
-  }
 
 onClickBtn(name: string){
 alert(name);
 }
 
   ngOnInit(): void {
-    this.getWells();
+  //  this.getWells();
   }
 
 }

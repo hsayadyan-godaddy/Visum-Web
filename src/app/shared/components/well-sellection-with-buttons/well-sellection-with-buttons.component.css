@@ -1,0 +1,25 @@
+.monitoring {
+    width:100%;
+    margin: 5% 0 0 0;
+    padding: 0;
+    border: 1px solid black;
+}
+.monitoring mat-grid-tile{
+    border-right: 1px solid rgba(157, 157, 157, 0.844);
+}
+
+
+.mat-select{
+    padding: 10px 0 0 0;
+    background-color: rgba(220, 218, 218, 0.844);
+}
+
+
+.monitoring-grid-list {
+    background-color: rgba(220, 218, 218, 0.844);
+}
+
+.monitoring button {
+    background-color: rgba(220, 218, 218, 0.844);;
+    border:none;
+}
