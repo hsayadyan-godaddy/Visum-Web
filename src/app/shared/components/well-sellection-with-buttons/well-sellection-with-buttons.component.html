@@ -1,0 +1,30 @@
+<div class="monitoring">
+    <mat-grid-list cols="3" class="monitoring-grid-list" rowHeight="50px">
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" class="mat-select">
+          <mat-label>Select an option</mat-label>
+          <mat-select [(value)]="selected">
+            <mat-option>None</mat-option>
+            <mat-option I *ngFor='let well from wells' value="well.Id">{{well.Name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-label>PRODUCTION MONITORING</mat-label>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <button aria-label="Compare" (click)="onClickCompare()">
+            <mat-icon>compare</mat-icon>
+          </button>
+          <button aria-label="Comment" (click)="onClickComment()">
+            <mat-icon>comment</mat-icon>
+          </button>
+          <button aria-label="Display" (click)="onClickDisplay()">
+            <mat-icon>monitor</mat-icon>
+          </button>
+          <button aria-label="Chart" (click)="onClickChart()">
+            <mat-icon>show_chart</mat-icon>
+          </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
