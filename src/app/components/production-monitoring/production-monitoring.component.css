@@ -5,53 +5,59 @@
     border: 1px solid black;
 }
 .monitoring mat-grid-tile{
-    border-right: 1px solid gray;
+    border-right: 1px solid rgba(157, 157, 157, 0.844);
 }
-.div-depth-time mat-grid-tile{
-    border-right: 1px solid gray;
-}
+
 
 .mat-select{
     padding: 10px 0 0 0;
+    background-color: rgba(220, 218, 218, 0.844);
 }
 
 
-mat-grid-list {
-    border: 1px solid rgb(220, 218, 218);;
-}
 .monitoring-grid-list {
-    background-color: rgb(220, 218, 218);
+    background-color: rgba(220, 218, 218, 0.844);
 }
-
-  .mat-button-base {
-    margin: 0 1px 0 0;
-  }
 
   .monitoring button {
-background-color: #a9a9a94d;
+background-color: rgba(220, 218, 218, 0.844);;
+border:none;
   }
 
-  .div-timeline .mat-button-base{
-      height: 30px;
-      width: 30px;
+  .div-timeline button{
+      height: 40px;
+      width: 40px;
       font-size: 9px;
+      margin: 0 5px 0 0;
+      background-color: white;
+      border-radius: 5px;
+      border: 1px solid rgba(193, 191, 191, 0.857);
+      cursor:pointer;
   }
+  .div-depth-tile{
+    width: 100%; display: flex; align-items: flex-start;
+  }
+  .depth-tile button{
+    height: 40px;
+    width: 50px;
+    font-size: 11px;
+    border-radius: 5px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid rgba(193, 191, 191, 0.857);
+    cursor: pointer;
+}
 
   .div-timeline span{
-      font-size: 11px;
-  }
-
-  .datapicker{
-      margin: 10px 0 0 0;
-      padding: 10px 0 0 0;
-  }
-
-.div-depth-time span{
+    font-size: 11px;
     display: block;
     width: 50px;
     margin: 0 0 0 -30px;
 }
-
+.datapicker mat-form-field{
+   margin: 20px 0 0 0;
+   padding: 15px 15px 10px 0;
+}
 .monitoring-charts mat-grid-tile {
     background: rgb(187, 204, 225);
 }

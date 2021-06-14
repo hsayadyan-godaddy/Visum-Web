@@ -15,7 +15,7 @@ export class ProductionMonitoringComponent implements OnInit {
   userId: string = "";
   wells : Well[];
   pmData : Productionmonitoring;
-
+  date : string = "";
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
