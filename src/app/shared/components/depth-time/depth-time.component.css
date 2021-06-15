@@ -8,6 +8,9 @@
     border: 1px solid rgba(193, 191, 191, 0.857);
     cursor:pointer;
 }
+.div-timeline button:hover {
+  background-color: rgba(193, 191, 191, 0.857);
+}
 .div-depth-tile{
   width: 100%; display: flex; align-items: flex-start;
 }
@@ -21,12 +24,15 @@
   border: 1px solid rgba(193, 191, 191, 0.857);
   cursor: pointer;
 }
+.depth-tile button:hover {
+  background-color: rgba(193, 191, 191, 0.857);
+}
 
 .div-timeline span{
   font-size: 11px;
   display: block;
   width: 50px;
-  margin: 0 0 0 -30px;
+  margin: 0 20px 0 0;
 }
 .datapicker mat-form-field{
   width: 100% !important;
