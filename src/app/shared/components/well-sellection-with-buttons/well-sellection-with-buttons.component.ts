@@ -40,8 +40,4 @@ export class WellSellectionWithButtonsComponent implements OnInit {
   onClickDisplay(){
     alert('Display');
   }
-
-  onClickChart(){
-    alert('Chart');
-  }
 }
