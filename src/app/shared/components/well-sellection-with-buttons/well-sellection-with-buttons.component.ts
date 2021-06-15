@@ -9,7 +9,7 @@ import { ProductionMonitoringService } from 'src/app/services/productionMonitori
   styleUrls: ['./well-sellection-with-buttons.component.css']
 })
 export class WellSellectionWithButtonsComponent implements OnInit {
-  selected = 'Well1';
+  selected = '';
   wells : Well[];
   pmData : Productionmonitoring;
 
@@ -30,11 +30,13 @@ export class WellSellectionWithButtonsComponent implements OnInit {
 
 
   onClickCompare(){
-    alert('Compare');
+    // this._pmService.Compare()
+    alert("compare");
   }
 
   onClickComment(){
-    alert('Comment');
+    alert("comment");
+   //this._pmSService.Comment() alert('Comment');
   }
 
   onClickDisplay(){
