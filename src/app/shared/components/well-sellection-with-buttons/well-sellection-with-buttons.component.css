@@ -1,8 +1,8 @@
 .monitoring {
     width:100%;
     margin: 5% 0 0 0;
-    padding: 0;
     border: 1px solid black;
+    display: block;
 }
 .monitoring mat-grid-tile{
     border-right: 1px solid rgba(157, 157, 157, 0.844);
@@ -25,4 +25,8 @@
 }
 .monitoring button:hover {
     background-color: rgba(193, 191, 191, 0.857);
+  }
+
+  button span {
+      display: block;
   }
