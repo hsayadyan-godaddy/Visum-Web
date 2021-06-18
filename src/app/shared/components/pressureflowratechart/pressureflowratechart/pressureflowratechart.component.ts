@@ -11,7 +11,19 @@ export class PressureflowratechartComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  getData(){
+    return  [
 
+      { x: ['10', '11', '12', '13', '14'], y: [50, 60, 40, 20, 10], legendgroup: 'group1', type: 'scatter', mode: 'lines', name: 'BOTTOM HOLE PRESSURE(5000 FT)', marker: { color: 'yellow' } },
+      { x: ['10', '11', '12', '13', '14'], y: [60, 80, 90, 100, 40], legendgroup: 'group1', type: 'scatter', mode: 'lines', name: 'Pressure SENSOR P1(100 FT)', marker: { color: 'green' } },
+      { x: ['10', '11', '12', '13', '14'], y: [62, 76, 80, 80, 40], legendgroup: 'group2', type: 'scatter', mode: 'lines', name: 'Pressure SENSOR P2(1000 FT)', marker: { color: 'red' } },
+      { x: ['10', '11', '12', '13', '14'], y: [70, 90, 60, 100, 0], legendgroup: 'group2', type: 'scatter', mode: 'lines', name: 'Pressure SENSOR P3(3000 FT)', marker: { color: 'blue' } },
+      { x: ['10', '11', '12', '13', '14'], y: [60, 70, 60, 70, 0], legendgroup: 'group3', type: 'scatter', mode: 'lines', name: 'SURFACE FLOW RATE', marker: { color: 'black' }, yaxis: 'y2', line: { dash: 'dash', color: 'black' } },
+      { x: ['10', '11', '12', '13', '14'], y: [50, 60, 40, 20, 10], legendgroup: 'group5', visiable: 'legendonly', showlegend: false, type: 'scatter', yaxis: 'y3', marker: { color: 'white' } },
+      { x: ['10', '11', '12', '13', '14'], y: [50, 60, 40, 20, 10], legendgroup: 'group5', visiable: 'legendonly', showlegend: false, type: 'scatter', yaxis: 'y4', marker: { color: 'white' } }
+
+    ]
+  }
   calculateScale(min, max) {
     let arr = [], textArr = [];
     for (let i = (min * 10); i <= (max * 10); i++) {
@@ -27,17 +39,7 @@ export class PressureflowratechartComponent implements OnInit {
 
   public graph = {
 
-    data: [
-
-      { x: ['10', '11', '12', '13', '14'], y: [50, 60, 40, 20, 10], legendgroup: 'group1', type: 'scatter', mode: 'lines', name: 'BOTTOM HOLE PRESSURE(5000 FT)', marker: { color: 'yellow' } },
-      { x: ['10', '11', '12', '13', '14'], y: [60, 80, 90, 100, 40], legendgroup: 'group1', type: 'scatter', mode: 'lines', name: 'Pressure SENSOR P1(100 FT)', marker: { color: 'green' } },
-      { x: ['10', '11', '12', '13', '14'], y: [62, 76, 80, 80, 40], legendgroup: 'group2', type: 'scatter', mode: 'lines', name: 'Pressure SENSOR P2(1000 FT)', marker: { color: 'red' } },
-      { x: ['10', '11', '12', '13', '14'], y: [70, 90, 60, 100, 0], legendgroup: 'group2', type: 'scatter', mode: 'lines', name: 'Pressure SENSOR P3(3000 FT)', marker: { color: 'blue' } },
-      { x: ['10', '11', '12', '13', '14'], y: [60, 70, 60, 70, 0], legendgroup: 'group3', type: 'scatter', mode: 'lines', name: 'SURFACE FLOW RATE', marker: { color: 'black' }, yaxis: 'y2', line: { dash: 'dash', color: 'black' } },
-      { x: ['10', '11', '12', '13', '14'], y: [50, 60, 40, 20, 10], legendgroup: 'group5', visiable: 'legendonly', showlegend: false, type: 'scatter', yaxis: 'y3', marker: { color: 'white' } },
-      { x: ['10', '11', '12', '13', '14'], y: [50, 60, 40, 20, 10], legendgroup: 'group5', visiable: 'legendonly', showlegend: false, type: 'scatter', yaxis: 'y4', marker: { color: 'white' } }
-
-    ],
+    data: this.getData(),
     layout: {
 
       showlegend: true,
