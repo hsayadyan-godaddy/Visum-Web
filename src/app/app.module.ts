@@ -24,6 +24,7 @@ import * as PlotlyJS from 'plotly.js-dist';
 import { ProductionMonitoringComponent } from './components/production-monitoring/production-monitoring.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PressureflowratechartComponent } from './shared/components/pressureflowratechart/pressureflowratechart/pressureflowratechart.component';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     SidebarComponent,
     FooterComponent,
     TimechartsComponent,
-    ProductionMonitoringComponent
+    ProductionMonitoringComponent,
+    PressureflowratechartComponent
   ],
   imports: [
     BrowserModule,
