@@ -1,48 +1,76 @@
-<div class="menu_icon" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen" opened>
-    <button mat-icon-button (click)="onToolbarMenuToggle()" id="toolbarMenu">
-        <img src="../../../../assets/images/play-arrow.svg">
-    </button>
-</div>
-<mat-sidenav-container id="sidenavContainer" fullscreen>
-    <mat-sidenav mode="side" #sidenav id="sidenav" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen"
-        opened>
-        <mat-list role="list">
-            <mat-list-item title="Home" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'home'}"
-                (click)="router.navigate(['/home']);isActive = 'home'">
-                <span class="discrepancies" style="padding-right: 10%;">
-                    <img src="assets/images/home.png">
-                </span>
-                <div *ngIf="isMenuOpen">Home</div>
-            </mat-list-item>
-            <mat-list-item title="project" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'project'}"
-                (click)="router.navigate(['/projects']);isActive = 'project'">
-                <span  class="discrepancies" style="padding-right: 10%;">
-                    <img src="assets/images/layers.png">
-                </span>
-                <div *ngIf="isMenuOpen">Project</div>
-            </mat-list-item>
-            
-            <mat-list-item title="well" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'well'}"
-                (click)="router.navigate(['/well/609d8252c62d2a1a325fa221']);isActive = 'well'">
-                <span class="discrepancies" style="padding-right: 10%;">
-                    <img src="assets/images/water-well.png">
-                </span>
-                <div *ngIf="isMenuOpen">Well</div>
-            </mat-list-item>
-            
-            <mat-list-item title="monitoring" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'monitoring'}"
-            (click)="router.navigate(['/production-monitoring']);isActive = 'monitoring'">
-            <span class="discrepancies" style="padding-right: 10%;">
-                <img src="assets/images/monitoring.png">
-            </span>
-            <div *ngIf="isMenuOpen">Production Monitoring</div>
-        </mat-list-item>
+ 
+<mat-nav-list>
+    <a mat-list-item title="Home" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'home'}"
+        (click)="router.navigate(['/home']);isActive = 'home'">
+        <span class="icon"><img src="assets/images/home.png"></span>
+        <span class="content" *ngIf="isMenuOpen">Home</span>
+    </a>
+    <a mat-list-item title="project" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'project'}"
+        (click)="router.navigate(['/projects']);isActive = 'project'">
+        <span class="icon"><img src="assets/images/layers.png"></span>
+        <span class="content" *ngIf="isMenuOpen">Project</span>
+    </a>
+    
+    <a mat-list-item title="well" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'well'}"
+        (click)="router.navigate(['/well/609d8252c62d2a1a325fa221']);isActive = 'well'">
+        <span class="icon"><img src="assets/images/water-well.png"></span>
+        <span class="content" *ngIf="isMenuOpen">Well</span>
+    </a>
+    
+    <a mat-list-item title="monitoring" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'monitoring'}"
+    (click)="router.navigate(['/production-monitoring']);isActive = 'monitoring'">
+        <span class="icon"><img src="assets/images/monitoring.png"></span>
+        <span class="content" *ngIf="isMenuOpen">Production Monitoring</span>
+    </a>
 
-        </mat-list>
-    </mat-sidenav>
-    <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
-        <div class="main_content">
-            <router-outlet></router-outlet>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-nav-list>
+
+<mat-nav-list>
+    <a mat-list-item [routerLink]=""> 
+        <span class="icon"><img src="./../../assets/images/setting-icon.svg" alt=""></span>
+        <span class="content">App Setting</span>
+    </a>
+    <a mat-list-item [routerLink]=""> 
+        <span class="icon"><img src="./../../assets/images/help-icon.svg" alt=""></span>
+        <span class="content">Help</span>
+    </a>   
+</mat-nav-list>
+
+<!-- <mat-nav-list>
+    <a mat-list-item [routerLink]="" class="active"> 
+        <span class="icon"><img src="./../../assets/images/cube.svg" alt=""></span>
+        <span class="content">Well Overview</span>
+    </a>
+    <a mat-list-item [routerLink]=""> 
+        <span class="icon"><img src="./../../assets/images/barel.svg" alt=""></span>
+        <span class="content">Production Monitoring</span>
+    </a>
+    <a mat-list-item [routerLink]="">  
+        <span class="icon"><img src="./../../assets/images/tower.svg" alt=""></span>
+        <span class="content">Caprock Integrity</span>
+    </a>
+    <a mat-list-item [routerLink]="">  
+        <span class="icon"><img src="./../../assets/images/gas cylender.svg" alt=""></span>
+        <span class="content">Sand Water Detection</span>
+    </a>
+    <a mat-list-item [routerLink]="">  
+        <span class="icon"><img src="./../../assets/images/tower.svg" alt=""></span>
+        <span class="content">Well Integrity</span>
+    </a>
+    <a mat-list-item [routerLink]="">  
+        <span class="icon"><img src="./../../assets/images/gas cylender.svg" alt=""></span>
+        <span class="content">Gas Lift Monitoring</span>
+    </a>
+</mat-nav-list>
+
+<mat-nav-list>
+    <a mat-list-item [routerLink]=""> 
+        <span class="icon"><img src="./../../assets/images/setting-icon.svg" alt=""></span>
+        <span class="content">App Setting</span>
+    </a>
+    <a mat-list-item [routerLink]=""> 
+        <span class="icon"><img src="./../../assets/images/help-icon.svg" alt=""></span>
+        <span class="content">Help</span>
+    </a>
+    
+</mat-nav-list> -->

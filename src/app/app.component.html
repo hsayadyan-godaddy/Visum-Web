@@ -1,4 +1,24 @@
-    <app-header></app-header>
+<app-header></app-header>
+
+<mat-sidenav-container id="sidenavContainer" >
+    
+    <mat-sidenav mode="side" #sidenav id="sidenav" [class.menuOpen]="isMenuOpen" [class.menuClose]="!isMenuOpen" opened>
+    <div class="menu_icon" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen">
+        
+        <button mat-icon-button (click)="onToolbarMenuToggle()" [ngClass]="status ? 'opennav' : 'closenav'">
+            <img src="./../assets/images/menu-icon.png" class="menuicon" alt="">
+            <img src="./../assets/images/close-icon.png" class="closeicon" alt="">
+          </button>
+    </div>    
     <app-sidebar></app-sidebar>
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>
+    </mat-sidenav>
+
+    <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
+        <div class="main_content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<!-- <app-footer></app-footer> -->

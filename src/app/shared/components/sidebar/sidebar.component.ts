@@ -13,21 +13,21 @@ export class SidebarComponent implements OnInit {
      router.url.includes('home') ? 'home' : 'home';
   }
   isMenuOpen = true;
-  contentMargin = 240;
+  //contentMargin = 240;
 
   isActive: string;
 
   @Output() sideNav = new EventEmitter<boolean>();
 
-  onToolbarMenuToggle() {
-    this.isMenuOpen = !this.isMenuOpen;
+  // onToolbarMenuToggle() {
+  //   this.isMenuOpen = !this.isMenuOpen;
 
-    if (!this.isMenuOpen) {
-      this.contentMargin = 50;
-    } else {
-      this.contentMargin = 240;
-    }
-  }
+  //   if (!this.isMenuOpen) {
+  //     this.contentMargin = 50;
+  //   } else {
+  //     this.contentMargin = 240;
+  //   }
+  // }
 
   ngOnInit(): void {
   }
