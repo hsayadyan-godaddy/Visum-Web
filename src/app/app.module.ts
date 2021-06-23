@@ -28,6 +28,9 @@ import { PressureflowratechartComponent } from './shared/components/pressureflow
 import { DepthTimeComponent } from './shared/components/depth-time/depth-time.component';
 import { WellSellectionWithButtonsComponent } from './shared/components/well-sellection-with-buttons/well-sellection-with-buttons.component';
 import { MonitoringChartsComponent } from './shared/components/monitoring-charts/monitoring-charts.component';
+import { PressureflowratechartComponent } from './shared/components/pressureflowratechart/pressureflowratechart/pressureflowratechart.component';
+import { WebSocketService } from './services/websocket/websocket.service';
+import { WebsocketUsageExampleService } from './services/websocket/websocket-usage-example-service';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -69,7 +72,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    WebSocketService,
+    WebsocketUsageExampleService
   ],
   bootstrap: [AppComponent]
 })
