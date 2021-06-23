@@ -16,13 +16,13 @@
 
     <div class="ml-auto userProfile">
       <!-- Login Code Start Here -->
-      <div class="loginbtn" *ngIf=isLoggedin>
+      <div class="loginbtn"  *ngIf=!isLoggedin>
         <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
       </div>
       <!-- Login Code End Here -->
 
       <!-- After Login Code Start Here -->
-      <div class="profileWrap" *ngIf=!isLoggedin>
+      <div class="profileWrap"  *ngIf=isLoggedin>
         <div ngbDropdown class="d-inline-block notification">
           <button mat-icon-button aria-label="Notification" id="notification" ngbDropdownToggle>
             <span class="material-icons" matBadge="3" matBadgePosition="after">notifications_none</span>
