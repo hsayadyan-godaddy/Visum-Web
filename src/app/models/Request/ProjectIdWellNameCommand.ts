@@ -1,4 +1,4 @@
 export interface ProjectIdWellNameCommand {
-    ProjectId : string;
-    WellId : string; 
+    projectId : string;
+    wellId : string; 
 }

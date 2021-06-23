@@ -1,6 +1,6 @@
 export interface  ZoneFlowTimeOilWaterGas{
-    Time : Date;
-    Oil: number;
-    Water : number;
-    Gas: number;
+    time : Date;
+    oil: number;
+    water : number;
+    gas: number;
 }

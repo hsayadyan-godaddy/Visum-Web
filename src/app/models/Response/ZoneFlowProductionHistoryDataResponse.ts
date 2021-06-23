@@ -4,15 +4,15 @@ import { ZoneFlowTimeOilWaterGas } from "../productionmonitoring/ZoneFlowTimeOil
 
 export interface ZoneFlowProductionHistoryDataResponse {
     // Zone number
-    ZoneNumber: number;
+    zoneNumber: number;
     // Oil Unit Of Measure Info
-    OilUoM: UnitOfMeasure;
+    oilUoM: UnitOfMeasure;
     // Water Unit Of Measure Info
-    WaterUoM: UnitOfMeasure;
+    waterUoM: UnitOfMeasure;
     // Gas Unit Of Measure Info
-    GasUoM: UnitOfMeasure;
+    gasUoM: UnitOfMeasure;
     // Depth type
-    DepthType: DepthType;
+    depthType: DepthType;
     // Zone info data
-    ZoneFlowProductionData : ZoneFlowTimeOilWaterGas;
+    zoneFlowProductionData : ZoneFlowTimeOilWaterGas;
 }

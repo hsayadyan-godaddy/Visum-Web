@@ -1,7 +1,7 @@
 import { FlowSource } from "../../enums/flow-source";
 
 export interface FlowLimitInfo {
-    FlowSource : FlowSource;
+    flowSource : FlowSource;
     min: number;
     max: number;
 }

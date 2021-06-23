@@ -8,17 +8,17 @@ import { ZoneFlowTick } from "./zone-flow-tick";
 import { ZoneInfo } from "./zone-info";
 
 export interface Productionmonitoring {
-    Periodicity : Period;
-    UnitOfMeasure : UnitOfMeasure;
-    Depth : DepthType;
-    ZoneInfo : ZoneInfo;
-    //ZonesData;
-    //ValueTime;
-    //RateData;
-    //PressureData;
-    ZoneFlowData : ZoneFlowData;
-    FlowSource: FlowSource;
-    FlowLimitInfo : FlowLimitInfo;
-    ZoneFlowDataLimits : FlowLimitInfo[];
-    ZoneFlowTick : ZoneFlowTick;
+    periodicity : Period;
+    unitOfMeasure : UnitOfMeasure;
+    depth : DepthType;
+    zoneInfo : ZoneInfo;
+    //zonesData;
+    //valueTime;
+    //rateData;
+    //pressureData;
+    zoneFlowData : ZoneFlowData;
+    flowSource: FlowSource;
+    flowLimitInfo : FlowLimitInfo;
+    zoneFlowDataLimits : FlowLimitInfo[];
+    zoneFlowTick : ZoneFlowTick;
 }

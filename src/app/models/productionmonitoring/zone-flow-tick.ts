@@ -1,6 +1,6 @@
 export interface ZoneFlowTick {
-    Oil: number;
-    Water: number;
-    Gas: Number;
+    oil: number;
+    water: number;
+    gas: Number;
     time: number;
 }

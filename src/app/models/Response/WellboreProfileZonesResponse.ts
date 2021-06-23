@@ -3,11 +3,10 @@ import { UnitOfMeasure } from "../productionmonitoring/unit-of-measure";
 import { ZoneInfo } from "../productionmonitoring/zone-info";
 
 export interface WellboreProfileZonesResponse {
-    
     // UoM of data info
-    UnitOfMeasureInfo: UnitOfMeasure;
+    unitOfMeasureInfo: UnitOfMeasure;
     // Data depth type
-    DepthType: DepthType;
+    depthType: DepthType;
     // Zone info data
-    ZoneInfoData : ZoneInfo[];
+    zoneInfoData : ZoneInfo[];
 }

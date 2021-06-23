@@ -1,4 +1,4 @@
 export interface TimeValue {
-    Time : Date;
-    Value : number;
+    time : Date;
+    value : number;
 }
