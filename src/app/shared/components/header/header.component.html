@@ -16,51 +16,87 @@
 
     <div class="ml-auto userProfile">
       <!-- Login Code Start Here -->
-      <div class="loginbtn" *ngIf=!isLoggedin>
+      <div class="loginbtn" *ngIf=isLoggedin>
         <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
       </div>
       <!-- Login Code End Here -->
 
       <!-- After Login Code Start Here -->
-      <div class="profileWrap" *ngIf=isLoggedin>
+      <div class="profileWrap" *ngIf=!isLoggedin>
         <div ngbDropdown class="d-inline-block notification">
           <button mat-icon-button aria-label="Notification" id="notification" ngbDropdownToggle>
-            <span class="material-icons" matBadge="8" matBadgePosition="after">notifications_none</span>
+            <span class="material-icons" matBadge="3" matBadgePosition="after">notifications_none</span>
           </button>
           <ul ngbDropdownMenu aria-labelledby="notification">
-            <div class="notiBtn">
-              <a href="#">New (6)</a>
-              <a href="#" class="read">Read (35)</a>
-            </div>
-            <li ngbDropdownItem>
-              <div class="notificationList">
-                <button mat-icon-button class="closeIcon"><mat-icon>clear</mat-icon></button>
-                <h6>What is Lorem Ipsum?</h6>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
-                <p class="view"><a href="#">View</a></p>
-              </div>
-            </li>
-            <li ngbDropdownItem>
-              <div class="notificationList">
-                <button mat-icon-button class="closeIcon"><mat-icon>clear</mat-icon></button>
-                <h6>What is Lorem Ipsum?</h6>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
-                <p class="view"><a href="#">View</a></p>
-              </div>
-            </li>
-            <li ngbDropdownItem>
-              <div class="notificationList">
-                <button mat-icon-button class="closeIcon"><mat-icon>clear</mat-icon></button>
-                <h6>What is Lorem Ipsum?</h6>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
-                <p class="view"><a href="#">View</a></p>
-              </div>
-            </li>
+
+            <mat-tab-group animationDuration="0ms" class="notiBtn">
+              <mat-tab label="New">
+                <li ngbDropdownItem>
+                  <div class="notificationList">
+                    <button mat-icon-button class="closeIcon">
+                      <mat-icon>clear</mat-icon>
+                    </button>
+                    <h6>What is Lorem Ipsum?</h6>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text</p>
+                    <p class="view"><a href="#">View</a></p>
+                  </div>
+                </li>
+                <li ngbDropdownItem>
+                  <div class="notificationList">
+                    <button mat-icon-button class="closeIcon">
+                      <mat-icon>clear</mat-icon>
+                    </button>
+                    <h6>What is Lorem Ipsum?</h6>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text</p>
+                    <p class="view"><a href="#">View</a></p>
+                  </div>
+                </li>
+                <li ngbDropdownItem>
+                  <div class="notificationList">
+                    <button mat-icon-button class="closeIcon">
+                      <mat-icon>clear</mat-icon>
+                    </button>
+                    <h6>What is Lorem Ipsum?</h6>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text</p>
+                    <p class="view"><a href="#">View</a></p>
+                  </div>
+                </li>
+              </mat-tab>
+              <mat-tab label="Read">
+                <li ngbDropdownItem>
+                  <div class="notificationList">
+                    <button mat-icon-button class="closeIcon">
+                      <mat-icon>clear</mat-icon>
+                    </button>
+                    <h6>What is Lorem Ipsum?</h6>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text</p>
+                    <p class="view"><a href="#">View</a></p>
+                  </div>
+                </li>
+                <li ngbDropdownItem>
+                  <div class="notificationList">
+                    <button mat-icon-button class="closeIcon">
+                      <mat-icon>clear</mat-icon>
+                    </button>
+                    <h6>What is Lorem Ipsum?</h6>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text</p>
+                    <p class="view"><a href="#">View</a></p>
+                  </div>
+                </li>
+              </mat-tab>
+            </mat-tab-group>
+
+
           </ul>
         </div>
         <div ngbDropdown class="d-inline-block profileList">
           <button mat-mini-fab aria-label="Profile" id="userProfile" ngbDropdownToggle matTooltip="{{userDisplayName}}"
-            [matMenuTriggerFor]="menu" [matTooltipPosition]="position.value">
+            [matTooltipPosition]="position.value">
             <img src="./../assets/images/profile_useravatar.png" alt="User Profile" />
           </button>
           <ul ngbDropdownMenu aria-labelledby="userProfile">
