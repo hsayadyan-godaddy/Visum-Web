@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl } from '@angular/forms';
+import { WebsocketUsageExampleService } from '../../services/websocket/websocket-usage-example-service';
 
 @Component({
   selector: 'app-monitoring',
@@ -14,7 +15,10 @@ export class ProductionMonitoringComponent implements OnInit {
     end: new FormControl()
   });
 
-  constructor() { }
+  constructor(private exampleWS: WebsocketUsageExampleService) {
+    
+   }
+
 
   onClickCompare(){
     alert('Compare');
