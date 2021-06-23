@@ -25,6 +25,8 @@ import { ProductionMonitoringComponent } from './components/production-monitorin
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PressureflowratechartComponent } from './shared/components/pressureflowratechart/pressureflowratechart/pressureflowratechart.component';
+import { WebSocketService } from './services/websocket/websocket.service';
+import { WebsocketUsageExampleService } from './services/websocket/websocket-usage-example-service';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    WebSocketService,
+    WebsocketUsageExampleService
   ],
   bootstrap: [AppComponent]
 })
