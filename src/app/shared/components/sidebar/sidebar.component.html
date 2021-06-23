@@ -2,12 +2,12 @@
 <mat-nav-list>
     <a mat-list-item title="Home" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'home'}"
         (click)="router.navigate(['/home']);isActive = 'home'">
-        <span class="icon"><img src="assets/images/home.png"></span>
+        <span class="icon"><img src="assets/images/home.svg"></span>
         <span class="content" *ngIf="isMenuOpen">Home</span>
     </a>
     <a mat-list-item title="project" role="listitem" [ngClass]="{'icon_align': !isMenuOpen, 'active_list': isActive === 'project'}"
         (click)="router.navigate(['/projects']);isActive = 'project'">
-        <span class="icon"><img src="assets/images/layers.png"></span>
+        <span class="icon"><img src="assets/images/layers.svg"></span>
         <span class="content" *ngIf="isMenuOpen">Project</span>
     </a>
     
