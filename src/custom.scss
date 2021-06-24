@@ -188,6 +188,7 @@
       } 
     }
   }
+  
   // Header Css End Here
 
   // Sidebar Css Start Here
@@ -255,6 +256,16 @@
             span.icon{
               width: 60px;
               text-align: center;
+              position: relative;
+              span.notifi{
+                display: inline-block;
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                border-radius: 100%;
+                right: 6px;
+                top: -4px;
+              }
               img{
                 max-width: 24px;
                 max-height: 24px;
