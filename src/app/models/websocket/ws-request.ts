@@ -1,6 +1,7 @@
 import { WSRequestType } from '../enums/ws-request-type';
 import { WSRequestParameter } from './ws-request-parameter';
 import { WSRequestSource } from './ws-request-source';
+import { v4 as uuidv4 } from 'uuid';
 
 export class WSRequest extends WSRequestSource {
 
@@ -14,15 +15,15 @@ export class WSRequest extends WSRequestSource {
 
         super(operationSource);
 
-        this.sequenceId = (new Date()).getTime().toString();
+        this.sequenceId = uuidv4().substring(0, 6);
         this.requestType = requestType;
 
         if (parameters) {
-            this.parameters = this._createParameters(parameters);
+            this.parameters = this.createParameters(parameters);
         }
     }
 
-    private _createParameters(source: Object): WSRequestParameter[] {
+    private createParameters(source: Object): WSRequestParameter[] {
         let target: WSRequestParameter[] = [];
 
         Object.keys(source).forEach((key: string) => {
