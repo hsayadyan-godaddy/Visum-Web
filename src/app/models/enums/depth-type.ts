@@ -1,4 +1,4 @@
-export enum DeothType {
+export enum DepthType {
     MD = 'MD',
     TVD = 'TVD',
     TVDSS = 'TVDSS'
