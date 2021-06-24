@@ -29,6 +29,7 @@
             "scripts": [
             ],
             "allowedCommonJsDependencies": [
+              "uuid"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

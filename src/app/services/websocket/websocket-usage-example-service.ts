@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { WSRequest } from '../../models/websocket/ws-request';
 import { TimeValue } from '../../models/production-monitoring/time-value';
 import { WSResponse } from '../../models/websocket/ws-response';
@@ -11,23 +11,27 @@ import { PressureDataUpdatesRequestParameters } from '../../models/websocket/ws-
 @Injectable()
 export class WebsocketUsageExampleService {
 
-  constructor(private _webSocketService: WebSocketService) {
-    this._connectWS();
+  public onNewTimeValueResponse = new EventEmitter<{ request: WSRequest, value: TimeValue }>(true); // subscribe and TODO something
+
+  private readonly requestDictionary: { [key: string]: WSRequest } = {};
+
+  constructor(private webSocketService: WebSocketService) {
+    this.connectWS();
   }
 
-  private _connectWS() {
-    this._webSocketService.onConnected.subscribe((connected: boolean) => {
+  private connectWS() {
+    this.webSocketService.onConnected.subscribe((connected: boolean) => {
       if (connected) {
-        this._resetContext(false);
+        this.resetContext(false);
       }
     });
 
-    this._resetContext();
+    this.resetContext();
   }
 
-  private _resetContext(initialization: boolean = true) {
+  private resetContext(initialization: boolean = true) {
     if (initialization) {
-      this._webSocketService.onNewMessage.subscribe((message: WSResponse<TimeValue>) => {
+      this.webSocketService.onNewMessage.subscribe((message: WSResponse<TimeValue>) => {
 
         var expectedOperation = WebSocketAPISource
           .PRODUCTION_MONITORING
@@ -35,23 +39,27 @@ export class WebsocketUsageExampleService {
 
         var allowed = WSResponseCheck.Allowed(message, expectedOperation);
         if (allowed) {
+          const key = message.sequenceId;
+          const refRequest = this.requestDictionary[key];
+          if (refRequest) {
 
-          this._todoHandleUpdates(message.response);
+            this.todoHandleUpdates(refRequest, message.response);
+          }
 
         } else if (message.statusCode >= 500) {
 
           // reasonable to reset subscription on internal server error
           setTimeout(() => {
-            this._resetContext(false);
+            this.resetContext(false);
           }, 3000);
         }
       });
     }
 
-    this._subscribeUpdates();
+    this.subscribeUpdates();
   }
 
-  private _subscribeUpdates(): void {
+  private subscribeUpdates(): void {
 
     var opSource: WSRequestSource = WebSocketAPISource
       .PRODUCTION_MONITORING
@@ -64,11 +72,17 @@ export class WebsocketUsageExampleService {
     };
 
     const request: WSRequest = new WSRequest(opSource, parameters);
-    this._webSocketService.send(request);
+    this.sendRequest(request);
   }
 
-  private _todoHandleUpdates(value: TimeValue): void {
-    // TODO something
+  private sendRequest(request: WSRequest) {
+    const key = request.sequenceId;
+    this.requestDictionary[key] = request;
+    this.webSocketService.send(request);
+  }
+
+  private todoHandleUpdates(request: WSRequest, value: TimeValue): void {
+    this.onNewTimeValueResponse.emit({ request, value });
   }
 
   // #endregion Private Methods (5)
