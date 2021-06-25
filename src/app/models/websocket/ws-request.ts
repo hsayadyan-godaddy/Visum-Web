@@ -2,6 +2,7 @@ import { WSRequestType } from '../enums/ws-request-type';
 import { WSRequestParameter } from './ws-request-parameter';
 import { WSRequestSource } from './ws-request-source';
 import { v4 as uuidv4 } from 'uuid';
+import { ParamBuilder } from '../../shared/pipes/parambuilder';
 
 export class WSRequest extends WSRequestSource {
 
@@ -19,23 +20,7 @@ export class WSRequest extends WSRequestSource {
         this.requestType = requestType;
 
         if (parameters) {
-            this.parameters = this.createParameters(parameters);
+            this.parameters = ParamBuilder.toWSRequestParameters(parameters);
         }
-    }
-
-    private createParameters(source: Object): WSRequestParameter[] {
-        let target: WSRequestParameter[] = [];
-
-        Object.keys(source).forEach((key: string) => {
-            const value: string | number | boolean | Date = source[key];
-            if ((typeof value !== 'undefined') && (value !== null)) {
-                const parameter: WSRequestParameter = {
-                    name: key,
-                    value: value
-                };
-            }
-        });
-
-        return target;
     }
 }

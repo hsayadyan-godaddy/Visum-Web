@@ -1,4 +1,5 @@
-import { HttpParams } from "@angular/common/http";
+import { HttpParams } from '@angular/common/http';
+import { WSRequestParameter } from '../../models/websocket/ws-request-parameter';
 
 export class ParamBuilder {
     
@@ -10,6 +11,25 @@ export class ParamBuilder {
                 target = target.append(key, value.toString());
             }
         });
+        return target;
+    }
+
+
+    
+    static toWSRequestParameters(source: Object): WSRequestParameter[] {
+        let target: WSRequestParameter[] = [];
+
+        Object.keys(source).forEach((key: string) => {
+            const value: string | number | boolean | Date = source[key];
+            if ((typeof value !== 'undefined') && (value !== null)) {
+                const parameter: WSRequestParameter = {
+                    name: key,
+                    value: value
+                };
+                target.push(parameter);
+            }
+        });
+
         return target;
     }
 }
