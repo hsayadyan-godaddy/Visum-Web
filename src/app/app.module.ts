@@ -56,7 +56,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
       {path: 'projects', component: ProjectsComponent}
     ]),
     RoutingModule,
-    NgbModule 
+      NgbModule 
   ],
   providers: [
     {
