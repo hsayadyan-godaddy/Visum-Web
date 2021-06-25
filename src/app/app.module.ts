@@ -24,6 +24,12 @@ import * as PlotlyJS from 'plotly.js-dist';
 import { ProductionMonitoringComponent } from './components/production-monitoring/production-monitoring.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PressureflowratechartComponent } from './shared/components/pressureflowratechart/pressureflowratechart.component';
+import { DepthTimeComponent } from './shared/components/depth-time/depth-time.component';
+import { WellSellectionWithButtonsComponent } from './shared/components/well-sellection-with-buttons/well-sellection-with-buttons.component';
+import { MonitoringChartsComponent } from './shared/components/monitoring-charts/monitoring-charts.component';
+import { WebSocketService } from './services/websocket/websocket.service';
+import { WebsocketUsageExampleService } from './services/websocket/websocket-usage-example-service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
@@ -37,7 +43,11 @@ PlotlyModule.plotlyjs = PlotlyJS;
     SidebarComponent,
     FooterComponent,
     TimechartsComponent,
-    ProductionMonitoringComponent
+    ProductionMonitoringComponent,
+    PressureflowratechartComponent,
+    DepthTimeComponent,
+    WellSellectionWithButtonsComponent,
+    MonitoringChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +73,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    WebSocketService,
+    WebsocketUsageExampleService
   ],
   bootstrap: [AppComponent]
 })

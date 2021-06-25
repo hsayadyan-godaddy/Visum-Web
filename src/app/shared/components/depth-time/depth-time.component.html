@@ -1,0 +1,34 @@
+<div class="div-depth-time">
+    <mat-grid-list cols="3" class="timeline-grid-list" rowHeight="50px">
+      <mat-grid-tile class="depth-tile">
+        <div class="div-depth-tile">
+        <button aria-label="MD" (click)="onClickBtn('MD')">MD</button>
+        <button aria-label="TVD" (click)="onClickBtn('TVD')">TVD</button>
+        <button aria-label="TVDSS" (click)="onClickBtn('TVDSS')">TVDSS</button>
+      </div>
+      </mat-grid-tile>
+      <mat-grid-tile class="div-timeline">
+        <span>Historical Timeline</span>
+        <button aria-label="" (click)="onClickBtn('Visibility off')">
+          <mat-icon>visibility_off</mat-icon>
+        </button>
+        <button aria-label="All" (click)="onClickBtn('All')">All</button>
+        <button aria-label="1Y" (click)="onClickBtn('1Y')">1Y</button>
+        <button aria-label="90D" (click)="onClickBtn('90D')">90D</button>
+        <button aria-label="60D" (click)="onClickBtn('60D')">60D</button>
+        <button aria-label="30D" (click)="onClickBtn('30D')">30D</button>
+        <button aria-label="7D" (click)="onClickBtn('7D')">7D</button>
+        <button aria-label="24H" (click)="onClickBtn('24H')">24H</button>
+      </mat-grid-tile>
+      <mat-grid-tile class="datapicker">
+          <mat-form-field>
+            <input matInput type="datetime-local" placeholder="start date">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="datetime-local" placeholder="end date">
+          </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  
+  
