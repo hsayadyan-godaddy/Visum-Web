@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  WSApiEndpoint: 'ws://localhost:5000/ws-api?SESSION-TOKEN=',
   API_URL: "http://localhost:5000/"
 };
 

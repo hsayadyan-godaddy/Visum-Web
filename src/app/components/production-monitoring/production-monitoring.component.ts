@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Productionmonitoring } from 'src/app/models/productionmonitoring/productionmonitoring';
 import { Well } from 'src/app/models/well';
 import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
+import { WebsocketUsageExampleService } from '../../services/websocket/websocket-usage-example-service';
 
 @Component({
   selector: 'app-monitoring',
@@ -17,7 +18,7 @@ export class ProductionMonitoringComponent implements OnInit {
   pmData : Productionmonitoring;
   
 
-  constructor(
+    constructor(private exampleWS: WebsocketUsageExampleService,
     private _pmService: ProductionMonitoringService
     ) { }
 
