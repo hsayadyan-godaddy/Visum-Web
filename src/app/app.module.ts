@@ -24,7 +24,7 @@ import * as PlotlyJS from 'plotly.js-dist';
 import { ProductionMonitoringComponent } from './components/production-monitoring/production-monitoring.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -55,7 +55,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
       {path: 'login', component: LoginComponent},
       {path: 'projects', component: ProjectsComponent}
     ]),
-    RoutingModule
+    RoutingModule,
+    NgbModule
   ],
   providers: [
     {
