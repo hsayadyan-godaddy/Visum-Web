@@ -31,7 +31,7 @@ export class ZoneFlowAllocationComponent implements OnInit {
       wellId: 'wellId222'
     };
 
-    this.productionMonitoringService.getZoneFlowProductionHistoryDataRates(command).subscribe((response) => {
+    this.productionMonitoringService.getZoneFlowProductionHistoryData(command).subscribe((response) => {
       this.dataSource = this.GetDataSource(response.zoneFlowProductionData);
       console.log(response);
     }, (error) => {
