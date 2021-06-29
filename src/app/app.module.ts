@@ -31,6 +31,7 @@ import { MonitoringChartsComponent } from './shared/components/monitoring-charts
 import { ZoneFlowAllocationComponent } from './components/production-monitoring/zone-flow-allocation/zone-flow-allocation.component';
 import { WebSocketService } from './services/websocket/websocket.service';
 import { WebsocketUsageExampleService } from './services/websocket/websocket-usage-example-service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
       {path: 'login', component: LoginComponent},
       {path: 'projects', component: ProjectsComponent}
     ]),
-    RoutingModule
+    RoutingModule,
+      NgbModule 
   ],
   providers: [
     {
