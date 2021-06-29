@@ -105,3 +105,17 @@ body {
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.8375em 0;
 }
+
+.monitoring-charts .mat-grid-tile-content{
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+}
+.monitoring-charts .chart{
+  padding-top: 48px;
+  width: 100%;
+  height: 100%;
+}
+.chart .layout{
+  padding-top: 0!important;
+}
