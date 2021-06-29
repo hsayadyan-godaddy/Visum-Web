@@ -14,5 +14,5 @@ export interface ZoneFlowProductionHistoryDataResponse {
     // Depth type
     depthType: DepthType;
     // Zone info data
-    zoneFlowProductionData : ZoneFlowTimeOilWaterGas;
+    zoneFlowProductionData : ZoneFlowTimeOilWaterGas[];
 }
