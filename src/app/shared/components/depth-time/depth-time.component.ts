@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DepthType } from 'src/app/enums/depth-type';
+import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
 
 @Component({
   selector: 'app-depth-time',
@@ -11,7 +12,7 @@ depthType : DepthType;
 data: Object;
 
 
-  constructor() { }
+  constructor(private _httpClient:ProductionMonitoringService) { }
 
   ngOnInit(): void {
   }
@@ -19,6 +20,6 @@ data: Object;
 
 
 onClickBtn(name: string){
-  alert(name);
+  this._httpClient.periodicityValue.next(name);  
   }
 }

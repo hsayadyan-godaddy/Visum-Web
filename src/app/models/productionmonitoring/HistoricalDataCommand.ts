@@ -1,9 +1,9 @@
-import { Period } from "src/app/enums/period";
+import { Periodicity } from "src/app/enums/periodicity";
 import { ProjectIdWellNameCommand } from "../Request/ProjectIdWellNameCommand";
 
 export interface HistoricalDataCommand extends ProjectIdWellNameCommand {
-    periodicity : Period;
-    snapshotSize : bigint;
+    periodicity : Periodicity;
+    snapshotSize : number;
     fromDate?: bigint;
     toDate?: bigint;
 }
