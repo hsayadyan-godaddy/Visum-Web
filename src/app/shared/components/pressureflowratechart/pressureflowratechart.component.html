@@ -1,3 +1,3 @@
-<div class="layout">
-    <plotly-plot [data]="graph.data" [layout]="graph.layout"  class="chart"></plotly-plot>
+<div class="layout" *ngIf="graph?.data !== undefined">
+    <plotly-plot [data]="graph?.data" [layout]="graph?.layout"  class="chart"></plotly-plot>
 </div>
