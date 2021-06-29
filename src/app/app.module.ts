@@ -28,6 +28,7 @@ import { PressureflowratechartComponent } from './shared/components/pressureflow
 import { DepthTimeComponent } from './shared/components/depth-time/depth-time.component';
 import { WellSellectionWithButtonsComponent } from './shared/components/well-sellection-with-buttons/well-sellection-with-buttons.component';
 import { MonitoringChartsComponent } from './shared/components/monitoring-charts/monitoring-charts.component';
+import { ZoneFlowAllocationComponent } from './components/production-monitoring/zone-flow-allocation/zone-flow-allocation.component';
 import { WebSocketService } from './services/websocket/websocket.service';
 import { WebsocketUsageExampleService } from './services/websocket/websocket-usage-example-service';
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -46,6 +47,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     PressureflowratechartComponent,
     DepthTimeComponent,
     WellSellectionWithButtonsComponent,
+    ZoneFlowAllocationComponent,
     MonitoringChartsComponent
   ],
   imports: [

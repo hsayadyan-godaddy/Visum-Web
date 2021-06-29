@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DepthType } from '../enums/depth-type';
-import { Period } from '../enums/period';
+import { Periodicity } from '../enums/periodicity';
 import { Productionmonitoring } from '../models/productionmonitoring/productionmonitoring';
 import { FlowRateHistoryDataCommand } from '../models/Request/FlowRateHistoryDataCommand';
 import { FlowRateSensorsCommand } from '../models/Request/FlowRateSensorsCommand';
@@ -80,6 +80,11 @@ export class ProductionMonitoringService {
   GetZoneFlowProductionAcceptableLimits(zoneFlowProductionAcceptableLimitsCommand : ZoneFlowProductionAcceptableLimitsCommand): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
     let params = ParamBuilder.toQueries(zoneFlowProductionAcceptableLimitsCommand);
     return this.http.get<ZoneFlowProductionAcceptableLimitsResponse>(this.AppUrl + UrlHelper.ZoneFlowProductionAcceptableLimits, { params: params, headers: this.headers });
+  }
+
+  getZoneFlowProductionHistoryDataRates(zoneFlowProductionHistoryDataCommand : ZoneFlowProductionHistoryDataCommand): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
+    let params = ParamBuilder.toQueries(zoneFlowProductionHistoryDataCommand);
+    return this.http.get<ZoneFlowProductionAcceptableLimitsResponse>(this.AppUrl + UrlHelper.ZoneFlowProductionHistoryDataRates, { params: params, headers: this.headers });
   }
 
 }

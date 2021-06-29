@@ -1,0 +1,66 @@
+.zone-flow-allocation-container {
+  width: 500px;
+
+  table {
+
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    border: 2px solid black;
+
+    th {
+      border: 1px solid #AEAEAE;
+    }
+
+    tr {
+      height: auto;
+    }
+
+    tr.total-row-style{
+      font-weight: bold;
+      height: 25px;
+    }
+
+    tr.out-of-limit{
+      border: 2px dashed red;
+    }
+
+    td {
+      padding-right: 0px;
+      border: 1px solid #AEAEAE;
+    }
+
+    tr:nth-child(even) {
+      background-color: #ECECEC;
+    }
+
+    th span.main-header-text {
+      text-transform: uppercase;
+      color: black;
+    }
+
+    th.value-content-header {
+      width: 80px;
+      text-align: center;
+      padding-right: 0px;
+    }
+
+    td.value-content-oil {
+      color: #61BD6B;
+    }
+
+    td.value-content-water {
+      color: #0379ED;
+    }
+
+    td.value-content-gas {
+      color: #EBBD1B;
+    }
+  }
+}
+
+
+// todo: You need to connect the main style
+.mat-elevation-z8 {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)
+}
