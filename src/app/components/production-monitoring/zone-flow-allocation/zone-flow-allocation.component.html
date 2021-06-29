@@ -1,0 +1,33 @@
+<div class="zone-flow-allocation-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Zone Column -->
+    <ng-container matColumnDef="zone">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> {{element.Zone}} </td>
+    </ng-container>
+
+    <!-- Oil Column -->
+    <ng-container matColumnDef="oil">
+      <th mat-header-cell *matHeaderCellDef class="value-content-header"><span class="main-header-text">Oil</span><br><span>bpm</span></th>
+      <td mat-cell *matCellDef="let element" class="value-content-oil"> {{element.Oil}} </td>
+    </ng-container>
+
+    <!-- Water Column -->
+    <ng-container matColumnDef="water">
+      <th mat-header-cell *matHeaderCellDef class="value-content-header"><span class="main-header-text">Water</span><br><span>bpm</span></th>
+      <td mat-cell *matCellDef="let element" class="value-content-water"> {{element.Water}} </td>
+    </ng-container>
+
+    <!-- Gas Column -->
+    <ng-container matColumnDef="gas">
+      <th mat-header-cell *matHeaderCellDef class="value-content-header"><span class="main-header-text">Gas</span><br><span>Cu ft</span></th>
+      <td mat-cell *matCellDef="let element" class="value-content-gas"> {{element.Gas}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        class="{{getClasses(row)}}"
+    ></tr>
+  </table>
+</div>
