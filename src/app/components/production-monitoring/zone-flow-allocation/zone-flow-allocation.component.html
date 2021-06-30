@@ -10,19 +10,19 @@
     <!-- Oil Column -->
     <ng-container matColumnDef="oil">
       <th mat-header-cell *matHeaderCellDef class="value-content-header"><span class="main-header-text">Oil</span><br><span>bpm</span></th>
-      <td mat-cell *matCellDef="let element" class="value-content-oil"> {{element.oil.toFixed(2)}} </td>
+      <td mat-cell *matCellDef="let element" class="value-content-oil"> {{element.oil | number:'.1-2'}} </td>
     </ng-container>
 
     <!-- Water Column -->
     <ng-container matColumnDef="water">
       <th mat-header-cell *matHeaderCellDef class="value-content-header"><span class="main-header-text">Water</span><br><span>bpm</span></th>
-      <td mat-cell *matCellDef="let element" class="value-content-water"> {{element.water.toFixed(2)}} </td>
+      <td mat-cell *matCellDef="let element" class="value-content-water"> {{element.water | number:'.1-2'}} </td>
     </ng-container>
 
     <!-- Gas Column -->
     <ng-container matColumnDef="gas">
       <th mat-header-cell *matHeaderCellDef class="value-content-header"><span class="main-header-text">Gas</span><br><span>Cu ft</span></th>
-      <td mat-cell *matCellDef="let element" class="value-content-gas"> {{element.gas.toFixed(2)}} </td>
+      <td mat-cell *matCellDef="let element" class="value-content-gas"> {{element.gas | number:'.1-2'}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

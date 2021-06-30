@@ -1,4 +1,4 @@
-import {DepthType} from '../../enums/depth-type';
+import {DepthType} from '../../../enums/depth-type';
 
 export class ZoneFlowProductionDataUpdatesRequestParameters {
 
