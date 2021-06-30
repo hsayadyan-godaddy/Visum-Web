@@ -4,6 +4,7 @@ import {Periodicity} from '../../../enums/periodicity';
 import {ZoneFlowProductionHistoryDataCommand} from '../../../models/Request/ZoneFlowProductionHistoryDataCommand';
 import {DepthType} from '../../../enums/depth-type';
 import {ZoneFlowTimeOilWaterGas} from '../../../models/productionmonitoring/ZoneFlowTimeOilWaterGas';
+import {WsFlowMonitoringService} from '../../../services/ws-production-monitoring/ws-flow-monitoring.service';
 
 @Component({
   selector: 'app-zone-flow-allocation',
@@ -13,13 +14,41 @@ import {ZoneFlowTimeOilWaterGas} from '../../../models/productionmonitoring/Zone
 
 export class ZoneFlowAllocationComponent implements OnInit {
   displayedColumns: string[] = ['zone', 'oil', 'water', 'gas'];
-  dataSource: any[] = [];
+  dataSource: ZoneFlowTimeOutOfLimitOilWaterGas[] = [];
 
   constructor(
-    private productionMonitoringService: ProductionMonitoringService
+    private productionMonitoringService: ProductionMonitoringService,
+    private wsFlowMonitoringService: WsFlowMonitoringService
   ) { }
 
   ngOnInit() {
+    this.wsFlowMonitoringService.onZoneFlowTimeOilWaterGas.subscribe(data => {
+      let oilTotal = 0;
+      let waterTotal = 0;
+      let gasTotal = 0;
+
+      for (let i = 0; i < this.dataSource.length - 1; i++)
+      {
+        if (this.dataSource[i].zone === data.request.zoneNumber.toString()){
+          this.dataSource[i].oil = data.value.oil;
+          this.dataSource[i].water = data.value.water;
+          this.dataSource[i].gas = data.value.gas;
+        }
+
+        oilTotal += this.dataSource[i].oil;
+        waterTotal += this.dataSource[i].water;
+        gasTotal += this.dataSource[i].gas;
+      }
+
+      this.dataSource[this.dataSource.length - 1].oil = oilTotal;
+      this.dataSource[this.dataSource.length - 1].water = waterTotal;
+      this.dataSource[this.dataSource.length - 1].gas = gasTotal;
+    });
+
+    for (let i = 1; i < 7; i++){
+      this.wsFlowMonitoringService.subscribeUpdates(i);
+    }
+
     const command: ZoneFlowProductionHistoryDataCommand = {
       depthType: DepthType.MD,
       zoneNumber: 3,
@@ -46,30 +75,40 @@ export class ZoneFlowAllocationComponent implements OnInit {
     let gasTotal = 0;
 
     for ( let i = 0; i < zoneFlowProductionData.length; i++){
-      const d = zoneFlowProductionData[i];
+      const dd = zoneFlowProductionData[i];
 
-      oilTotal += d.oil;
-      waterTotal += d.water;
-      gasTotal += d.gas;
+      oilTotal += dd.oil;
+      waterTotal += dd.water;
+      gasTotal += dd.gas;
 
-      data.push({
-        // "Zone": ,
-        OutOfLimit: false,
-        Oil: d.oil.toFixed(2),
-        Water: d.water.toFixed(2),
-        Gas: d.gas.toFixed(2)
-      });
+      const date = new Date();
+      const zone = i + 1;
+      const outOfLimit = false;
+      const item = this.createItem(dd, date, zone.toString(), outOfLimit);
+      data.push(item);
     }
 
-    data.push({
-      Zone: 'Total',
-      OutOfLimit: false,
-      Oil: oilTotal.toFixed(2),
-      Water: waterTotal.toFixed(2),
-      Gas: gasTotal.toFixed(2)
-    });
+    const d: ZoneFlowTimeOilWaterGas = {
+      time: new Date(),
+      oil: oilTotal,
+      water: waterTotal,
+      gas: gasTotal
+    };
+    data.push(this.createItem(d, new Date(), 'Total', false));
 
     return data;
+  }
+
+  private createItem(data: ZoneFlowTimeOilWaterGas, date: Date, zone: string, outOfLimit: boolean) {
+    const item: ZoneFlowTimeOutOfLimitOilWaterGas = {
+      time: date,
+      zone,
+      outOfLimit,
+      oil: data.oil,
+      water: data.water,
+      gas: data.gas
+    };
+    return item;
   }
 
   getClasses(row) {
@@ -77,4 +116,9 @@ export class ZoneFlowAllocationComponent implements OnInit {
     classes += row.OutOfLimit ? ' out-of-limit' : '';
     return classes;
   }
+}
+
+export interface ZoneFlowTimeOutOfLimitOilWaterGas extends ZoneFlowTimeOilWaterGas{
+  zone: string;
+  outOfLimit: boolean;
 }
