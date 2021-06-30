@@ -1,5 +1,5 @@
 export enum DepthType {
-    MD,
-    TVD,
-    TVDSS
+    MD = 'MD',
+    TVD = 'TVD',
+    TVDSS = 'TVDSS'
 }
