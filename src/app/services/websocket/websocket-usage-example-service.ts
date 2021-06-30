@@ -68,7 +68,7 @@ export class WebsocketUsageExampleService {
     var parameters: PressureDataUpdatesRequestParameters = {
       projectId: '0EA456-45CD89456-1237-8F8A',
       wellId: 'LONG-HOLE-003',
-      sensorId: 'ABC-PRESS-1'
+      sensorId: 'ABC-PRESS-'
     };
 
     const request: WSRequest = new WSRequest(opSource, parameters);

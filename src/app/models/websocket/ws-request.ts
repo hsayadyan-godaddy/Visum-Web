@@ -8,7 +8,7 @@ export class WSRequest extends WSRequestSource {
 
     public sequenceId: string;
     public requestType: WSRequestType;
-    public parameters?: WSRequestParameter[];
+    public methodParameters?: WSRequestParameter[];
 
     constructor(operationSource: WSRequestSource,
         parameters?: Object,
@@ -20,7 +20,7 @@ export class WSRequest extends WSRequestSource {
         this.requestType = requestType;
 
         if (parameters) {
-            this.parameters = ParamBuilder.toWSRequestParameters(parameters);
+            this.methodParameters = ParamBuilder.toWSRequestParameters(parameters);
         }
     }
 }
