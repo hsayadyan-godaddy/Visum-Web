@@ -33,6 +33,7 @@ import { WebSocketService } from './services/websocket/websocket.service';
 import { WebsocketUsageExampleService } from './services/websocket/websocket-usage-example-service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WsFlowMonitoringService } from './services/ws-production-monitoring/ws-flow-monitoring.service';
+import { ZoneChartComponent } from './shared/components/zone-chart/zone-chart.component';
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     DepthTimeComponent,
     WellSellectionWithButtonsComponent,
     ZoneFlowAllocationComponent,
-    MonitoringChartsComponent
+    MonitoringChartsComponent,
+    ZoneChartComponent
   ],
   imports: [
     BrowserModule,

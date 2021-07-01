@@ -69,7 +69,7 @@ export class ZoneChartComponent implements OnInit {
 
   createLayout() {
     var layout = {
-      title: 'Zone Information',
+      title: '',
       xaxis: {
         visible: false,
         showticklabels: false
@@ -78,7 +78,7 @@ export class ZoneChartComponent implements OnInit {
         l: 140,
         r: 40,
         b: 50,
-        t: 90
+        t: 70
       },
       yaxis: {
         showline: true,
