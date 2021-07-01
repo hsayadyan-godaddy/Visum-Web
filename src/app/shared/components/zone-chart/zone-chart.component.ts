@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DepthType } from 'src/app/enums/depth-type';
-import { WellboreProfileZonesCommand } from 'src/app/models/Request/WellboreProfileZonesCommand';
-import { WellboreProfileZonesResponse } from 'src/app/models/Response/WellboreProfileZonesResponse';
-import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
+import { DepthType } from '../../../enums/depth-type';
+import { WellboreProfileZonesCommand } from '../../../models/Request/WellboreProfileZonesCommand';
+import { WellboreProfileZonesResponse } from '../../../models/Response/WellboreProfileZonesResponse';
+import { ProductionMonitoringService } from '../../../services/productionMonitoring.service';
 
 @Component({
   selector: 'app-zone-chart',
