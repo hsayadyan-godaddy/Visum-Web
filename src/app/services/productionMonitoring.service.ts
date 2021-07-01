@@ -47,9 +47,9 @@ export class ProductionMonitoringService {
   }
 
 
-  getWellboreProfileZones(wellboreProfileZonesCommand : WellboreProfileZonesCommand): Observable<WellboreProfileZonesResponse> {
+  async getWellboreProfileZones(wellboreProfileZonesCommand : WellboreProfileZonesCommand): Promise<WellboreProfileZonesResponse> {
     let params = ParamBuilder.toQueries(wellboreProfileZonesCommand);
-    return this.http.get<WellboreProfileZonesResponse>(this.AppUrl + UrlHelper.WellboreProfileZones, { params : params, headers: this.headers });
+    return this.http.get<WellboreProfileZonesResponse>(this.AppUrl + UrlHelper.WellboreProfileZones, { params : params, headers: this.headers }).toPromise();
   }
 
   getPressureSensors(pressureSensorsCommand : PressureSensorsCommand): Observable<PressureSensorsResponse> {
