@@ -19,6 +19,10 @@ export class ZoneChartComponent implements OnInit {
   public depth: number[] = [];
   public allDepths: number[] = [];
   public zoneDepth: string[] = [];
+  public graph = {
+    data : this.createZoneChartData(),
+    layout: this.createLayout()
+  };
   constructor(public pmService: ProductionMonitoringService) { }
   
 
@@ -102,11 +106,6 @@ export class ZoneChartComponent implements OnInit {
 
     return layout;
   }
-
-  public graph = {
-    data: this.createZoneChartData(),
-    layout: this.createLayout()
-  };
 
   onChange(newDepth) {
     this.selectedDepth = newDepth;
