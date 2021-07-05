@@ -45,45 +45,17 @@ export class PressureflowratechartComponent implements OnInit {
   private yMinorArray: Array<number> = [];
 
   flowSub: Subscription;
-  private period: Periodicity;
-  constructor(private _pmService: ProductionMonitoringService) { }
+  private periodicity: Periodicity;
+  constructor(private productionMonitoringService: ProductionMonitoringService) { }
 
   ngOnInit(): void {
     this.getFlowRateSensors();
     this.getPressureSensors();
     // this.plotGraph();
 
-    this._pmService.periodicityValue.subscribe(value => {
-      
-      switch (value) {
-        case '24H':
-          this.period = Periodicity.Hours24;
-          break;
-        case '7D':
-          this.period = Periodicity.Days7;
-          break;
-        case '30D':
-          this.period = Periodicity.Days30;
-          break;
-        case '60D':
-          this.period = Periodicity.Days60;
-          break;
-        case '90D':
-          this.period = Periodicity.Days90;
-          break;
-        case '1Y':
-          this.period = Periodicity.OneYear;
-          break;
-        case 'All':
-          this.period = Periodicity.All;
-          break;
-        default:
-          break;
-      }
-      
-
-      this.plotRefresh(this.period);
-      
+    this.productionMonitoringService.periodicity.subscribe(value => {
+      this.periodicity = value;
+      this.plotRefresh(value);
     });
 
   }
@@ -94,13 +66,12 @@ export class PressureflowratechartComponent implements OnInit {
   }
 
   async getFlowRateSensors() {
-    
     this.flowRateSensorCmd = {
       projectId: 'project1',
       wellId: 'well1'
     }
 
-    this.flowRateSensorResponse = await this._pmService.getFlowRateSensorsAsync(this.flowRateSensorCmd);
+    this.flowRateSensorResponse = await this.productionMonitoringService.getFlowRateSensorsAsync(this.flowRateSensorCmd);
 
   }
 
@@ -110,7 +81,7 @@ export class PressureflowratechartComponent implements OnInit {
       wellId: 'well1'
     }
 
-    this.pressureSensorsResponse = await this._pmService.getPressureSensorsAsync(this.pressureSensorsCommand);
+    this.pressureSensorsResponse = await this.productionMonitoringService.getPressureSensorsAsync(this.pressureSensorsCommand);
 
   }
 
@@ -122,12 +93,12 @@ export class PressureflowratechartComponent implements OnInit {
       projectId: 'project1',
       wellId: 'well1'
     }
-    this.bhppressureHistoryDataResponse = await this._pmService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
+    this.bhppressureHistoryDataResponse = await this.productionMonitoringService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
 
     if (this.bhppressureHistoryDataResponse.pressureData) {
       this.xBHPArray = [];
       this.yBHPArray = [];
-      
+
       this.bhppressureHistoryDataResponse.pressureData.data.forEach(v => {
 
         this.xBHPArray.push(new Date(v.time));
@@ -136,7 +107,7 @@ export class PressureflowratechartComponent implements OnInit {
       });
 
     }
-    
+
 
 
     this.pressureHistoryDataCommand = {
@@ -146,19 +117,19 @@ export class PressureflowratechartComponent implements OnInit {
       projectId: 'project1',
       wellId: 'well1'
     }
-    this.p1pressureHistoryDataResponse = await this._pmService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
+    this.p1pressureHistoryDataResponse = await this.productionMonitoringService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
 
     if (this.p1pressureHistoryDataResponse.pressureData) {
       this.xP1Array = [];
       this.yP1Array = [];
-      
+
       this.p1pressureHistoryDataResponse.pressureData.data.forEach(v => {
         this.xP1Array.push(new Date(v.time));
         this.yP1Array.push(v.value);
       });
 
     }
-    
+
 
     this.pressureHistoryDataCommand = {
       sensorId: 'Pressure-P2-1000',
@@ -167,19 +138,19 @@ export class PressureflowratechartComponent implements OnInit {
       projectId: 'project1',
       wellId: 'well1'
     }
-    this.p2pressureHistoryDataResponse = await this._pmService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
+    this.p2pressureHistoryDataResponse = await this.productionMonitoringService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
 
     if (this.p2pressureHistoryDataResponse.pressureData) {
       this.xP2Array = [];
       this.yP2Array = [];
-      
+
       this.p2pressureHistoryDataResponse.pressureData.data.forEach(v => {
         this.xP2Array.push(new Date(v.time));
         this.yP2Array.push(v.value);
       });
 
     }
-    
+
     this.pressureHistoryDataCommand = {
       sensorId: 'Pressure-P3-3000',
       periodicity: period,
@@ -187,21 +158,21 @@ export class PressureflowratechartComponent implements OnInit {
       projectId: 'project1',
       wellId: 'well1'
     }
-    this.p3pressureHistoryDataResponse = await this._pmService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
+    this.p3pressureHistoryDataResponse = await this.productionMonitoringService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
 
     if (this.p3pressureHistoryDataResponse.pressureData) {
       this.xP3Array = [];
       this.yP3Array = [];
-      
+
       this.p3pressureHistoryDataResponse.pressureData.data.forEach(v => {
-        
+
         this.xP3Array.push(new Date(v.time));
         this.yP3Array.push(v.value);
-        
+
       });
       this.getFlowRateHistoryData(period);
     }
-    
+
 
 
 
@@ -217,15 +188,15 @@ export class PressureflowratechartComponent implements OnInit {
       snapshotSize: 100
     }
 
-    this.flowRateHistoryDataResponse = await this._pmService.getFlowRateHistoryDataAsync(this.flowRateHistoryDataCommand);
+    this.flowRateHistoryDataResponse = await this.productionMonitoringService.getFlowRateHistoryDataAsync(this.flowRateHistoryDataCommand);
 
     if (this.flowRateHistoryDataResponse.flowRateData) {
       var n = 0;
       this.xArray = [];
       this.yArray = [];
-      
+
       this.flowRateHistoryDataResponse.flowRateData.data.forEach(v => {
-        
+
         this.xArray.push(new Date(v.time));
         this.yArray.push(v.value);
         this.yMinorArray.push(n);
@@ -269,7 +240,7 @@ export class PressureflowratechartComponent implements OnInit {
   }
 
   plotGraph() {
-    
+
 
     this.graph = {
 
