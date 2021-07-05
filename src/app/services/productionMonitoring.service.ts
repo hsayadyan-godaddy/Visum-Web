@@ -29,7 +29,7 @@ import { UrlHelper } from '../shared/pipes/urlhelper';
 export class ProductionMonitoringService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   readonly AppUrl = environment.API_URL;
-  public periodicityValue: BehaviorSubject<string> = new BehaviorSubject<string>('24H');
+  public periodicity: BehaviorSubject<Periodicity> = new BehaviorSubject<Periodicity>(Periodicity.Hours24);
   constructor(
     private http: HttpClient
   ) { }

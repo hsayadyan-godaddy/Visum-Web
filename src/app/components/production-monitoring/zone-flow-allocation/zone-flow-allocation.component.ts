@@ -21,6 +21,8 @@ export class ZoneFlowAllocationComponent implements OnInit {
     private wsFlowMonitoringService: WsFlowMonitoringService
   ) { }
 
+  private command: ZoneFlowProductionHistoryDataCommand;
+
   ngOnInit() {
     this.wsFlowMonitoringService.onZoneFlowTimeOilWaterGas.subscribe(data => {
       let oilTotal = 0;
@@ -45,30 +47,31 @@ export class ZoneFlowAllocationComponent implements OnInit {
       this.dataSource[this.dataSource.length - 1].gas = gasTotal;
     });
 
-    for (let i = 1; i < 7; i++){
+    const snapshotSize = 7;
+    for (let i = 1; i < snapshotSize; i++){
       this.wsFlowMonitoringService.subscribeUpdates(i);
     }
 
-    const command: ZoneFlowProductionHistoryDataCommand = {
+    this.command = {
       depthType: DepthType.MD,
       zoneNumber: 3,
       periodicity: Periodicity.Hours24,
-      snapshotSize: 7,
+      snapshotSize,
       // fromDate?: ,
       // toDate?: ,
       projectId: '60af3d5cdc4e604afc4f8437',
       wellId: 'wellId222'
     };
 
-    this.productionMonitoringService.getZoneFlowProductionHistoryData(command).subscribe((response) => {
-      this.dataSource = this.GetDataSource(response.zoneFlowProductionData);
-      console.log(response);
-    }, (error) => {
-      console.log(error);
+    this.plotRefresh(this.command);
+
+    this.productionMonitoringService.periodicity.subscribe(periodicity => {
+      this.command.periodicity = periodicity;
+      this.plotRefresh(this.command);
     });
   }
 
-  private GetDataSource(zoneFlowProductionData: ZoneFlowTimeOilWaterGas[]) {
+  private getDataSource(zoneFlowProductionData: ZoneFlowTimeOilWaterGas[]) {
     const data = [];
     let oilTotal = 0;
     let waterTotal = 0;
@@ -115,6 +118,15 @@ export class ZoneFlowAllocationComponent implements OnInit {
     let classes = row.Zone === 'Total' ? 'total-row-style' : '';
     classes += row.OutOfLimit ? ' out-of-limit' : '';
     return classes;
+  }
+
+  private plotRefresh(command: ZoneFlowProductionHistoryDataCommand) {
+    this.productionMonitoringService.getZoneFlowProductionHistoryData(command).subscribe((response) => {
+      this.dataSource = this.getDataSource(response.zoneFlowProductionData);
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
   }
 }
 
