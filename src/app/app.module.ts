@@ -33,6 +33,7 @@ import { WebSocketService } from './services/websocket/websocket.service';
 import { WebsocketUsageExampleService } from './services/websocket/websocket-usage-example-service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WsFlowMonitoringService } from './services/ws-production-monitoring/ws-flow-monitoring.service';
+import { WsPressureMoniteringService } from "./services/ws-production-monitoring/ws-pressure-monitoring.service";
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     },
     WebSocketService,
     WebsocketUsageExampleService,
-    WsFlowMonitoringService
+    WsFlowMonitoringService,
+    WsPressureMoniteringService
   ],
   bootstrap: [AppComponent]
 })
