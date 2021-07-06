@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Productionmonitoring } from 'src/app/models/productionmonitoring/productionmonitoring';
 import { Well } from 'src/app/models/well';
 import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-well-sellection-with-buttons',
@@ -14,7 +15,8 @@ export class WellSellectionWithButtonsComponent implements OnInit {
   pmData : Productionmonitoring;
 
   constructor(
-    private _pmService: ProductionMonitoringService
+    private _pmService: ProductionMonitoringService,
+    public dialog: MatDialog
     ) { }
 
   getWells() : void
@@ -42,4 +44,18 @@ export class WellSellectionWithButtonsComponent implements OnInit {
   onClickDisplay(){
     alert('Display');
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
+
+@Component({
+  selector: 'dialog-content',
+  templateUrl: 'dialog-content.html',
+})
+export class DialogContent {}
