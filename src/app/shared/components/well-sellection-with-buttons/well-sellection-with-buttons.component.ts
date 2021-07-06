@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input  } from '@angular/core';
 import { Productionmonitoring } from 'src/app/models/productionmonitoring/productionmonitoring';
 import { Well } from 'src/app/models/well';
 import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./well-sellection-with-buttons.component.css']
 })
 export class WellSellectionWithButtonsComponent implements OnInit {
+  @Input('selectedWell') selectedWellname = "Select a Well";
   selected = '';
   wells : Well[];
   pmData : Productionmonitoring;
@@ -27,6 +28,7 @@ export class WellSellectionWithButtonsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.selectedWellname);
   }
 
 
@@ -48,9 +50,9 @@ export class WellSellectionWithButtonsComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(DialogContent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
   }
 }
 

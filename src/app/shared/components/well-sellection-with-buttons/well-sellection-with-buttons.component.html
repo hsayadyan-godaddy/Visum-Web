@@ -1,15 +1,8 @@
 <div class="monitoring">
     <mat-grid-list cols="3" class="monitoring-grid-list" rowHeight="50px">
       <mat-grid-tile>
-         <!-- <mat-form-field appearance="fill" class="mat-select"> -->
-          <mat-label>Select a well</mat-label>
+          <mat-label>{{selectedWellname}}</mat-label>
           <mat-icon (click)="openDialog()">keyboard_arrow_down</mat-icon>
-          <!-- <mat-select [(value)]="selected">
-            <mat-option>None</mat-option>
-            <mat-option>None2</mat-option>
-            <mat-option I *ngFor='let well from wells' value="well.Id">{{well.Name}}</mat-option>
-          </mat-select> -->
-        <!-- </mat-form-field> -->
       </mat-grid-tile>
       <mat-grid-tile>
         <mat-label>PRODUCTION MONITORING</mat-label>

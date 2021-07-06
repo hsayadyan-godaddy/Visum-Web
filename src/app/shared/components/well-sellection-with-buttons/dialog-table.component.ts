@@ -10,6 +10,7 @@ export interface PeriodicElement {
   Project: string;
 }
 
+
 const ELEMENT_DATA: PeriodicElement[] = [
   {Wellname: 'Well1', Padname: 'Hydrogen', Field: 'F1', Project: 'H'},
   {Wellname: 'Well2', Padname: 'Helium', Field: 'F2', Project: 'He'},
@@ -29,16 +30,23 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: 'dialog-table.component.html',
 })
 export class DialogTableComponent {
+  selectedWell:string;
   displayedColumns: string[] = ['Wellname', 'Padname', 'Field', 'Project'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   dataSource1 = new MatTableDataSource(ELEMENT_DATA);
   dataSource2 = new MatTableDataSource(ELEMENT_DATA);
+  clickedRows = new Set<PeriodicElement>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource1.paginator = this.paginator;
     this.dataSource2.paginator = this.paginator;
+  }
+
+  selected(row){
+    this.selectedWell = row.Wellname;
+    console.log(this.selectedWell);
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
