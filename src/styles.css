@@ -137,3 +137,10 @@ body {
   position: sticky;
   bottom: 0;
 }
+
+.title .mat-grid-tile-content{
+  justify-content: flex-start;
+}
+.title-icon .mat-grid-tile-content{
+  justify-content: flex-end;
+}
