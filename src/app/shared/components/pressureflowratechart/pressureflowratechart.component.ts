@@ -1,25 +1,22 @@
-import { formatDate } from '@angular/common';
-import { convertActionBinding } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, OnInit } from '@angular/core';
 import * as Plotly from 'plotly.js-dist';
 import { Subscription } from 'rxjs';
-import { Periodicity } from 'src/app/enums/periodicity';
-import { FlowRateHistoryDataCommand } from 'src/app/models/Request/FlowRateHistoryDataCommand';
-import { FlowRateSensorsCommand } from 'src/app/models/Request/FlowRateSensorsCommand';
-import { PressureHistoryDataCommand } from 'src/app/models/Request/PressureHistoryDataCommand';
-import { PressureSensorsCommand } from 'src/app/models/Request/PressureSensorsCommand';
-import { FlowRateHistoryDataResponse } from 'src/app/models/Response/FlowRateHistoryDataResponse';
-import { FlowRateSensorsResponse } from 'src/app/models/Response/FlowRateSensorsResponse';
-import { PressureHistoryDataResponse } from 'src/app/models/Response/PressureHistoryDataResponse';
-import { PressureSensorsResponse } from 'src/app/models/Response/PressureSensorsResponse';
-import { PressureDataUpdatesRequestParameters } from 'src/app/models/websocket/ws-request-parameters/pressure-data-updates-request-parameters';
-import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
-import { WsFlowMonitoringService } from 'src/app/services/ws-production-monitoring/ws-flow-monitoring.service';
-import { WsPressureMoniteringService } from 'src/app/services/ws-production-monitoring/ws-pressure-monitoring.service';
+import { Periodicity } from '../../../enums/periodicity';
+import { FlowRateHistoryDataCommand } from '../../../models/Request/FlowRateHistoryDataCommand';
+import { FlowRateSensorsCommand } from '../../../models/Request/FlowRateSensorsCommand';
+import { PressureHistoryDataCommand } from '../../../models/Request/PressureHistoryDataCommand';
+import { PressureSensorsCommand } from '../../../models/Request/PressureSensorsCommand';
+import { FlowRateHistoryDataResponse } from '../../../models/Response/FlowRateHistoryDataResponse';
+import { FlowRateSensorsResponse } from '../../../models/Response/FlowRateSensorsResponse';
+import { PressureHistoryDataResponse } from '../../../models/Response/PressureHistoryDataResponse';
+import { PressureSensorsResponse } from '../../../models/Response/PressureSensorsResponse';
+import { PressureDataUpdatesRequestParameters } from '../../../models/websocket/ws-request-parameters/pressure-data-updates-request-parameters';
+import { ProductionMonitoringService } from '../../../services/productionMonitoring.service'; 
+import { WsPressureMoniteringService } from '../../../services/ws-production-monitoring/ws-pressure-monitoring.service';
 @Component({
   selector: 'app-pressureflowratechart',
   templateUrl: './pressureflowratechart.component.html',
-  styleUrls: ['./pressureflowratechart.component.css']
+  styleUrls: ['./pressureflowratechart.component.scss']
 })
 export class PressureflowratechartComponent implements OnInit {
   public graph: any;
@@ -308,8 +305,11 @@ export class PressureflowratechartComponent implements OnInit {
       });
 
     }
-    if (this.flowRateHistoryDataResponse.flowRateData && this.bhppressureHistoryDataResponse.pressureData && this.p1pressureHistoryDataResponse.pressureData
-      && this.p2pressureHistoryDataResponse.pressureData && this.p3pressureHistoryDataResponse.pressureData) {
+    if (this.flowRateHistoryDataResponse.flowRateData && 
+      this.bhppressureHistoryDataResponse.pressureData && 
+      this.p1pressureHistoryDataResponse.pressureData  && 
+      this.p2pressureHistoryDataResponse.pressureData && 
+      this.p3pressureHistoryDataResponse.pressureData) {
 
       this.plotGraph();
 
