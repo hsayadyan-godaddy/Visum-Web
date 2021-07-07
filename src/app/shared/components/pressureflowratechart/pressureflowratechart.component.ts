@@ -46,19 +46,32 @@ export class PressureflowratechartComponent implements OnInit {
   private params: PressureDataUpdatesRequestParameters;
 
   flowSub: Subscription;
+<<<<<<< HEAD
   private period: Periodicity;
   constructor(private productionMonitoringService: ProductionMonitoringService, private wsPressureService: WsPressureMoniteringService) { }
+=======
+  private periodicity: Periodicity;
+  constructor(private productionMonitoringService: ProductionMonitoringService) { }
+>>>>>>> 9c34939718ae9f3bfefd5801fac18c4491b476dc
 
   ngOnInit(): void {
 
     this.getFlowRateSensors();
     this.getPressureSensors();
+<<<<<<< HEAD
 
     this.productionMonitoringService.periodicity.subscribe(value => {
 
       this.period = value
       this.plotRefresh(this.period);
 
+=======
+    // this.plotGraph();
+
+    this.productionMonitoringService.periodicity.subscribe(value => {
+      this.periodicity = value;
+      this.plotRefresh(value);
+>>>>>>> 9c34939718ae9f3bfefd5801fac18c4491b476dc
     });
     this.subscribeUpdates();
     this.getSubscribedData();
@@ -169,7 +182,10 @@ export class PressureflowratechartComponent implements OnInit {
   }
 
   async getFlowRateSensors() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9c34939718ae9f3bfefd5801fac18c4491b476dc
     this.flowRateSensorCmd = {
       projectId: 'project1',
       wellId: 'well1'
@@ -276,6 +292,12 @@ export class PressureflowratechartComponent implements OnInit {
       });
       this.getFlowRateHistoryData(period);
     }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 9c34939718ae9f3bfefd5801fac18c4491b476dc
 
   }
 
@@ -329,6 +351,24 @@ export class PressureflowratechartComponent implements OnInit {
 
     ]
   }
+<<<<<<< HEAD
+=======
+  calculateScale(min, max) {
+    let arr = [], textArr = [];
+    for (let i = (min * 10); i <= (max * 10); i++) {
+      arr.push((i / 10).toString());
+      if ((i % 10) == 0) {
+        textArr.push((i / 10).toString());
+      } else {
+        textArr.push('');
+      }
+    }
+    return [arr, textArr];
+  }
+
+  plotGraph() {
+
+>>>>>>> 9c34939718ae9f3bfefd5801fac18c4491b476dc
 
 
   plotGraph() {

@@ -38,7 +38,6 @@ export class WsFlowMonitoringService {
     if (initialization) {
       this.webSocketService.onNewMessage.subscribe((message: WSResponse<ZoneFlowTimeOilWaterGas>) => {
 
-        console.log(message.sequenceId);
         const expectedOperation = WebSocketAPISource
           .PRODUCTION_MONITORING
           .SUBSCRIBE_ZONE_FLOW_PRODATION_DATAUPDATE;

@@ -29,7 +29,7 @@ import { UrlHelper } from '../shared/pipes/urlhelper';
 export class ProductionMonitoringService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   readonly AppUrl = environment.API_URL;
-  public periodicityValue: BehaviorSubject<string> = new BehaviorSubject<string>('24H');
+  public periodicity: BehaviorSubject<Periodicity> = new BehaviorSubject<Periodicity>(Periodicity.Hours24);
   constructor(
     private http: HttpClient
   ) { }
@@ -47,9 +47,9 @@ export class ProductionMonitoringService {
   }
 
 
-  getWellboreProfileZones(wellboreProfileZonesCommand : WellboreProfileZonesCommand): Observable<WellboreProfileZonesResponse> {
+  async getWellboreProfileZones(wellboreProfileZonesCommand : WellboreProfileZonesCommand): Promise<WellboreProfileZonesResponse> {
     let params = ParamBuilder.toQueries(wellboreProfileZonesCommand);
-    return this.http.get<WellboreProfileZonesResponse>(this.AppUrl + UrlHelper.WellboreProfileZones, { params : params, headers: this.headers });
+    return this.http.get<WellboreProfileZonesResponse>(this.AppUrl + UrlHelper.WellboreProfileZones, { params : params, headers: this.headers }).toPromise();
   }
 
   getPressureSensors(pressureSensorsCommand : PressureSensorsCommand): Observable<PressureSensorsResponse> {
@@ -95,7 +95,7 @@ export class ProductionMonitoringService {
     return this.http.get<ZoneFlowProductionHistoryDataResponse>(this.AppUrl + UrlHelper.ZoneFlowProductionHistoryData, { params: params, headers: this.headers });
   }
 
-  GetZoneFlowProductionAcceptableLimits(zoneFlowProductionAcceptableLimitsCommand : ZoneFlowProductionAcceptableLimitsCommand): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
+  getZoneFlowProductionAcceptableLimits(zoneFlowProductionAcceptableLimitsCommand : ZoneFlowProductionAcceptableLimitsCommand): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
     let params = ParamBuilder.toQueries(zoneFlowProductionAcceptableLimitsCommand);
     return this.http.get<ZoneFlowProductionAcceptableLimitsResponse>(this.AppUrl + UrlHelper.ZoneFlowProductionAcceptableLimits, { params: params, headers: this.headers });
   }
