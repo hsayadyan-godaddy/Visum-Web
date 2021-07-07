@@ -1,7 +1,7 @@
 import { Component, OnInit, Input  } from '@angular/core';
-import { Productionmonitoring } from 'src/app/models/productionmonitoring/productionmonitoring';
-import { Well } from 'src/app/models/well';
-import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
+import { Productionmonitoring } from '../../../models/productionmonitoring/productionmonitoring';
+import { Well } from '../../../models/well';
+import { ProductionMonitoringService } from '../../../services/productionMonitoring.service';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
