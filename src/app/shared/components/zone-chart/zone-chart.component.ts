@@ -76,11 +76,12 @@ export class ZoneChartComponent implements OnInit {
       title: '',
       xaxis: {
         visible: false,
-        showticklabels: false
+        showticklabels: false,
+        fixedrange: true
       },
       margin: {
-        l: 140,
-        r: 40,
+        l: 90,
+        r: 180,
         b: 50,
         t: 70
       },
@@ -94,7 +95,8 @@ export class ZoneChartComponent implements OnInit {
         tick0: this.depth[0],
         dtick: 1000,
         zeroline: false,
-        autorange: 'reversed'
+        autorange: 'reversed',
+        fixedrange: true
       },
       width: 400,
       height: 600,
