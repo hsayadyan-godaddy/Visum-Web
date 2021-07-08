@@ -24,6 +24,9 @@ import * as PlotlyJS from 'plotly.js-dist';
 import { ProductionMonitoringComponent } from './components/production-monitoring/production-monitoring.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng5SliderModule } from 'ng5-slider';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { PressureflowratechartComponent } from './shared/components/pressureflowratechart/pressureflowratechart.component';
 import { DepthTimeComponent } from './shared/components/depth-time/depth-time.component';
 import { WellSellectionWithButtonsComponent } from './shared/components/well-sellection-with-buttons/well-sellection-with-buttons.component';
@@ -31,10 +34,10 @@ import { MonitoringChartsComponent } from './shared/components/monitoring-charts
 import { ZoneFlowAllocationComponent } from './components/production-monitoring/zone-flow-allocation/zone-flow-allocation.component';
 import { WebSocketService } from './services/websocket/websocket.service';
 import { WebsocketUsageExampleService } from './services/websocket/websocket-usage-example-service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WsFlowMonitoringService } from './services/ws-production-monitoring/ws-flow-monitoring.service';
 import { WsPressureMoniteringService } from "./services/ws-production-monitoring/ws-pressure-monitoring.service";
 import { ZoneChartComponent } from './shared/components/zone-chart/zone-chart.component';
+
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     HttpClientModule,
     PlotlyModule,
     MatNativeDateModule,
+    Ng5SliderModule,
+    MatButtonToggleModule,
     MatDatepickerModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch : 'full'},
