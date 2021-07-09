@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable , forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DepthType } from '../enums/depth-type';
 import { Periodicity } from '../enums/periodicity';
@@ -53,7 +53,7 @@ export class ProductionMonitoringService {
     let params = ParamBuilder.toQueries(wellboreProfileZonesCommand);
     return this.http.get<WellboreProfileZonesResponse>(this.AppUrl + UrlHelper.WellboreProfileZones, { params : params, headers: this.headers }).toPromise();
   }
-
+  
   async getWellboreSearch(wellboreSearchCommand : WellboreSearchCommand): Promise<WellboreSearchResponse> {
     let params = ParamBuilder.toQueries(wellboreSearchCommand);
     return this.http.get<WellboreSearchResponse>(this.AppUrl + UrlHelper.WellboreSearch, { params : params, headers: this.headers }).toPromise();
@@ -102,7 +102,30 @@ export class ProductionMonitoringService {
     return this.http.get<ZoneFlowProductionHistoryDataResponse>(this.AppUrl + UrlHelper.ZoneFlowProductionHistoryData, { params: params, headers: this.headers });
   }
 
-  getZoneFlowProductionAcceptableLimits(zoneFlowProductionAcceptableLimitsCommand : ZoneFlowProductionAcceptableLimitsCommand): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
+ // getZoneFlowProductionAcceptableLimits(zoneFlowProductionAcceptableLimitsCommand : ZoneFlowProductionAcceptableLimitsCommand): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
+  getZoneFlowRateProductionHistoryData(zoneFlowProductionHistoryDataCommand : ZoneFlowProductionHistoryDataCommand): Observable<ZoneFlowProductionHistoryDataResponse> {
+    let params = ParamBuilder.toQueries(zoneFlowProductionHistoryDataCommand);
+    return this.http.get<ZoneFlowProductionHistoryDataResponse>(this.AppUrl + UrlHelper.ZoneFlowRateProductionHistoryData, { params: params, headers: this.headers });
+  }
+
+  getZoneFlowRateDataFromMultipleZones(noOfZone: number, depthType: DepthType): Observable<ZoneFlowProductionHistoryDataResponse[]> {
+    let ZoneResponses : Observable<ZoneFlowProductionHistoryDataResponse>[] = [];
+    for(let i = 1 ; i <= noOfZone; i++) {
+       let zoneFlowProductionHistoryDataCommand : ZoneFlowProductionHistoryDataCommand= {
+        zoneNumber: i,
+        depthType: depthType,
+        periodicity: Periodicity.Hours24,
+        snapshotSize: 100,
+        projectId: 'sdsd',
+        wellId: 'sju',
+      };
+      let params = ParamBuilder.toQueries(zoneFlowProductionHistoryDataCommand);
+      ZoneResponses.push(this.http.get<ZoneFlowProductionHistoryDataResponse>(this.AppUrl + UrlHelper.ZoneFlowRateProductionHistoryData, { params: params, headers: this.headers }));
+    }
+    return forkJoin(ZoneResponses);
+  }
+
+  GetZoneFlowProductionAcceptableLimits(zoneFlowProductionAcceptableLimitsCommand : ZoneFlowProductionAcceptableLimitsCommand): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
     let params = ParamBuilder.toQueries(zoneFlowProductionAcceptableLimitsCommand);
     return this.http.get<ZoneFlowProductionAcceptableLimitsResponse>(this.AppUrl + UrlHelper.ZoneFlowProductionAcceptableLimits, { params: params, headers: this.headers });
   }

@@ -32,6 +32,7 @@ import { DepthTimeComponent } from './shared/components/depth-time/depth-time.co
 import { WellSellectionWithButtonsComponent } from './shared/components/well-sellection-with-buttons/well-sellection-with-buttons.component';
 import { MonitoringChartsComponent } from './shared/components/monitoring-charts/monitoring-charts.component';
 import { ZoneFlowAllocationComponent } from './components/production-monitoring/zone-flow-allocation/zone-flow-allocation.component';
+import { ZoneFlowAllocationChartComponent } from './shared/components/zone-flow-allocation-chart/zone-flow-allocation-chart.component';
 import { WebSocketService } from './services/websocket/websocket.service';
 import { WebsocketUsageExampleService } from './services/websocket/websocket-usage-example-service';
 import { WsFlowMonitoringService } from './services/ws-production-monitoring/ws-flow-monitoring.service';
@@ -60,6 +61,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MonitoringChartsComponent,
     ZoneChartComponent,
     DialogContent,
+    ZoneFlowAllocationChartComponent
     DialogTableComponent
   ],
   imports: [
