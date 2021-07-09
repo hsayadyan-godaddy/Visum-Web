@@ -106,6 +106,7 @@ export class ZoneChartComponent implements OnInit {
         tickfont: { color: '#1f77b4' },
         ticks: 'outside',
         ticklength: 8,
+        tickformat : ',d',
         tick0: this.zeroTick,
         dtick: this.ticksize,
         zeroline: false,
