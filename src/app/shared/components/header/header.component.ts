@@ -8,7 +8,7 @@ import { TooltipPosition } from '@angular/material/tooltip';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
   public positionOptions: TooltipPosition[] = ['left']; // Tooltip postion

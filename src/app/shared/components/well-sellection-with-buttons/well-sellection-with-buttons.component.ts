@@ -7,7 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-well-sellection-with-buttons',
   templateUrl: './well-sellection-with-buttons.component.html',
-  styleUrls: ['./well-sellection-with-buttons.component.css']
+  styleUrls: ['./well-sellection-with-buttons.component.scss']
 })
 export class WellSellectionWithButtonsComponent implements OnInit {
   @Input('selectedWell') selectedWellname = "Select a Well";
