@@ -61,7 +61,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MonitoringChartsComponent,
     ZoneChartComponent,
     DialogContent,
-    ZoneFlowAllocationChartComponent,
+    ZoneFlowAllocationChartComponent
     DialogTableComponent
   ],
   imports: [
