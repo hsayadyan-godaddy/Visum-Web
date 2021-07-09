@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
-import { DepthType } from 'src/app/enums/depth-type';
-import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
+import { DepthType } from '../../../enums/depth-type';
+import { ProductionMonitoringService } from '../../../services/productionMonitoring.service';
 import { Periodicity } from '../../../enums/periodicity';
 import { Options, LabelType } from 'ng5-slider'
 
