@@ -7,6 +7,8 @@ import { WellComponent } from '../components/well/well.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { TimechartsComponent } from '../components/timecharts/timecharts.component';
 import { ProductionMonitoringComponent } from '../components/production-monitoring/production-monitoring.component';
+import { ZoneFlowAllocationChartComponent } from '../shared/components/zone-flow-allocation-chart/zone-flow-allocation-chart.component';
+import { PressureflowratechartComponent } from '../shared/components/pressureflowratechart/pressureflowratechart.component';
 
 const routes: Routes = [
   { path: 'home' , component: HomeComponent, canActivate: [AuthGuard]},
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'well/:id', component: WellComponent, canActivate: [AuthGuard]},
   { path: 'timecharts', component: TimechartsComponent},
   { path: 'production-monitoring', component: ProductionMonitoringComponent},
+  { path: 'zoneflowcharts', component: ZoneFlowAllocationChartComponent},
+  { path: 'pressurechart', component: PressureflowratechartComponent},
   { path: '' , redirectTo:'/home',pathMatch:'full'},
 ];
 
