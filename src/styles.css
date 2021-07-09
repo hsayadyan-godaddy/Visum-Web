@@ -93,3 +93,36 @@ body {
 .chart .layout {
   padding-top: 0!important;
 }
+
+
+/* well selector modal popup */
+.mat-dialog-content.wellSelector{
+  max-height: inherit;
+  overflow: inherit;
+}
+.mat-dialog-content.wellSelector .mat-elevation-z8{
+  height: 58vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.mat-dialog-content.wellSelector .mat-elevation-z8 table{
+  height: auto;
+  box-shadow: none;
+  display: table;
+}
+.mat-dialog-content.wellSelector .mat-table thead{
+  position: sticky;
+  top: 0;
+}
+.mat-dialog-content.wellSelector .mat-paginator{
+  position: sticky;
+  bottom: 0;
+}
+
+.title .mat-grid-tile-content{
+  justify-content: flex-start;
+}
+.title-icon .mat-grid-tile-content{
+  justify-content: flex-end;
+}

@@ -37,7 +37,9 @@ import { WebsocketUsageExampleService } from './services/websocket/websocket-usa
 import { WsFlowMonitoringService } from './services/ws-production-monitoring/ws-flow-monitoring.service';
 import { WsPressureMoniteringService } from "./services/ws-production-monitoring/ws-pressure-monitoring.service";
 import { ZoneChartComponent } from './shared/components/zone-chart/zone-chart.component';
-
+import {DemoMaterialModule} from './shared/components/well-sellection-with-buttons/material-module';
+import {DialogContent} from './shared/components/well-sellection-with-buttons/well-sellection-with-buttons.component';
+import {DialogTableComponent} from './shared/components/well-sellection-with-buttons/dialog-table.component'
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -56,9 +58,12 @@ PlotlyModule.plotlyjs = PlotlyJS;
     WellSellectionWithButtonsComponent,
     ZoneFlowAllocationComponent,
     MonitoringChartsComponent,
-    ZoneChartComponent
+    ZoneChartComponent,
+    DialogContent,
+    DialogTableComponent
   ],
   imports: [
+    DemoMaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
     AngularMaterialModule,

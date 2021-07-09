@@ -1,0 +1,121 @@
+
+  <mat-grid-list cols="2" rowHeight="4:1">
+    <mat-grid-tile >
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-checkbox>Show Nearby Wells Only</mat-checkbox>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+<mat-tab-group>
+
+  <mat-tab label="Current Projects(10)">
+    <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="Wellname">
+        <th mat-header-cell *matHeaderCellDef> Wellname </th>
+        <td mat-cell *matCellDef="let element"> {{element.Wellname}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="Padname">
+        <th mat-header-cell *matHeaderCellDef> Padname </th>
+        <td mat-cell *matCellDef="let element"> {{element.Padname}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="Field">
+        <th mat-header-cell *matHeaderCellDef> Field </th>
+        <td mat-cell *matCellDef="let element"> {{element.Field}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="Project">
+        <th mat-header-cell *matHeaderCellDef> Project </th>
+        <td mat-cell *matCellDef="let element"> {{element.Project}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- <tr mat-row  (click)="clickedRows.add(row)"  [class.demo-row-is-clicked]="clickedRows.has(row)" *matRowDef="let row; columns: displayedColumns;"></tr> -->
+      <tr mat-row  (click)="selected(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>  
+    </table>
+  </div>
+  
+    
+    </mat-tab>
+    <mat-tab label="Recent Wells(10)">
+      <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="Wellname">
+          <th mat-header-cell *matHeaderCellDef> Wellname </th>
+          <td mat-cell *matCellDef="let element"> {{element.Wellname}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="Padname">
+          <th mat-header-cell *matHeaderCellDef> Padname </th>
+          <td mat-cell *matCellDef="let element"> {{element.Padname}} </td>
+        </ng-container>
+      
+       
+        <ng-container matColumnDef="Field">
+          <th mat-header-cell *matHeaderCellDef> Field </th>
+          <td mat-cell *matCellDef="let element"> {{element.Field}} </td>
+        </ng-container>
+      
+       
+        <ng-container matColumnDef="Project">
+          <th mat-header-cell *matHeaderCellDef> Project </th>
+          <td mat-cell *matCellDef="let element"> {{element.Project}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row  (click)="selected(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+       
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+  </div>
+      
+    </mat-tab>
+    <mat-tab label="All Wells(10)">
+      <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="Wellname">
+          <th mat-header-cell *matHeaderCellDef> Wellname </th>
+          <td mat-cell *matCellDef="let element"> {{element.Wellname}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="Padname">
+          <th mat-header-cell *matHeaderCellDef> Padname </th>
+          <td mat-cell *matCellDef="let element"> {{element.Padname}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="Field">
+          <th mat-header-cell *matHeaderCellDef> Field </th>
+          <td mat-cell *matCellDef="let element"> {{element.Field}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="Project">
+          <th mat-header-cell *matHeaderCellDef> Project </th>
+          <td mat-cell *matCellDef="let element"> {{element.Project}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row  (click)="selected(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+  </div>
+      
+    </mat-tab>
+    </mat-tab-group>
