@@ -24,8 +24,8 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
   private totalZones: number = 0;
   public wellboreProfileZonesResponse: WellboreProfileZonesResponse;
   private request: WellboreProfileZonesCommand;
-  private depthTypes = Object.values(DepthType);
-  private selectedDepth: string = 'MD';
+  public depthTypes = Object.values(DepthType);
+  public selectedDepth: string = 'MD';
   private zones: string[] = [];
   private zoneX: number[] = [];
   private zoneX2: Date[] = [];
@@ -71,7 +71,7 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
       // this.allDepths.push(z.depthFrom);
       // this.allDepths.push(z.depthTo);
       this.zoneX.push(0);
-      this.zones.push(`Zone ${z.zoneNumber}`);
+      this.zones.push(`ZONE ${z.zoneNumber}`);
       this.zoneDepth.push(`From: ${z.depthFrom} To: ${z.depthTo}`);
     });
     this.getZoneFlowAllocationChartData();
@@ -92,17 +92,42 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
               tick0: this.depth[0],
               dtick: 2500,
               zeroline: false,
+              title: {
+                text: 'MEASURED DEPTH (ft)',
+                font: {
+                  size: 10,
+                },
+              },
+              titlefont: { color: '#1f77b4' },
+              tickfont: { color: '#1f77b4' },
+              tickcolor: '#1f77b4',
               // gridcolor: 'lightgrey',
               // gridwidth: 10,
               autorange: 'reversed',
               anchor: 'free',
               overlaying: 'y',
-              position: 1.01
+              position: 1.01,
             },
             xaxis: {
               type: 'date',
               autorange: true,
               visible: true,
+              title: {
+                text: 'HOURS',
+                font: {
+                  size: 10,
+                },
+              },
+              titlefont: { color: '#1f77b4' },
+              tickfont: { color: '#1f77b4' },
+              ticks: 'outside',
+              tickformat: '%H:%M',
+              tickmode: 'linear',
+              // tick0: '2000-01-01',
+              dtick: 60 * 60 * 1000,
+              ticklen: 8,
+              tickwidth: 2,
+              tickcolor: '#1f77b4',
               domain: [0.056, 1],
               anchor: 'y1',
             },
@@ -110,13 +135,16 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
               domain: [0, 0.05],
               anchor: 'y1',
               visible: false,
+              autorange: false,
+              range: [-0.2,1.5]
             },
-            width: 1500,
+            width: 1300,
             // height: 800,
             paper_bgcolor: 'white',
             plot_bgcolor: 'white',
             showlegend: false,
-            hovermode: "closest"
+            hovermode: 'closest',
+           
           };
 
           zoneFlowDataList.forEach((zoneFlowData, index) => {
@@ -143,12 +171,11 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
       text: this.zones,
       customdata: this.zoneDepth,
       name: '',
-      // marker: {
-      //   color: 'rgba(156, 165, 196, 0.95)',
-      //   symbol: 'circle',
-      //   size: 10,
-      //   sizeref: 4000,
-      // },
+      textposition: 'middle right',
+      textfont: {
+        size: 11,
+        color: '#1f77b4',
+      },
       hovertemplate: '<b>Zone Range</b><br> %{customdata}',
     };
   }
@@ -161,7 +188,7 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
       (z) => z.zoneNumber == zoneFlowData.zoneNumber
     );
     let ydata = zoneFlowData.zoneFlowProductionData.map(
-      (flow) => (-flow.oil - flow.water - flow.gas)
+      (flow) => -flow.oil - flow.water - flow.gas
     );
     const traces = {
       x: zoneFlowData.zoneFlowProductionData.map((flow) => new Date(flow.time)),
@@ -176,10 +203,12 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
       showline: true,
       marker: {
         color: this.getColorScale(zoneFlowData, 0.2),
-      //  colorscale: ,
+        //  colorscale: ,
         //reversescale: true,
-        showcolorscale: true
+        showcolorscale: true,
       },
+      // bargap:0,
+      // bargroupgap:0,
       hovertemplate:
         'Oil: %{customdata.oil:,}<br>' +
         'Water: %{customdata.water:,}<br>' +
@@ -195,33 +224,27 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
   ): string[] {
     const colorScale = zoneFlowData.zoneFlowProductionData.map(
       (zoneFlowData) => {
-        return this.getColor(zoneFlowData , 0.2);
+        return this.getColor(zoneFlowData, 0.2);
       }
     );
 
     return colorScale;
   }
 
-  getColor(zoneFlowData: ZoneFlowTimeOilWaterGas , maxVal: number): string {
+  getColor(zoneFlowData: ZoneFlowTimeOilWaterGas, maxVal: number): string {
     const oilColor = [0, 255, 0];
     const waterColor = [0, 0, 255];
     const gasColor = [255, 255, 0];
-    
-    let oil = (zoneFlowData.oil/maxVal) ;
-    let water = (zoneFlowData.water/maxVal) 
-    let gas = (zoneFlowData.gas/maxVal)
-    
-    const  blendedColor = [
-        (oil  * oilColor[0]) +
-          (water * waterColor[0]) +
-          (gas * gasColor[0]),
-        (oil * oilColor[1] ) +
-          (water * waterColor[1]) +
-          (gas * gasColor[1]),
-        (oil * oilColor[2]) +
-          (water * waterColor[2] ) +
-          (gas * gasColor[2]),
-      ];
+
+    let oil = zoneFlowData.oil / maxVal;
+    let water = zoneFlowData.water / maxVal;
+    let gas = zoneFlowData.gas / maxVal;
+
+    const blendedColor = [
+      oil * oilColor[0] + water * waterColor[0] + gas * gasColor[0],
+      oil * oilColor[1] + water * waterColor[1] + gas * gasColor[1],
+      oil * oilColor[2] + water * waterColor[2] + gas * gasColor[2],
+    ];
     // const blendedColor = [
     //   zoneFlowData.oil * oilColor[0] +
     //     zoneFlowData.water * waterColor[0] +
@@ -243,5 +266,10 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
       blendedColor[2] +
       ')'
     );
+  }
+
+  onChange(newDepth) {
+    this.selectedDepth = newDepth;
+    this.getZoneDetailData();
   }
 }
