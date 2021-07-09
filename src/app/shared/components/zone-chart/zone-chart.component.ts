@@ -7,28 +7,37 @@ import { ProductionMonitoringService } from '../../../services/productionMonitor
 @Component({
   selector: 'app-zone-chart',
   templateUrl: './zone-chart.component.html',
-  styleUrls: ['./zone-chart.component.css']
+  styleUrls: ['./zone-chart.component.scss']
 })
 export class ZoneChartComponent implements OnInit {
   public wellboreProfileZonesResponse: WellboreProfileZonesResponse;
-  public request : WellboreProfileZonesCommand;
+  public request: WellboreProfileZonesCommand;
   public depthTypes = Object.values(DepthType);
   public selectedDepth: string = 'MD';
-  public zones: string[] = [];
-  public zoneX: number[] = [];
-  public depth: number[] = [];
-  public allDepths: number[] = [];
-  public zoneDepth: string[] = [];
-  public graph = {
-    data : this.createZoneChartData(),
-    layout: this.createLayout()
-  };
+  private zones: string[] = [];
+  private zoneX: number[] = [];
+  private depth: number[] = [];
+  private allDepths: number[] = [];
+  private zoneDepth: string[] = [];
+  private unitOfMeasureLabel: string = "FT";
+  private zeroTick : number = 0;
+  private ticksize : number = 500;
+  public graph: any;
+
+
   constructor(public pmService: ProductionMonitoringService) { }
-  
+
 
   ngOnInit(): void {
+    this.createZoneChart();
+  }
+
+  createZoneChart() {
     this.getZoneChartData();
-    this.createZoneChartData();
+    this.graph = {
+      data: this.createZoneChartData(),
+      layout: this.createLayout()
+    };
   }
 
   async getZoneChartData() {
@@ -37,8 +46,11 @@ export class ZoneChartComponent implements OnInit {
       projectId: 'Project Id',
       depthType: DepthType[this.selectedDepth]
     };
-    this.wellboreProfileZonesResponse = await this.pmService.getWellboreProfileZones(this.request);
+    await this.pmService.getWellboreProfileZones(this.request).then(data => {
+      this.wellboreProfileZonesResponse = data;
+    });
     var zoneInfoData = this.wellboreProfileZonesResponse.zoneInfoData;
+    this.unitOfMeasureLabel = this.wellboreProfileZonesResponse.unitOfMeasureInfo.label;
     zoneInfoData.forEach(z => {
       this.depth.push((z.depthTo + z.depthFrom) / 2);
       this.allDepths.push(z.depthFrom);
@@ -46,7 +58,9 @@ export class ZoneChartComponent implements OnInit {
       this.zoneX.push(0.5);
       this.zones.push(`Zone ${z.zoneNumber}`);
       this.zoneDepth.push(`From: ${z.depthFrom} To: ${z.depthTo}`);
-    })
+    });
+    this.zeroTick = this.allDepths[0];
+    this.ticksize = this.allDepths[1];
   };
 
   createZoneChartData() {
@@ -80,26 +94,26 @@ export class ZoneChartComponent implements OnInit {
         fixedrange: true
       },
       margin: {
-        l: 90,
-        r: 180,
+        l: 80,
+        r: 500,
         b: 50,
         t: 70
       },
       yaxis: {
         showline: true,
-        title: 'Measured Depth',
+        title: "Measured Depth (" + this.unitOfMeasureLabel + ")",
         titlefont: { color: '#1f77b4' },
         tickfont: { color: '#1f77b4' },
         ticks: 'outside',
         ticklength: 8,
-        tick0: this.depth[0],
-        dtick: 1000,
+        tick0: this.zeroTick,
+        dtick: this.ticksize,
         zeroline: false,
         autorange: 'reversed',
         fixedrange: true
       },
-      width: 400,
-      height: 600,
+      width: '100%',
+      height: 850,
       paper_bgcolor: 'white',
       plot_bgcolor: 'white',
       showlegend: false,
@@ -109,9 +123,8 @@ export class ZoneChartComponent implements OnInit {
     return layout;
   }
 
-  onChange(newDepth) {
+  onDepthChange(newDepth) {
     this.selectedDepth = newDepth;
-    this.getZoneChartData();
-    this.createZoneChartData();
+    this.createZoneChart();
   }
 }
