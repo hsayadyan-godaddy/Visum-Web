@@ -1,20 +1,21 @@
-
-
-<!-- <div class="select-content"> 
-    <mat-form-field appearance="fill">
-        <mat-label>Color Scale</mat-label>
-        <mat-select (selectionChange)="selectView($event.value)">
-         <mat-option value="flowRate">Flow Rate</mat-option>
-         <mat-option value="oil">Oil</mat-option>
-         <mat-option value="water">Water</mat-option>
-         <mat-option value="gas">Gas</mat-option>
-        </mat-select>
-    </mat-form-field>
-</div> -->
-
-<div *ngIf="graph">
-    <plotly-plot [data]="graph.data" [layout]="graph.layout"  class="chart"
+<div *ngIf="graph" class="chart">
+  <plotly-plot
+    [data]="graph.data"
+    [layout]="graph.layout"
     [updateOnDataChange]="true"
-    [updateOnLayoutChange]="true"></plotly-plot>
+    [updateOnLayoutChange]="true"
+  >
+  </plotly-plot>
 </div>
 
+<div>
+  <select
+    [(ngModel)]="selectedDepth"
+    (ngModelChange)="onChange($event)"
+    class="depth-select"
+  >
+    <option *ngFor="let depthType of depthTypes" [value]="depthType">
+      {{ depthType }}
+    </option>
+  </select>
+</div>
