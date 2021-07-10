@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as Plotly from 'plotly.js-dist';
 import { DepthType } from '../../../enums/depth-type';
 import { WellboreProfileZonesCommand } from '../../../models/Request/WellboreProfileZonesCommand';
 import { WellboreProfileZonesResponse } from '../../../models/Response/WellboreProfileZonesResponse';
@@ -19,25 +20,16 @@ export class ZoneChartComponent implements OnInit {
   private depth: number[] = [];
   private allDepths: number[] = [];
   private zoneDepth: string[] = [];
-  private unitOfMeasureLabel: string = "FT";
-  private zeroTick : number = 0;
-  private ticksize : number = 500;
-  public graph: any;
+  private zeroTick: number = 0;
+  private ticksize: number = 500;
+  private unitOfMeasureLabel: string;
 
 
   constructor(public pmService: ProductionMonitoringService) { }
 
 
   ngOnInit(): void {
-    this.createZoneChart();
-  }
-
-  createZoneChart() {
     this.getZoneChartData();
-    this.graph = {
-      data: this.createZoneChartData(),
-      layout: this.createLayout()
-    };
   }
 
   async getZoneChartData() {
@@ -61,6 +53,8 @@ export class ZoneChartComponent implements OnInit {
     });
     this.zeroTick = this.allDepths[0];
     this.ticksize = this.allDepths[1];
+
+    this.createZoneChartGraph();
   };
 
   createZoneChartData() {
@@ -85,7 +79,7 @@ export class ZoneChartComponent implements OnInit {
     return data;
   };
 
-  createLayout() {
+  createLayout(unitOfMeasureLabel: string) {
     var layout = {
       title: '',
       xaxis: {
@@ -93,39 +87,38 @@ export class ZoneChartComponent implements OnInit {
         showticklabels: false,
         fixedrange: true
       },
-      margin: {
-        l: 80,
-        r: 500,
-        b: 50,
-        t: 70
-      },
       yaxis: {
         showline: true,
-        title: "Measured Depth (" + this.unitOfMeasureLabel + ")",
+        title: "Measured Depth (" + unitOfMeasureLabel + ")",
         titlefont: { color: '#1f77b4' },
         tickfont: { color: '#1f77b4' },
         ticks: 'outside',
         ticklength: 8,
-        tickformat : ',d',
+        tickformat: ',d',
         tick0: this.zeroTick,
         dtick: this.ticksize,
         zeroline: false,
         autorange: 'reversed',
         fixedrange: true
       },
-      width: '100%',
-      height: 850,
       paper_bgcolor: 'white',
       plot_bgcolor: 'white',
       showlegend: false,
       hovermode: "closest"
     };
-
     return layout;
   }
 
   onDepthChange(newDepth) {
     this.selectedDepth = newDepth;
-    this.createZoneChart();
+    this.getZoneChartData();
+  }
+
+
+  createZoneChartGraph() {
+    var data = this.createZoneChartData();
+    var layout = this.createLayout(this.unitOfMeasureLabel);
+    
+    Plotly.plot("zonechart", data, layout, {displayModeBar: false});
   }
 }
