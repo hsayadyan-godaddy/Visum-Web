@@ -33,6 +33,12 @@ export class ZoneChartComponent implements OnInit {
   }
 
   async getZoneChartData() {
+    this.depth = [];
+    this.allDepths = [];
+    this.zoneX = [];
+    this.zones = [];
+    this.zoneDepth = [];
+    
     this.request = {
       wellId: 'Well Id',
       projectId: 'Project Id',
@@ -118,7 +124,7 @@ export class ZoneChartComponent implements OnInit {
   createZoneChartGraph() {
     var data = this.createZoneChartData();
     var layout = this.createLayout(this.unitOfMeasureLabel);
-    
-    Plotly.plot("zonechart", data, layout, {displayModeBar: false});
+
+    Plotly.newPlot("zonechart", data, layout, { displayModeBar: false });
   }
 }
