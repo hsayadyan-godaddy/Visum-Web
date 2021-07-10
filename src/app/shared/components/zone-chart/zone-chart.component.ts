@@ -24,9 +24,7 @@ export class ZoneChartComponent implements OnInit {
   private ticksize: number = 500;
   private unitOfMeasureLabel: string;
 
-
   constructor(public pmService: ProductionMonitoringService) { }
-
 
   ngOnInit(): void {
     this.getZoneChartData();
@@ -38,7 +36,7 @@ export class ZoneChartComponent implements OnInit {
     this.zoneX = [];
     this.zones = [];
     this.zoneDepth = [];
-    
+
     this.request = {
       wellId: 'Well Id',
       projectId: 'Project Id',
@@ -119,7 +117,6 @@ export class ZoneChartComponent implements OnInit {
     this.selectedDepth = newDepth;
     this.getZoneChartData();
   }
-
 
   createZoneChartGraph() {
     var data = this.createZoneChartData();
