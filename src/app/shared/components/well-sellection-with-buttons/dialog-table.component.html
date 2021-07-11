@@ -13,9 +13,9 @@
 
 <mat-tab-group>
 
-  <mat-tab label="Current Projects(10)">
+  <mat-tab [label]="currentProject">
     <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="currentProjectDataSource" class="mat-elevation-z8">
 
       <ng-container matColumnDef="Wellname">
         <th mat-header-cell *matHeaderCellDef> Wellname </th>
@@ -48,9 +48,9 @@
   
     
     </mat-tab>
-    <mat-tab label="Recent Wells(10)">
+    <mat-tab [label]="recentWells">
       <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table [dataSource]="recentWellsDataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="Wellname">
           <th mat-header-cell *matHeaderCellDef> Wellname </th>
           <td mat-cell *matCellDef="let element"> {{element.Wellname}} </td>
@@ -84,9 +84,9 @@
   </div>
       
     </mat-tab>
-    <mat-tab label="All Wells(10)">
+    <mat-tab [label]="allWells">
       <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table [dataSource]="allWellsDataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="Wellname">
           <th mat-header-cell *matHeaderCellDef> Wellname </th>

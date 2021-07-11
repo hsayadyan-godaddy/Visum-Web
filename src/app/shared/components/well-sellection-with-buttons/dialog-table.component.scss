@@ -1,0 +1,54 @@
+/* Structure */
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+table {
+  text-align: center;
+  font-size: 11px;
+  font-family: Verdana, Sans-Serif;
+  color: #1a084c;
+  width: 600px;
+  height: 300px;
+  overflow: auto;
+}
+
+.mat-header-cell {
+  width: 30px;
+  text-align:right;
+  min-height: 25px;
+  font-family: Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  color: #1a084c;
+  margin-bottom: 5px;
+  top: 0;
+  // position: sticky;
+  z-index: 1;
+  background-color: inherit;
+}
+
+.mat-cell {
+  min-height: 25px;
+  width: 30px;
+  font-family: Verdana, sans-serif;
+  text-align: center;
+  font-size: 15px;
+  color: #1a084c;
+}
+
+.mat-tab-label {
+  min-width: 25px;
+  padding: 5px;
+  background-color: dimgray;
+  font-weight: 700;
+}
