@@ -114,9 +114,13 @@ body {
 
 
 /* well selector modal popup */
+.mat-table {
+  font-family: 'Open Sans', sans-serif;
+}
 .mat-dialog-content.wellSelector{
   max-height: inherit;
   overflow: inherit;
+  font-family: 'Open Sans', sans-serif;
 }
 .mat-dialog-content.wellSelector .mat-elevation-z8{
   height: 58vh;
@@ -133,6 +137,15 @@ body {
   position: sticky;
   top: 0;
 }
+.mat-dialog-content.wellSelector .mat-table thead::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+  height: 1px;
+  bottom: 0;
+  background-color: #212121;
+}
 .mat-dialog-content.wellSelector .mat-paginator{
   position: sticky;
   bottom: 0;
@@ -140,7 +153,56 @@ body {
 
 .title .mat-grid-tile-content{
   justify-content: flex-start;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
 }
 .title-icon .mat-grid-tile-content{
   justify-content: flex-end;
+}
+.wellSelector .mat-tab-nav-bar, .mat-tab-header{
+  border-bottom: 0px;
+  margin-bottom: 15px;
+}
+.wellSelector .mat-tab-labels{
+  justify-content: space-between;
+  min-height: 46px;
+  align-items: center;
+}
+.wellSelector .mat-tab-label {
+  padding: 10px;
+  background-color: #c9cfd4;
+  color: #191a1b;
+  opacity: 1;
+  width: 32.66%;
+  border-radius: 5px;
+  height: auto;
+  font-weight: 400;
+}
+.wellSelector .mat-tab-label:hover{
+  background-color: #e9ecee;
+}
+.wellSelector .mat-tab-label.mat-tab-label-active{
+  background-color: #e9ecee;
+  height: 46px;
+}
+.wellSelector .mat-ink-bar{
+  display: none;
+}
+.wellSelector tr.mat-header-row{
+  height: 40px;
+}
+.wellSelector .mat-checkbox{
+  font-family: 'Open Sans', sans-serif;
+}
+.wellSelector  th.mat-header-cell:last-of-type, .wellSelector  td.mat-cell:last-of-type, .wellSelector  td.mat-footer-cell:last-of-type {
+  padding-right: 0;
+}
+.wellSelector .wellname, .wellSelector .padname{
+  width: 200px;
+}
+.wellSelector .field{
+  width: 150px;
+}
+.wellSelector .project{
+  width: 75px;
 }
