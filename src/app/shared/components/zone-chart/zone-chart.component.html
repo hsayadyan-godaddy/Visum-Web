@@ -1,8 +1,8 @@
-<div class="layout">
-    <plotly-plot [data]="graph.data" [layout]="graph.layout"  class="chart"></plotly-plot>
+<div id="zonechart">
+   
 </div>
 <div class="depth-select">
-    <select [(ngModel)]="selectedDepth" (ngModelChange)="onChange($event)">
+    <select [(ngModel)]="selectedDepth" (ngModelChange)="onDepthChange($event)">
         <option *ngFor="let depthType of depthTypes"
           [value]="depthType">
     {{depthType}}

@@ -74,6 +74,7 @@ export class DialogTableComponent implements OnInit{
   public selected(row) {
     this.selectedWell = row.Wellname;
   }
+
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.currentProjectDataSource.filter = filterValue.trim().toLowerCase();

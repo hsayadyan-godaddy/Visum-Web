@@ -1,22 +1,22 @@
-import { formatDate } from '@angular/common';
-import { convertActionBinding } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, OnInit } from '@angular/core';
 import * as Plotly from 'plotly.js-dist';
 import { Subscription } from 'rxjs';
-import { Periodicity } from 'src/app/enums/periodicity';
-import { FlowRateHistoryDataCommand } from 'src/app/models/Request/FlowRateHistoryDataCommand';
-import { FlowRateSensorsCommand } from 'src/app/models/Request/FlowRateSensorsCommand';
-import { PressureHistoryDataCommand } from 'src/app/models/Request/PressureHistoryDataCommand';
-import { PressureSensorsCommand } from 'src/app/models/Request/PressureSensorsCommand';
-import { FlowRateHistoryDataResponse } from 'src/app/models/Response/FlowRateHistoryDataResponse';
-import { FlowRateSensorsResponse } from 'src/app/models/Response/FlowRateSensorsResponse';
-import { PressureHistoryDataResponse } from 'src/app/models/Response/PressureHistoryDataResponse';
-import { PressureSensorsResponse } from 'src/app/models/Response/PressureSensorsResponse';
-import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
+import { Periodicity } from '../../../enums/periodicity';
+import { FlowRateHistoryDataCommand } from '../../../models/Request/FlowRateHistoryDataCommand';
+import { FlowRateSensorsCommand } from '../../../models/Request/FlowRateSensorsCommand';
+import { PressureHistoryDataCommand } from '../../../models/Request/PressureHistoryDataCommand';
+import { PressureSensorsCommand } from '../../../models/Request/PressureSensorsCommand';
+import { FlowRateHistoryDataResponse } from '../../../models/Response/FlowRateHistoryDataResponse';
+import { FlowRateSensorsResponse } from '../../../models/Response/FlowRateSensorsResponse';
+import { PressureHistoryDataResponse } from '../../../models/Response/PressureHistoryDataResponse';
+import { PressureSensorsResponse } from '../../../models/Response/PressureSensorsResponse';
+import { PressureDataUpdatesRequestParameters } from '../../../models/websocket/ws-request-parameters/pressure-data-updates-request-parameters';
+import { ProductionMonitoringService } from '../../../services/productionMonitoring.service'; 
+import { WsPressureMoniteringService } from '../../../services/ws-production-monitoring/ws-pressure-monitoring.service';
 @Component({
   selector: 'app-pressureflowratechart',
   templateUrl: './pressureflowratechart.component.html',
-  styleUrls: ['./pressureflowratechart.component.css']
+  styleUrls: ['./pressureflowratechart.component.scss']
 })
 export class PressureflowratechartComponent implements OnInit {
   public graph: any;
@@ -43,26 +43,129 @@ export class PressureflowratechartComponent implements OnInit {
   private xP3Array: Array<Date> = [];
   private yP3Array: Array<number> = [];
   private yMinorArray: Array<number> = [];
+  private params: PressureDataUpdatesRequestParameters;
 
   flowSub: Subscription;
-  private periodicity: Periodicity;
-  constructor(private productionMonitoringService: ProductionMonitoringService) { }
+  private period: Periodicity;
+  constructor(private productionMonitoringService: ProductionMonitoringService, private wsPressureService: WsPressureMoniteringService) { }
 
   ngOnInit(): void {
+
     this.getFlowRateSensors();
     this.getPressureSensors();
-    // this.plotGraph();
 
     this.productionMonitoringService.periodicity.subscribe(value => {
-      this.periodicity = value;
-      this.plotRefresh(value);
-    });
 
+      this.period = value
+      this.plotRefresh(this.period);
+
+    });
+    this.subscribeUpdates();
+    this.getSubscribedData();
+  }
+
+  
+  subscribeUpdates() {
+
+    this.params = {
+      sensorId: 'Bottom-Hole-Pressure-5000',
+      projectId: 'project1',
+      wellId: 'well1'
+    };
+
+    this.wsPressureService.subscribeUpdates(this.params);
+
+    this.params = {
+      sensorId: 'Pressure-P1-100',
+      projectId: 'project1',
+      wellId: 'well1'
+    };
+    this.wsPressureService.subscribeUpdates(this.params);
+    this.params = {
+      sensorId: 'Pressure-P2-1000',
+      projectId: 'project1',
+      wellId: 'well1'
+    };
+    this.wsPressureService.subscribeUpdates(this.params);
+    this.params = {
+      sensorId: 'Pressure-P3-3000',
+      projectId: 'project1',
+      wellId: 'well1'
+    };
+    this.wsPressureService.subscribeUpdates(this.params);
+    this.params = {
+      sensorId: 'Flow-Rate-Surface',
+      projectId: 'project1',
+      wellId: 'well1'
+    };
+    this.wsPressureService.subscribeUpdates(this.params);
+  }
+
+  getSubscribedData() {
+
+    var update;
+
+    this.wsPressureService.onNewTimeValueResponse.subscribe(data => {
+
+      if (data.params.sensorId == 'Bottom-Hole-Pressure-5000') {
+
+        update = {
+          x: [[data.value.time]],
+          y: [[data.value.value]]
+        }
+        if (this.xBHPArray.length > 0) {
+          Plotly.extendTraces('graph', update, [0])
+        }
+
+
+      }
+      else if (data.params.sensorId == 'Pressure-P1-100') {
+        update = {
+          x: [[data.value.time]],
+          y: [[data.value.value]]
+        }
+        if (this.xP1Array.length > 0) {
+          Plotly.extendTraces('graph', update, [1])
+        }
+
+      }
+
+      else if (data.params.sensorId == 'Pressure-P2-1000') {
+        update = {
+          x: [[data.value.time]],
+          y: [[data.value.value]]
+        }
+        if (this.xP2Array.length > 0) {
+          Plotly.extendTraces('graph', update, [2])
+        }
+
+      }
+      else if (data.params.sensorId == 'Pressure-P3-3000') {
+        update = {
+          x: [[data.value.time]],
+          y: [[data.value.value]]
+        }
+        if (this.xP3Array.length > 0) {
+          Plotly.extendTraces('graph', update, [3])
+        }
+
+      }
+      else if (data.params.sensorId == 'Flow-Rate-Surface') {
+        update = {
+          x: [[data.value.time]],
+          y: [[data.value.value]]
+        }
+        if (this.xArray.length > 0) {
+          Plotly.extendTraces('graph', update, [4])
+        }
+
+      }
+    });
   }
 
   plotRefresh(period: Periodicity) {
     this.getPressureHistoryData(period);
-    //this.getFlowRateHistoryData(period);
+
   }
 
   async getFlowRateSensors() {
@@ -173,15 +276,12 @@ export class PressureflowratechartComponent implements OnInit {
       this.getFlowRateHistoryData(period);
     }
 
-
-
-
   }
 
   async getFlowRateHistoryData(period: Periodicity) {
 
     this.flowRateHistoryDataCommand = {
-      sensorId: 'Flow-Rate-Surfasce',
+      sensorId: 'Flow-Rate-Surface',
       periodicity: period,
       projectId: 'project1',
       wellId: 'well1',
@@ -191,7 +291,7 @@ export class PressureflowratechartComponent implements OnInit {
     this.flowRateHistoryDataResponse = await this.productionMonitoringService.getFlowRateHistoryDataAsync(this.flowRateHistoryDataCommand);
 
     if (this.flowRateHistoryDataResponse.flowRateData) {
-      var n = 0;
+
       this.xArray = [];
       this.yArray = [];
 
@@ -199,18 +299,20 @@ export class PressureflowratechartComponent implements OnInit {
 
         this.xArray.push(new Date(v.time));
         this.yArray.push(v.value);
-        this.yMinorArray.push(n);
-        n++;
+        this.yMinorArray.push(Math.random());
+
       });
 
     }
-    if (this.flowRateHistoryDataResponse.flowRateData && this.bhppressureHistoryDataResponse.pressureData && this.p1pressureHistoryDataResponse.pressureData
-      && this.p2pressureHistoryDataResponse.pressureData && this.p3pressureHistoryDataResponse.pressureData) {
+    if (this.flowRateHistoryDataResponse.flowRateData && 
+      this.bhppressureHistoryDataResponse.pressureData && 
+      this.p1pressureHistoryDataResponse.pressureData  && 
+      this.p2pressureHistoryDataResponse.pressureData && 
+      this.p3pressureHistoryDataResponse.pressureData) {
+
       this.plotGraph();
+
     }
-
-
-
   }
 
   getData() {
@@ -226,151 +328,126 @@ export class PressureflowratechartComponent implements OnInit {
 
     ]
   }
-  calculateScale(min, max) {
-    let arr = [], textArr = [];
-    for (let i = (min * 10); i <= (max * 10); i++) {
-      arr.push((i / 10).toString());
-      if ((i % 10) == 0) {
-        textArr.push((i / 10).toString());
-      } else {
-        textArr.push('');
-      }
-    }
-    return [arr, textArr];
-  }
+
 
   plotGraph() {
 
+    const data = this.getData();
+    const layout = {
 
-    this.graph = {
+      showlegend: true,
+      title: {
+        text: 'PRESSURE/FlOWRATE',
+        x: 0.24,
+        y: 1.20
+      },
+      legend: {
+        orientation: 'h',
+        x: 0.39,
+        y: 1.30,
+        xanchor: 'left',
+        font: {
+          family: 'sans-serif',
+          size: 12,
+          color: '#000'
+        },
+      },
+      xaxis: {
+        type: 'date',
+        autorange: true,
+        title: 'Hours',
+        domain: [0.3, 0.99],
+        showline: true,
+        ticklen: 5,
+        tickwidth: 2,
+      },
+      yaxis: {
 
-      data: this.getData(),
-      layout: {
-
-        showlegend: true,
         title: {
-          text: 'PRESSURE/FlOWRATE',
-          x: 0.24,
-          y: 1.20
+          text: 'Pressure (PSI)'
         },
-        legend: {
-          orientation: 'h',
-          x: 0.39,
-          y: 1.30,
-          xanchor: 'left',
-          font: {
-            family: 'sans-serif',
-            size: 12,
-            color: '#000'
-          },
-
-
+        titlefont: {
+          color: 'red'
         },
-        xaxis: {
-          type: 'date',
-          autorange: true,
-          title: 'Hours',
-          domain: [0.3, 0.99],
-          showline: true,
-          //tickvals: this.calculateScale(10, 14)[0],
-          //ticktext: this.calculateScale(10, 14)[1],
-          ticklen: 5,
-          tickwidth: 2,
-          //tickmode: 'match overlay',
-          //position: 0.05
-
-        },
-        yaxis: {
-          //range: [0, 100],
-          title: {
-            text: 'Pressure (PSI)'
-
-          },
-          titlefont: {
-            color: 'red'
-          },
-          autorange: true,
-
-          type: 'linear',
-
-          showgrid: false,
-          zeroline: true,
-          showline: true,
-          autotick: true,
-          ticks: 'outside',
-          tick0: 0,
-          ticklen: 8,
-          tickwidth: 1,
-          tickcolor: '#000',
-          linecolor: '#636363',
-          linewidth: 1,
-          tickfont: {
-            color: 'red'
-          }
-
-        },
-        yaxis3: {
-          //range: [0, 100],
-          type: 'linear',
-          showgrid: false,
-          zeroline: false,
-          showline: false,
-          ticks: 'outside',
-          tick0: 0,
-          dtick: this.yBHPArray.length / 100,
-          ticklen: 4,
-          tickwidth: 0.3,
-          tickcolor: '#000',
-          showticklabels: false,
-          overlaying: 'y',
-          side: 'left',
-          anchor: 'free',
-          position: 0.30,
-        },
-        yaxis2: {
-          //range: [0, 100],
-          title: {
-            text: 'Flow Rate (bpm)',
-
-          },
-          autorange: true,
-          type: 'linear',
-          showgrid: false,
-          zeroline: true,
-          showline: true,
-          ticks: 'outside',
-          tick0: 0,
-          ticklen: 8,
-          tickwidth: 1,
-          tickcolor: '#000',
-          showticklabels: true,
-          overlaying: 'y',
-          side: 'left',
-          anchor: 'free',
-          position: 0.24,
-
-        },
-        yaxis4: {
-          //range: [0, 100],
-          type: 'linear',
-          showgrid: false,
-          zeroline: false,
-          showline: false,
-          ticks: 'outside',
-          tick0: 0,
-          dtick: this.xArray.length / 100,
-          ticklen: 4,
-          tickwidth: 0.3,
-          tickcolor: '#000',
-          showticklabels: false,
-          overlaying: 'y',
-          side: 'left',
-          anchor: 'free',
-          position: 0.24,
+        autorange: true,
+        type: 'linear',
+        showgrid: false,
+        zeroline: true,
+        showline: true,
+        autotick: true,
+        ticks: 'outside',
+        tick0: 0,
+        ticklen: 8,
+        tickwidth: 1,
+        tickcolor: '#000',
+        linecolor: '#636363',
+        linewidth: 1,
+        tickfont: {
+          color: 'red'
         }
-      }
 
-    };
+      },
+      yaxis3: {
+        type: 'linear',
+        showgrid: false,
+        zeroline: false,
+        showline: false,
+        ticks: 'outside',
+        tick0: 0,
+        dtick: 0.03,
+        ticklen: 4,
+        tickwidth: 0.3,
+        tickcolor: '#000',
+        showticklabels: false,
+        overlaying: 'y',
+        side: 'left',
+        anchor: 'free',
+        position: 0.30,
+      },
+      yaxis2: {
+        title: {
+          text: 'Flow Rate (bpm)',
+
+        },
+        autorange: true,
+        type: 'linear',
+        showgrid: false,
+        zeroline: true,
+        showline: true,
+        ticks: 'outside',
+        tick0: 0,
+        ticklen: 8,
+        tickwidth: 1,
+        tickcolor: '#000',
+        showticklabels: true,
+        overlaying: 'y',
+        side: 'left',
+        anchor: 'free',
+        position: 0.24,
+
+      },
+      yaxis4: {
+        type: 'linear',
+        showgrid: false,
+        zeroline: false,
+        showline: false,
+        ticks: 'outside',
+        tick0: 0,
+        dtick: 0.03,
+        ticklen: 4,
+        tickwidth: 0.3,
+        tickcolor: '#000',
+        showticklabels: false,
+        overlaying: 'y',
+        side: 'left',
+        anchor: 'free',
+        position: 0.24,
+      }
+    }
+
+    Plotly.newPlot('graph', data, layout);
+
+
   }
 
 
