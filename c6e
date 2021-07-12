@@ -1,0 +1,782 @@
+[33mcommit 3f103c71b70c97f2753739245f47490ab5968b42[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Merge: 20d618f c6e47f0
+Author: Naresh Ghorpade <Naresh.Ghorpade@halliburton.com>
+Date:   Fri Jul 9 14:03:58 2021 +0000
+
+    Merged PR 14383: Range slider updated ui code
+    
+    Related work items: #33834, #33845, #33847, #33854, #34405, #34406, #34411, #34414, #34416, #34423, #34615, #35669
+
+[33mcommit c6e47f041b073dbc5c832d404227168786afdd42[m[33m ([m[1;31morigin/Naresh_Ghorpade/35666-Dev-Create-Component-UI-html-css-part-copy[m[33m)[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Fri Jul 9 16:13:33 2021 +0530
+
+    change relative path url
+
+[33mcommit adcec39bc33bbe9ac2d292e1c6fa2dce495d68ae[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Fri Jul 9 11:47:40 2021 +0530
+
+    ng5 slider code added
+
+[33mcommit a61376583a275a3197e41612c7181cd4e835ca34[m
+Merge: 575d608 20d618f
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Fri Jul 9 10:40:52 2021 +0530
+
+    conflict resolved
+
+[33mcommit 20d618f8d937075f4efa18b0674dddabb76fc67c[m
+Merge: 41c4cb5 237597b
+Author: Pritam Channawar <Pritam.Channawar@halliburton.com>
+Date:   Thu Jul 8 16:38:47 2021 +0000
+
+    Merged PR 14307: 34896-Well-selector-popup
+
+[33mcommit 575d608828ab99509a5254386b35d2cda3f1c2e8[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Thu Jul 8 19:12:20 2021 +0530
+
+    range slider ui updated code
+
+[33mcommit 41c4cb5d32135ef92f14cfcdcd25f481ea4d2e31[m
+Merge: 3807944 a5d0317
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Thu Jul 8 07:11:06 2021 +0000
+
+    Merged PR 14371: Quick Fix
+    
+    Removed unwanted characters
+
+[33mcommit a5d0317cea4892449544360f8137be0b0b77009e[m
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Thu Jul 8 12:34:04 2021 +0530
+
+    Quick fix
+
+[33mcommit 3807944ac0e9330679d5b16b7389ffd0cb11fd2a[m
+Merge: 121eba6 8fadd34
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Thu Jul 8 06:03:24 2021 +0000
+
+    Merged PR 14290: Implemented Realtime Data for PressreFlow rate
+    
+    Implemented Realtime Data for PressreFlow rate
+
+[33mcommit 121eba68f9cdf485fc1c37f0921c1184035a2928[m
+Merge: 5b4dd69 a30b552
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Wed Jul 7 21:56:22 2021 +0000
+
+    Merged PR 14357: quick fix
+    
+    quick fix
+
+[33mcommit a30b5523a8e0e1f3dde4468c85c69759c37180f3[m[33m ([m[1;31morigin/Haykaz_Sayadyan/34414-quick-fix[m[33m)[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Wed Jul 7 13:29:40 2021 -0700
+
+    quick fix
+
+[33mcommit 5b4dd691f9b40531df5482ffa60159550c110d66[m
+Author: Mykhailo Shuturma <Mykhailo.Shuturma2@halliburton.com>
+Date:   Wed Jul 7 19:48:23 2021 +0000
+
+    Merged PR 14353: changed pipeline trigger to dev
+    
+    As we need provide intermediate build for the testing purposes during a sprint it's reasonable to use 'dev' as a trigger
+
+[33mcommit 8bd3fe7974fd8a7dec5c6fd84f3d0030de560a7f[m
+Author: Mykhailo Shuturma <Mykhailo.Shuturma2@halliburton.com>
+Date:   Wed Jul 7 14:27:02 2021 +0000
+
+    Merged PR 14331: Hot fix: error on a production mode
+    
+    Hot fix: error on a production mode
+    Minor chanes of the header
+
+[33mcommit 237597b55150c2cfc28c1dcceef3ca9193f07ec9[m[33m ([m[1;31morigin/Pritam_Channawar/34896-Well-selector-popup[m[33m, [m[1;32mtst[m[33m)[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Wed Jul 7 18:42:22 2021 +0530
+
+    well selector modal title alignment
+
+[33mcommit 1bc75d22bf69c3952993ea8a618e412749db4eeb[m
+Author: pritam-channawar <pritam.channawar@ilink-systems.com>
+Date:   Wed Jul 7 18:25:00 2021 +0530
+
+    fixed comments by haykaz and added new features like checkbox and seeting
+
+[33mcommit c43d55c154f82689c62d0e34adff6e8b979f0f96[m
+Author: pritam-channawar <pritam.channawar@ilink-systems.com>
+Date:   Wed Jul 7 18:16:39 2021 +0530
+
+    fixed comments by haykaz and added new features like checkbox and seeting
+
+[33mcommit 8fadd34cd8af7f46e511fc21bbd89c49085417ff[m
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Wed Jul 7 17:22:39 2021 +0530
+
+    deleted unwanted file
+
+[33mcommit 4006ad9e157c994110922d065a57bf9782c7f6ea[m
+Merge: 1fbb40f 9c34939
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Wed Jul 7 17:11:44 2021 +0530
+
+    conflict resolved
+
+[33mcommit 1fbb40f4bfbc3284225b5e8036a41c6ef06dd7ce[m
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Wed Jul 7 13:14:18 2021 +0530
+
+    fixed the PR comments
+
+[33mcommit 9593b68b89af4cf7746983f07cba365a3646f142[m[33m ([m[1;31morigin/Ravindra_Deshmukh/RealTimeData-PressureFlowRateChart[m[33m)[m
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Wed Jul 7 08:02:32 2021 +0530
+
+    Refactor code
+
+[33mcommit a8d4f694087d08c79e13d8c913d3c970b770ebec[m
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Tue Jul 6 23:31:07 2021 +0530
+
+    Implemented Realtime Data for PressreFlow rate
+
+[33mcommit 051f2d70571273f17a3e260bc2a434494d91d903[m
+Author: pritam-channawar <pritam.channawar@ilink-systems.com>
+Date:   Tue Jul 6 21:15:18 2021 +0530
+
+    well selector pop up changes
+
+[33mcommit 7f65be6b885478cb0a32a0583ef5663ad5eadb48[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Tue Jul 6 19:01:58 2021 +0530
+
+    modal popup height issue resolved and UI changes
+
+[33mcommit b2d240274eccc16c7ee46f6e23ede7a9fde97cd3[m
+Author: pritam-channawar <pritam.channawar@ilink-systems.com>
+Date:   Tue Jul 6 15:56:29 2021 +0530
+
+    Well selector Pop up fuctonality added
+
+[33mcommit 9c34939718ae9f3bfefd5801fac18c4491b476dc[m[33m ([m[1;31morigin/pooja.sathe/33844-Zone-Flow-Chart[m[33m)[m
+Merge: 7d93207 0fa97ec
+Author: Mykhailo Orlov <Mykhailo.Orlov@halliburton.com>
+Date:   Mon Jul 5 13:54:08 2021 +0000
+
+    Merged PR 14251: Organize main UI container
+    
+    Organize main UI container
+    
+    Related work items: #35669
+
+[33mcommit 0fa97ec83299e0e2f8a8df8d1fed3810b1056320[m[33m ([m[1;31morigin/Mykhailo_Orlov/Organize_main_UI_container[m[33m)[m
+Author: Mykhailo Orlov <mykhailo.orlov@halliburton.com>
+Date:   Mon Jul 5 14:39:33 2021 +0300
+
+    Implement data for Zone-depth table
+
+[33mcommit c3b1ff4e91d89ddce265a020c7d6089dcd9d2ec0[m
+Author: Mykhailo Orlov <mykhailo.orlov@halliburton.com>
+Date:   Mon Jul 5 12:20:51 2021 +0300
+
+    Organize main UI container
+
+[33mcommit 7d93207c456da97775427694f606c0a802e9ab3a[m
+Author: Mykhailo Shuturma <Mykhailo.Shuturma2@halliburton.com>
+Date:   Mon Jul 5 08:52:07 2021 +0000
+
+    Merged PR 14144: Update azure-pipelines.yml for Azure Pipelines
+
+[33mcommit e5c76653e8e0573707506a75bcb1971dba23c0f9[m
+Merge: e3b5dd9 8bc0d72
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Fri Jul 2 07:13:32 2021 +0000
+
+    Merged PR 14178: Zone chart with depth
+    
+    Related work items: #34414
+
+[33mcommit 8bc0d72ada258671c08fb325b24382073f06f4c5[m[33m ([m[1;31morigin/Haykaz_Sayadyan/34414-zone-depth-chart[m[33m)[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Fri Jul 2 00:09:40 2021 -0700
+
+    fix
+
+[33mcommit 64eccbbb66ad8a2a7664f84c1c375f394e6cd932[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Thu Jul 1 14:53:18 2021 -0700
+
+    to top
+
+[33mcommit 6b4248afa38074157e229214e8d7bc58abe052cb[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Thu Jul 1 14:48:23 2021 -0700
+
+    file path correction
+
+[33mcommit 0ac0daeb46ae4e525691f9084b609e7cad2a73c3[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Thu Jul 1 07:08:01 2021 -0700
+
+    renamed
+
+[33mcommit 1331c6a481e453cce080555320efac6f46d8d47c[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Thu Jul 1 02:32:47 2021 -0700
+
+    added in monitoring page
+
+[33mcommit bf6a33e876ac8b8517a0ffe95528c68a233920ba[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Thu Jul 1 02:24:50 2021 -0700
+
+    added zone-depth chart component
+
+[33mcommit e3b5dd9a57ec13a8a5d4a641d37cbcf7a5b6a8bf[m
+Merge: 9dd7a36 01ae5e4
+Author: Mykhailo Orlov <Mykhailo.Orlov@halliburton.com>
+Date:   Wed Jun 30 13:20:54 2021 +0000
+
+    Merged PR 14140: Small changes
+    
+    Small changes
+    
+    Related work items: #33845
+
+[33mcommit 01ae5e4c09bffd2e40e72ff41fba48b5d1eea2f2[m[33m ([m[1;31morigin/Mykhailo_Orlov/33845_Small_changes[m[33m)[m
+Author: Mykhailo Orlov <mykhailo.orlov@halliburton.com>
+Date:   Wed Jun 30 16:15:51 2021 +0300
+
+    Small changes
+
+[33mcommit 9dd7a36ecdfdf034de720f02617f542de6d88094[m
+Merge: 5011764 24a2011
+Author: Mykhailo Orlov <Mykhailo.Orlov@halliburton.com>
+Date:   Wed Jun 30 12:55:46 2021 +0000
+
+    Merged PR 14139: Production monitoring - requires table component for Zone Flow allocation chart
+    
+    Production monitoring - requires table component for Zone Flow allocation chart
+    
+    Related work items: #33845
+
+[33mcommit 24a20111f710506c962a67a5d77d6d106099da8b[m[33m ([m[1;31morigin/Mykhailo_Orlov/33845_Production_monitoring_requires_table_component_for_Zone_Flow_allocation_chart[m[33m)[m
+Author: Mykhailo Orlov <mykhailo.orlov@halliburton.com>
+Date:   Wed Jun 30 15:52:22 2021 +0300
+
+    Added the webSocket data for zone flow allocation conponent
+
+[33mcommit 501176481e202b5fbdeb9e26619a35b1aa9e56ab[m
+Author: Mykhailo Shuturma <Mykhailo.Shuturma2@halliburton.com>
+Date:   Wed Jun 30 11:55:10 2021 +0000
+
+    Merged PR 14133: Fixed WS adapted for UI
+    
+    Fixed WS adapted for UI
+
+[33mcommit 59c8403b3b8ca60fcca60316d3a131cec2cd2159[m
+Merge: 627877e b522ca4
+Author: Naresh Ghorpade <Naresh.Ghorpade@halliburton.com>
+Date:   Tue Jun 29 14:34:09 2021 +0000
+
+    Merged PR 14031: Conflict resolved
+    
+    Related work items: #34615
+
+[33mcommit b522ca4af1f1d1e4a5c9f1caabd82de15508ad58[m[33m ([m[1;31morigin/Naresh_Ghorpade/34615-Sidebar-As-a-User-I-want-to-see-the-sidebar-with-Home-button-at-the-left-side-of-the-screen[m[33m)[m
+Merge: 6866084 627877e
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Tue Jun 29 20:00:00 2021 +0530
+
+    conflict resolved
+
+[33mcommit 6866084034a34d2d465a47d9e75833ef07b1e19b[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Tue Jun 29 19:55:35 2021 +0530
+
+    removed cli code in angular file
+
+[33mcommit 627877e6b3a8047a19605c81bc7edd56b7061b35[m
+Merge: 84297c1 8f12cbe
+Author: Mykhailo Orlov <Mykhailo.Orlov@halliburton.com>
+Date:   Tue Jun 29 13:04:12 2021 +0000
+
+    Merged PR 14098: Fixed merge conflict
+    
+    Fixed merge conflict
+    
+    Related work items: #33845
+
+[33mcommit 8f12cbe56071ba63afc3a1de9bc1709bf3808b57[m[33m ([m[1;31morigin/Mykhailo_Orlov/33845_Fixed_merge_conglict[m[33m)[m
+Author: Mykhailo Orlov <mykhailo.orlov@halliburton.com>
+Date:   Tue Jun 29 16:03:54 2021 +0300
+
+    Fixed merge conflint
+
+[33mcommit 84297c13d912b0fb1174f4dcdc5dc2484f416e1f[m
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Tue Jun 29 12:21:50 2021 +0000
+
+    Merged PR 14094: Implemented Pressure chart with API and integrated with main UI
+    
+    Related work items: #33834, #33845, #33847, #33854, #34405, #34406, #34411, #34416, #34423
+
+[33mcommit 6a6f7e0605429c84769f5afa7fd4019fc0ac83c9[m
+Merge: 136ac1b e29d151
+Author: Mykhailo Orlov <Mykhailo.Orlov@halliburton.com>
+Date:   Tue Jun 29 11:00:16 2021 +0000
+
+    Merged PR 14090: Production monitoring - requires table component for Zone Flow allocation chart
+    
+    Production monitoring - requires table component for Zone Flow allocation chart
+    
+    Related work items: #33845
+
+[33mcommit e29d151394e1ee6f04b6e2c04b1d0f0361e1ff28[m
+Author: Mykhailo Orlov <mykhailo.orlov@halliburton.com>
+Date:   Tue Jun 29 13:21:14 2021 +0300
+
+    Added the requires table component for Zone Flow allocation chart
+
+[33mcommit 136ac1bc99602da33fea2eff68b489856c2dbfda[m
+Merge: 282d90f 31a73dd
+Author: Mykhailo Orlov <Mykhailo.Orlov@halliburton.com>
+Date:   Tue Jun 29 07:53:30 2021 +0000
+
+    Merged PR 14079: Added the requires table component for Zone Flow allocation chart
+    
+    Added the requires table component for Zone Flow allocation chart
+    
+    Related work items: #33845
+
+[33mcommit 31a73dd091a21214e2ca657911d19e1a3c88dee9[m
+Author: Mykhailo Orlov <mykhailo.orlov@halliburton.com>
+Date:   Tue Jun 29 10:45:43 2021 +0300
+
+    Added the requires table component for Zone Flow allocation chart
+
+[33mcommit ab6fc2290d1454e47394b18c7f71bafc4495d459[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Mon Jun 28 10:42:12 2021 +0530
+
+    Removed commented code
+
+[33mcommit 0d18d0e4068fc8c9d05900a7523ba77f57f6409d[m
+Merge: 56a6433 282d90f
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Fri Jun 25 22:07:19 2021 +0530
+
+    conflict resolved
+
+[33mcommit 282d90fcd22accfc38968fb1d4ced37d00d30535[m
+Author: Mykhailo Shuturma <Mykhailo.Shuturma2@halliburton.com>
+Date:   Fri Jun 25 07:42:20 2021 +0000
+
+    Merged PR 13968: WS-API handling on frontend
+    
+    Added basic WebSocket api handler and example
+    
+    Related work items: #33854, #34405, #34406
+
+[33mcommit 56a64336ddb75644484ea3bba0a045ba701aa2a0[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Fri Jun 25 12:27:35 2021 +0530
+
+    Module change
+
+[33mcommit d904984e9114404e648351c36a91290bd2fd35d9[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Fri Jun 25 12:00:35 2021 +0530
+
+    bootstrap add
+
+[33mcommit 92c60a0f6e921c81ca8bbbc2471574eca2183d98[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Fri Jun 25 11:41:47 2021 +0530
+
+    add ng bootsrap code
+
+[33mcommit 0d248832d81187547175093855da007747bfc06e[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Fri Jun 25 11:39:44 2021 +0530
+
+    removed bootstrap code
+
+[33mcommit 278df25ed73c2e30f3a3965f1f2207f2c7870155[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Thu Jun 24 16:36:59 2021 +0530
+
+    add alert indicators for sidenav
+
+[33mcommit 378c7a12df10160f5fec7097c547a7c82abd1e9e[m[33m ([m[1;31morigin/qa[m[33m)[m
+Merge: 6e6d3ff fab5e89
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Wed Jun 23 20:11:23 2021 +0000
+
+    Merged PR 13978: quick fix
+    
+    Updated environment.prod.ts
+
+[33mcommit fab5e89efd10a5dcc5cfd89ca3378359cf8396fd[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Wed Jun 23 20:09:05 2021 +0000
+
+    Updated environment.prod.ts
+
+[33mcommit 6e6d3ff6e0e06ba0beeed787b429617fc76c9fa1[m
+Merge: 3a68984 9670a10
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Wed Jun 23 15:21:13 2021 +0000
+
+    Merged PR 13904: backend API integration
+    
+    added calls to backend API with query params
+    
+    Related work items: #33847, #34411
+
+[33mcommit 9670a101e6874d65482d2c8691a40fe92a48dcd9[m[33m ([m[1;31morigin/Haykaz_Sayadyan/33847-integrate-backend-API-for-basic-interface[m[33m)[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Wed Jun 23 08:14:58 2021 -0700
+
+    property name fixes
+
+[33mcommit 9dd68930dac38f2a0051d6aa7164447f8e4848e4[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Wed Jun 23 16:40:13 2021 +0530
+
+    Sidebar icon change
+
+[33mcommit 0cb29f4e92bbcd73083ef6b9ff77642cbbfeed1e[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Wed Jun 23 16:17:10 2021 +0530
+
+    UI Changes
+
+[33mcommit 3d86469806f2e3d3255e4ea2ce38f10c63f700f0[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Wed Jun 23 16:16:02 2021 +0530
+
+    UI Changes
+
+[33mcommit 723d698f5b4323f000eae5c5e20db9d11e5e4ac4[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Tue Jun 22 17:05:20 2021 -0700
+
+    Request and Response classes
+
+[33mcommit 3880e66e764258b950685f32d4b5bc6c466e935e[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Tue Jun 22 14:34:23 2021 -0700
+
+    class with constants
+
+[33mcommit cd48930c60ddfb07a1b261eb8df70e10805e4092[m
+Author: ghorpadenaresh <naresh_ghorpade@simplicity-creations.com>
+Date:   Tue Jun 22 16:17:16 2021 +0530
+
+    sidebar and topbar UI
+
+[33mcommit 61d325713fa0198ba1784ca33a3210d8d42934a6[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Mon Jun 21 14:56:13 2021 -0700
+
+    deleted subfolder
+
+[33mcommit 8093c03d90358cc6f7cb7d8312c0047e0b512f5d[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Mon Jun 21 14:39:41 2021 -0700
+
+    added calls to API
+
+[33mcommit 6f01709daf41be0163100017391767698e021906[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Fri Jun 18 17:23:47 2021 -0700
+
+    fixes
+
+[33mcommit b2e2c42a3608a8603a1a4e455f86f4dcd0734b9e[m
+Merge: 6541f5b 3ee4365
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Fri Jun 18 17:15:40 2021 -0700
+
+    Merge remote-tracking branch 'refs/remotes/origin/Haykaz_Sayadyan/33847-integrate-backend-API-for-basic-interface'
+    
+    Conflicts:
+            src/app/app.module.ts
+
+[33mcommit 6541f5b24a2525bb525f6e442ab63a4f30eb1c9d[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Tue Jun 15 13:26:49 2021 -0700
+
+    code clean up
+
+[33mcommit e6701694489d541881da29b04651820cc47cfc26[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Tue Jun 15 11:45:15 2021 -0700
+
+    removed chart button with method
+
+[33mcommit c030402317b593aaa0a0fed7e8dae3fb10bd623a[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Tue Jun 15 07:49:59 2021 -0700
+
+    css updates
+
+[33mcommit 436b6cd01ad9921fe5435dbaae7b61d63ae47175[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Mon Jun 14 15:27:51 2021 -0700
+
+    created components for production monitoring page
+
+[33mcommit 413e26500846232e9718670ba982decef0ef46d7[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Mon Jun 14 14:43:28 2021 -0700
+
+    datetimepicker updated, button design changed
+
+[33mcommit d9ce5e5c92b9cf12349c8017cb4f41a4833e44e2[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Fri Jun 11 16:07:35 2021 -0700
+
+    service to call API
+
+[33mcommit 5f63b26f845aa38f1629d8ae1fa3f8b3e0e27f34[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Fri Jun 11 15:42:36 2021 -0700
+
+    created models for production monitoring
+
+[33mcommit df91dafbb8216d8a40e17948d77a4b4a177bfd4b[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Thu Jun 10 15:34:55 2021 -0700
+
+    getting well list form service, timepicker
+
+[33mcommit 4277f4c3545bfab7badd441803cd7f5f8a902c9a[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Wed Jun 9 13:34:05 2021 -0700
+
+    created service for production monitoring
+    
+    service, enum, anv variable
+
+[33mcommit 3a689844e81131da24de5d79a0cf8d75e5956cad[m
+Merge: 86a69a6 abc9f39
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Fri Jun 18 19:15:13 2021 +0000
+
+    Merged PR 13834: Implemented UI for line chart
+    
+    Implemented UI for line chart
+
+[33mcommit abc9f39fe5815251f006682a478a8e6c606d950e[m[33m ([m[1;31morigin/Ravindra_Deshmukh/33842-create-chart-component-for-Pressure/FlowRate[m[33m)[m
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Fri Jun 18 14:26:16 2021 +0530
+
+    made changes as per the PR comment
+
+[33mcommit 76069eb70c04b24a57511c21e4b238ad10ca4249[m
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Thu Jun 17 21:26:16 2021 +0530
+
+    Implemented UI for line chart
+
+[33mcommit 3ee436551bf2d19d80bfcc2203b960938975d994[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Tue Jun 15 13:26:49 2021 -0700
+
+    code clean up
+
+[33mcommit d6deafacf9f5b293031ced7f41e36970e94d21d3[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Tue Jun 15 11:45:15 2021 -0700
+
+    removed chart button with method
+
+[33mcommit 4cab4e21dad2ce9e1fa791133450f8facea4ccc2[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Tue Jun 15 07:49:59 2021 -0700
+
+    css updates
+
+[33mcommit 8e76d4155100394e5872fea20bedb002859c32eb[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Mon Jun 14 15:27:51 2021 -0700
+
+    created components for production monitoring page
+
+[33mcommit 95b6db4aec14df62badecaac30829647c2850eff[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Mon Jun 14 14:43:28 2021 -0700
+
+    datetimepicker updated, button design changed
+
+[33mcommit 24f613b8335c17b0b80a4b1a2be2c8b160fdda74[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Fri Jun 11 16:07:35 2021 -0700
+
+    service to call API
+
+[33mcommit 974649eb9ddf8a58a4c148bfc33f1276a18eebe7[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Fri Jun 11 15:42:36 2021 -0700
+
+    created models for production monitoring
+
+[33mcommit 0cb334dfe0a6c5786531a997d95394e86de0882c[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Thu Jun 10 15:34:55 2021 -0700
+
+    getting well list form service, timepicker
+
+[33mcommit a1790acd4e142d5361129bae7de663142982151b[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Wed Jun 9 13:34:05 2021 -0700
+
+    created service for production monitoring
+    
+    service, enum, anv variable
+
+[33mcommit 86a69a6de2e7f47ae2c5d12f4a061cb4a2942582[m
+Merge: 41bca4b cbed72d
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Wed Jun 9 14:48:03 2021 +0000
+
+    Merged PR 13596: Create Basic User Interface
+    
+    Created basic user interface for Production Monitoring page
+    Page Header for Well selection, buttons for Compare, Comment, Display, Chart
+    PageHeader for Time/Depth selection with buttons and datapicker
+    Page needs final css/html corrections
+    
+    Related work items: #33834
+
+[33mcommit cbed72d760ebbf8e39269e62ac4a2dda0e3bb152[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Tue Jun 8 13:05:00 2021 -0700
+
+    project structure changes and renamed components
+
+[33mcommit 5dddbf3a6433d3032a60ebff0677f879767416cd[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Mon Jun 7 16:25:51 2021 -0700
+
+    time/depth headers
+
+[33mcommit 193b56a51454f436bfd5c3b1a3ef4562944c0aca[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Fri Jun 4 16:04:18 2021 -0700
+
+    added timeline/depth and buttons sectors
+
+[33mcommit dbe9a2e032f6eabad3e8f9f341722e757c1db089[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Thu Jun 3 15:05:59 2021 -0700
+
+    created monitoring page/component
+
+[33mcommit 41bca4b77484b8fda1447949f145939d53049bcc[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Wed Jun 2 12:01:22 2021 -0700
+
+    changet app name
+
+[33mcommit 69da3684968705a0826bb0dfa4613e959a53f871[m
+Author: Haykaz Sayadyan <54286866+hsayadyan@users.noreply.github.com>
+Date:   Wed Jun 2 11:46:27 2021 -0700
+
+    implemented plotly charts
+
+[33mcommit 5a0d1de85f444013785448dfba924e557458837e[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Tue May 25 16:05:11 2021 -0500
+
+    home page and auth guard
+
+[33mcommit 4c80d4df19da8c9ae731f8ea48120a0407e5e9d9[m
+Merge: fc65270 6585608
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Tue May 25 14:22:49 2021 +0000
+
+    Merged PR 13166: Navigation changes added
+    
+    Navigation changes added
+
+[33mcommit 6585608abe3d65ea9edfcc5251d1fc81a7237099[m[33m ([m[1;31morigin/Navigation[m[33m)[m
+Author: Ravindra Deshmukh <Ravindra.Deshmukh@halliburton.com>
+Date:   Tue May 25 11:57:18 2021 +0530
+
+    Navigation changes added
+
+[33mcommit fc652700e1c481626abf29bc20eed1953b2e32c5[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Tue May 25 05:10:14 2021 +0000
+
+    Update azure-pipelines.yml for Azure Pipelines
+
+[33mcommit 856ccb50061b8b5dfe1351ff6866c7b892169021[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Mon May 24 20:28:42 2021 -0500
+
+    loading chart data
+
+[33mcommit 969076d791aa45c5d1cfc25c57ca2b6e95b7ea4b[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Fri May 21 16:50:34 2021 -0500
+
+    upadted service
+
+[33mcommit d0c8bf612691dd950817862f33b5e40d2f947dbc[m
+Merge: 4571161 918da2a
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Fri May 21 01:57:48 2021 -0500
+
+    Merge branch 'main' of https://dev.azure.com/HAL-PEC/MF%20and%20SS%20FO%20Monitoring/_git/VisumWeb
+
+[33mcommit 4571161ec58e4021f82d7a1e1cded1c30ad9d056[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Fri May 21 01:56:18 2021 -0500
+
+    updated version 12
+
+[33mcommit 8760e8825e271fe96522827b2ef527f5d2f3f6ac[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Thu May 20 16:15:20 2021 -0500
+
+    version update
+
+[33mcommit 49966420cb7c6fd5bd22a0b5f6c76d16ba0e2605[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Thu May 20 16:06:16 2021 -0500
+
+    version update
+
+[33mcommit 3f165f4696daa7621e3e6bc6194b82b56507bc08[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Thu May 20 15:56:26 2021 -0500
+
+    version update
+
+[33mcommit 918da2a44b55638776aa98a3b30a5a510380114a[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Thu May 20 08:04:30 2021 +0000
+
+    Set up CI with Azure Pipelines
+    
+    [skip ci]
+
+[33mcommit 3057f53df1582dc1f38241afae2e6b38fe989ce9[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Thu May 20 03:02:24 2021 -0500
+
+    added source code to repo
+
+[33mcommit 5292229a306210a9b1bca66ee135c0803ee34c5e[m
+Author: Haykaz Sayadyan <Haykaz.Sayadyan@halliburton.com>
+Date:   Thu May 20 07:29:12 2021 +0000
+
+    Added README.md
