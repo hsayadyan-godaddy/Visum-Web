@@ -22,6 +22,8 @@ import { ZoneFlowProductionAcceptableLimitsResponse } from '../models/Response/Z
 import { ZoneFlowProductionHistoryDataResponse } from '../models/Response/ZoneFlowProductionHistoryDataResponse';
 import { ParamBuilder } from '../shared/pipes/parambuilder';
 import { UrlHelper } from '../shared/pipes/urlhelper';
+import {WellboreSearchCommand} from '../models/Request/WellboreSearchCommand';
+import {WellboreSearchResponse} from '../models/Response/WellboreSearchResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +52,11 @@ export class ProductionMonitoringService {
   async getWellboreProfileZones(wellboreProfileZonesCommand : WellboreProfileZonesCommand): Promise<WellboreProfileZonesResponse> {
     let params = ParamBuilder.toQueries(wellboreProfileZonesCommand);
     return this.http.get<WellboreProfileZonesResponse>(this.AppUrl + UrlHelper.WellboreProfileZones, { params : params, headers: this.headers }).toPromise();
+  }
+
+  async getWellboreSearch(wellboreSearchCommand : WellboreSearchCommand): Promise<WellboreSearchResponse> {
+    let params = ParamBuilder.toQueries(wellboreSearchCommand);
+    return this.http.get<WellboreSearchResponse>(this.AppUrl + UrlHelper.WellboreSearch, { params : params, headers: this.headers }).toPromise();
   }
 
   getPressureSensors(pressureSensorsCommand : PressureSensorsCommand): Observable<PressureSensorsResponse> {
