@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as Plotly from 'plotly.js-dist';
 import { DepthType } from '../../../enums/depth-type';
 import { WellboreProfileZonesCommand } from '../../../models/Request/WellboreProfileZonesCommand';
 import { WellboreProfileZonesResponse } from '../../../models/Response/WellboreProfileZonesResponse';
@@ -7,38 +8,45 @@ import { ProductionMonitoringService } from '../../../services/productionMonitor
 @Component({
   selector: 'app-zone-chart',
   templateUrl: './zone-chart.component.html',
-  styleUrls: ['./zone-chart.component.css']
+  styleUrls: ['./zone-chart.component.scss']
 })
 export class ZoneChartComponent implements OnInit {
   public wellboreProfileZonesResponse: WellboreProfileZonesResponse;
-  public request : WellboreProfileZonesCommand;
+  public request: WellboreProfileZonesCommand;
   public depthTypes = Object.values(DepthType);
   public selectedDepth: string = 'MD';
-  public zones: string[] = [];
-  public zoneX: number[] = [];
-  public depth: number[] = [];
-  public allDepths: number[] = [];
-  public zoneDepth: string[] = [];
-  public graph = {
-    data : this.createZoneChartData(),
-    layout: this.createLayout()
-  };
+  private zones: string[] = [];
+  private zoneX: number[] = [];
+  private depth: number[] = [];
+  private allDepths: number[] = [];
+  private zoneDepth: string[] = [];
+  private zeroTick: number = 0;
+  private ticksize: number = 500;
+  private unitOfMeasureLabel: string;
+
   constructor(public pmService: ProductionMonitoringService) { }
-  
 
   ngOnInit(): void {
     this.getZoneChartData();
-    this.createZoneChartData();
   }
 
   async getZoneChartData() {
+    this.depth = [];
+    this.allDepths = [];
+    this.zoneX = [];
+    this.zones = [];
+    this.zoneDepth = [];
+
     this.request = {
       wellId: 'Well Id',
       projectId: 'Project Id',
       depthType: DepthType[this.selectedDepth]
     };
-    this.wellboreProfileZonesResponse = await this.pmService.getWellboreProfileZones(this.request);
+    await this.pmService.getWellboreProfileZones(this.request).then(data => {
+      this.wellboreProfileZonesResponse = data;
+    });
     var zoneInfoData = this.wellboreProfileZonesResponse.zoneInfoData;
+    this.unitOfMeasureLabel = this.wellboreProfileZonesResponse.unitOfMeasureInfo.label;
     zoneInfoData.forEach(z => {
       this.depth.push((z.depthTo + z.depthFrom) / 2);
       this.allDepths.push(z.depthFrom);
@@ -46,7 +54,11 @@ export class ZoneChartComponent implements OnInit {
       this.zoneX.push(0.5);
       this.zones.push(`Zone ${z.zoneNumber}`);
       this.zoneDepth.push(`From: ${z.depthFrom} To: ${z.depthTo}`);
-    })
+    });
+    this.zeroTick = this.allDepths[0];
+    this.ticksize = this.allDepths[1];
+
+    this.createZoneChartGraph();
   };
 
   createZoneChartData() {
@@ -71,7 +83,7 @@ export class ZoneChartComponent implements OnInit {
     return data;
   };
 
-  createLayout() {
+  createLayout(unitOfMeasureLabel: string) {
     var layout = {
       title: '',
       xaxis: {
@@ -79,39 +91,37 @@ export class ZoneChartComponent implements OnInit {
         showticklabels: false,
         fixedrange: true
       },
-      margin: {
-        l: 90,
-        r: 180,
-        b: 50,
-        t: 70
-      },
       yaxis: {
         showline: true,
-        title: 'Measured Depth',
+        title: "Measured Depth (" + unitOfMeasureLabel + ")",
         titlefont: { color: '#1f77b4' },
         tickfont: { color: '#1f77b4' },
         ticks: 'outside',
         ticklength: 8,
-        tick0: this.depth[0],
-        dtick: 1000,
+        tickformat: ',d',
+        tick0: this.zeroTick,
+        dtick: this.ticksize,
         zeroline: false,
         autorange: 'reversed',
         fixedrange: true
       },
-      width: 400,
-      height: 600,
       paper_bgcolor: 'white',
       plot_bgcolor: 'white',
       showlegend: false,
       hovermode: "closest"
     };
-
     return layout;
   }
 
-  onChange(newDepth) {
+  onDepthChange(newDepth) {
     this.selectedDepth = newDepth;
     this.getZoneChartData();
-    this.createZoneChartData();
+  }
+
+  createZoneChartGraph() {
+    var data = this.createZoneChartData();
+    var layout = this.createLayout(this.unitOfMeasureLabel);
+
+    Plotly.newPlot("zonechart", data, layout, { displayModeBar: false });
   }
 }
