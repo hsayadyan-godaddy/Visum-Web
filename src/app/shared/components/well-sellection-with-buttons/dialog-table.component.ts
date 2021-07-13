@@ -28,7 +28,6 @@ export class DialogTableComponent implements OnInit {
   public selected(row) {
     this.selectedWell = row.Wellname;
   }
-
   public applyFilter(event: Event) {
     this.searchString = (event.target as HTMLInputElement).value;
     this.initTable(this.getWellboreSearchCommand(this.searchString));

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Productionmonitoring } from '../../models/productionmonitoring/productionmonitoring';
+import { Productionmonitoring } from 'src/app/models/productionmonitoring/productionmonitoring';
 import { Well } from 'src/app/models/well';
-import { ProductionMonitoringService } from '../../services/productionMonitoring.service';
+import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
 import { WebsocketUsageExampleService } from '../../services/websocket/websocket-usage-example-service';
 
 @Component({
