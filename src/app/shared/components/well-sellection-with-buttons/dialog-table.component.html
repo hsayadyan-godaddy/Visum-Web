@@ -7,11 +7,11 @@
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile>
-      <mat-checkbox>Show Nearby Wells Only</mat-checkbox>
+      <mat-checkbox (change)="onShowNearbyWellsOnlyChange($event)">Show Nearby Wells Only</mat-checkbox>
     </mat-grid-tile>
   </mat-grid-list>
 
-<mat-tab-group>
+<mat-tab-group (selectedTabChange)="tabChanged($event)">
 
   <mat-tab [label]="currentProject">
     <div class="mat-elevation-z8">
