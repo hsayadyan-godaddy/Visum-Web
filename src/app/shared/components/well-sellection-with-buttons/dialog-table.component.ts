@@ -17,7 +17,6 @@ export class DialogTableComponent implements OnInit {
   public displayedColumns: string[] = ['Wellname', 'Padname', 'Field', 'Project'];
   public dataSource: MatTableDataSource<PeriodicElement>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   pageSize: number = 15;
   pageIndex: number;
   private searchString: string;
@@ -32,7 +31,6 @@ export class DialogTableComponent implements OnInit {
   public applyFilter(event: Event) {
     this.searchString = (event.target as HTMLInputElement).value;
     this.initTable(this.getWellboreSearchCommand(this.searchString));
-    //this.dataSource.filter = searchString.trim().toLowerCase();
   }
 
   ngOnInit(): void {
@@ -61,9 +59,6 @@ export class DialogTableComponent implements OnInit {
           };
           return item;
         }));
-      context.dataSource.paginator = context.paginator;
-      context.paginator.pageIndex = response.currentPageIndex;
-      console.log(context.paginator);
     })(this);
   }
 
@@ -74,7 +69,7 @@ export class DialogTableComponent implements OnInit {
       NearbyWellsOnly: false,
       PageIndex: this.pageIndex,
       RecentWells: false,
-      ResultsPerPage: this.pageSize * 100
+      ResultsPerPage: this.pageSize * 10
     };
   }
 }
