@@ -4,18 +4,21 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
+import * as Plotly from 'plotly.js-dist';
 import { DepthType } from 'src/app/enums/depth-type';
+import { Periodicity } from 'src/app/enums/periodicity';
 import { ZoneFlowTimeOilWaterGas } from 'src/app/models/productionmonitoring/ZoneFlowTimeOilWaterGas';
 import { WellboreProfileZonesCommand } from 'src/app/models/Request/WellboreProfileZonesCommand';
 import { WellboreProfileZonesResponse } from 'src/app/models/Response/WellboreProfileZonesResponse';
 import { ZoneFlowProductionHistoryDataResponse } from 'src/app/models/Response/ZoneFlowProductionHistoryDataResponse';
 import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
+import { WsZoneFlowMonitoringService } from 'src/app/services/ws-production-monitoring/ws-zone-flow-monitoring.service';
 
 @Component({
   selector: 'app-zone-flow-allocation-chart',
   templateUrl: './zone-flow-allocation-chart.component.html',
   styleUrls: ['./zone-flow-allocation-chart.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZoneFlowAllocationChartComponent implements OnInit {
   public graph: any;
@@ -24,35 +27,53 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
   private totalZones: number = 0;
   public wellboreProfileZonesResponse: WellboreProfileZonesResponse;
   private request: WellboreProfileZonesCommand;
+  private zoneFlowDataList: ZoneFlowProductionHistoryDataResponse[];
   public depthTypes = Object.values(DepthType);
-  public selectedDepth: string = 'MD';
+  public selectedDepth: DepthType.MD;
   private zones: string[] = [];
   private zoneX: number[] = [];
-  private zoneX2: Date[] = [];
   private depth: number[] = [];
   private allDepths: number[] = [];
   private zoneDepth: string[] = [];
+  private period: Periodicity;
+  private xData: Date[] = [];
 
   constructor(
-    public productionMonitoringService: ProductionMonitoringService,
-    private _cd: ChangeDetectorRef
-  ) {
-    this.generalColorScale = [
-      ['0.0', 'rgb(241, 217, 86)'],
-      ['0.11111111111', 'rgb(225, 236, 78)'],
-      ['0.222222222222', 'rgb(184, 230, 71)'],
-      ['0.333333333333', 'rgb(141, 224, 64)'],
-      ['0.444444444444', 'rgb(58, 210, 52)'],
-      ['0.555555555556', 'rgb(56, 189, 107)'],
-      ['0.666666666667', 'rgb(58, 169, 147)'],
-      ['0.777777777778', 'rgb(60, 130, 151)'],
-      ['0.888888888889', 'rgb(60, 86, 133)'],
-      ['1.0', 'rgb(63, 60, 116)'],
-    ];
+    private productionMonitoringService: ProductionMonitoringService,
+    private _cd: ChangeDetectorRef,
+    private wsZoneFlowMonitoringService: WsZoneFlowMonitoringService
+  ) { }
+
+  ngOnInit() {
     this.getZoneDetailData();
+    this.productionMonitoringService.periodicity.subscribe(async (value) => {
+      this.period = value;
+      this.plotRefresh();
+    });
   }
 
-  ngOnInit(): void {}
+  subscribeUpdates() {
+    for (let zoneNum = 1; zoneNum <= this.totalZones; zoneNum++) {
+      this.wsZoneFlowMonitoringService.subscribeUpdates(
+        zoneNum,
+        this.selectedDepth,
+        this.period
+      );
+    }
+  }
+
+  getSubscribedData() {
+      this.wsZoneFlowMonitoringService.onZoneFlowTimeOilWaterGas.subscribe(
+        (data) => {
+          const y = (-data.value.oil - data.value.gas - data.value.water) * 100;
+          const update = {
+            y: [[y]],
+            x: [[data.value.time]],
+          };
+         Plotly.extendTraces('graph', update, [data.request.zoneNumber - 1]);           
+        }
+      ); 
+  }
 
   async getZoneDetailData() {
     this.request = {
@@ -66,98 +87,145 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
       );
     var zoneInfoData = this.wellboreProfileZonesResponse.zoneInfoData;
     this.totalZones = zoneInfoData.length;
-    zoneInfoData.forEach((z) => {
+    zoneInfoData.forEach((z , index) => {
       this.depth.push((z.depthTo + z.depthFrom) / 2);
-      // this.allDepths.push(z.depthFrom);
-      // this.allDepths.push(z.depthTo);
+      this.allDepths.push(z.depthFrom);
+      //if(index ==)
+      this.allDepths.push(z.depthTo);
       this.zoneX.push(0);
       this.zones.push(`ZONE ${z.zoneNumber}`);
       this.zoneDepth.push(`From: ${z.depthFrom} To: ${z.depthTo}`);
     });
-    this.getZoneFlowAllocationChartData();
+    this.plotRefresh();
+  //  this.subscribeUpdates();
+   // this.getSubscribedData();
   }
 
-  getZoneFlowAllocationChartData() {
-    this.productionMonitoringService
-      .getZoneFlowRateDataFromMultipleZones(this.totalZones, DepthType.MD)
-      .subscribe(
-        (zoneFlowDataList: ZoneFlowProductionHistoryDataResponse[]) => {
-          let traces = [];
-          let layout = {};
-          layout = {
-            yaxis: {
-              showline: true,
-              ticks: 'outside',
-              ticklength: 8,
-              tick0: this.depth[0],
-              dtick: 2500,
-              zeroline: false,
-              title: {
-                text: 'MEASURED DEPTH (ft)',
-                font: {
-                  size: 10,
-                },
-              },
-              titlefont: { color: '#1f77b4' },
-              tickfont: { color: '#1f77b4' },
-              tickcolor: '#1f77b4',
-              // gridcolor: 'lightgrey',
-              // gridwidth: 10,
-              autorange: 'reversed',
-              anchor: 'free',
-              overlaying: 'y',
-              position: 1.01,
-            },
-            xaxis: {
-              type: 'date',
-              autorange: true,
-              visible: true,
-              title: {
-                text: 'HOURS',
-                font: {
-                  size: 10,
-                },
-              },
-              titlefont: { color: '#1f77b4' },
-              tickfont: { color: '#1f77b4' },
-              ticks: 'outside',
-              tickformat: '%H:%M',
-              tickmode: 'linear',
-              // tick0: '2000-01-01',
-              dtick: 60 * 60 * 1000,
-              ticklen: 8,
-              tickwidth: 2,
-              tickcolor: '#1f77b4',
-              domain: [0.056, 1],
-              anchor: 'y1',
-            },
-            xaxis2: {
-              domain: [0, 0.05],
-              anchor: 'y1',
-              visible: false,
-              autorange: false,
-              range: [-0.2,1.5]
-            },
-            width: 1300,
-            // height: 800,
-            paper_bgcolor: 'white',
-            plot_bgcolor: 'white',
-            showlegend: false,
-            hovermode: 'closest',
-           
-          };
+  plotRefresh() {
+    this.getZoneFlowAllocationData();
+  }
 
-          zoneFlowDataList.forEach((zoneFlowData, index) => {
-            traces.push(this.getBarTraceForZone(zoneFlowData, index + 3));
-          });
-          traces.push(this.getTraceForZone());
-          this.graph = {
-            data: traces,
-            layout: layout,
-          };
-          this._cd.markForCheck();
+  async getZoneFlowAllocationData() {
+    await this.productionMonitoringService
+      .getZoneFlowRateDataFromMultipleZones(
+        this.totalZones,
+        DepthType.MD,
+        this.period
+      )
+      .then((data) => {
+        this.zoneFlowDataList = data;
+      });
+
+    if (this.zoneFlowDataList) {
+      this.plotGraph();
+    }
+  }
+
+  getShapes() {
+    let shapes = [];
+    for(let i = 0 ; i < this.totalZones; i++) {
+      if (i % 2 != 0) {
+       let shape = {
+        type: 'rect', 
+        layer: 'below',
+        xref: 'x', yref: 'y',
+        x0: this.xData[0], x1: this.xData[this.xData.length - 1],
+        y0: this.allDepths[i+1], y1: this.allDepths[i+3],
+        opacity: 0.3,
+        fillcolor:  'grey',
+        line: {
+          color: 'grey'
         }
-      );
+      }
+      shapes.push(shape);
+    }
+  }
+    return shapes;
+  }
+
+  getData() {
+    let traces = [];
+    if (this.zoneFlowDataList) {
+      this.zoneFlowDataList.forEach((zoneFlowData, index) => {
+        traces.push(this.getBarChartTrace(zoneFlowData, index + 3));
+      });
+      traces.push(this.getTraceForZone());
+    }
+    return traces;
+  }
+
+  getLayout() {
+    return {
+      yaxis: {
+        showline: true,
+        ticks: 'outside',
+      //  range: [17500, 18700],
+        name: 'y1',
+        ticklength: 8,
+        tick0: this.depth[0],
+        dtick: 2500,
+        zeroline: false,
+        title: {
+          text: 'MEASURED DEPTH (ft)',
+          font: {
+            size: 10,
+          },
+        },
+        titlefont: { color: '#1f77b4' },
+        tickfont: { color: '#1f77b4' },
+        tickcolor: '#1f77b4',
+        // gridcolor: 'lightgrey',
+        // gridwidth: 10,
+        autorange: 'reversed',
+        anchor: 'free',
+        overlaying: 'y',
+        position: 1.01,
+      },
+      xaxis: {
+        type: 'date',
+        autorange: true,
+        visible: true,
+        title: {
+          text: 'HOURS',
+          font: {
+            size: 10,
+          },
+        },
+        titlefont: { color: '#1f77b4' },
+        tickfont: { color: '#1f77b4' },
+        ticks: 'outside',
+        tickformat: '%H:%M',
+        tickmode: 'linear',
+        // tick0: '2000-01-01',
+        dtick: 60 * 60 * 1000,
+        ticklen: 8,
+        tickwidth: 2,
+        tickcolor: '#1f77b4',
+        domain: [0.056, 1],
+        // anchor: 'y1',
+      },
+      xaxis2: {
+        domain: [0, 0.05],
+        //  anchor: 'y1',
+        visible: false,
+        autorange: false,
+        range: [-0.2, 1.5],
+      },
+      shapes: this.getShapes(),
+      width: 1300,
+      // height: 800,
+      paper_bgcolor: 'white',
+      plot_bgcolor: 'white',
+      showlegend: false,
+      hovermode: 'closest',
+    };
+  }
+
+  plotGraph() {
+    const data = this.getData();
+    const layout = this.getLayout();
+
+    Plotly.newPlot('graph', data, layout);
   }
 
   getTraceForZone() {
@@ -180,7 +248,7 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
     };
   }
 
-  getBarTraceForZone(
+  getBarChartTrace(
     zoneFlowData: ZoneFlowProductionHistoryDataResponse,
     index: number
   ): {} {
@@ -190,24 +258,39 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
     let ydata = zoneFlowData.zoneFlowProductionData.map(
       (flow) => -flow.oil - flow.water - flow.gas
     );
+    let ydata2 = zoneFlowData.zoneFlowProductionData.map(
+      (flow) => flow.oil + flow.water + flow.gas
+    );
+    this.xData = zoneFlowData.zoneFlowProductionData.map(
+      (flow) => new Date(flow.time)
+    );
+   // let width = [];
+    // let width = xData.map((date, index) => {
+    //   xData[index + 1].getTime() - date.getTime();
+    // });
+    // for (let i = 0; i < xData.length - 1; i++) {
+    //   width.push((xData[i].getTime() - xData[index + 1].getTime()) / 2);
+    // }
     const traces = {
-      x: zoneFlowData.zoneFlowProductionData.map((flow) => new Date(flow.time)),
-      y: ydata.map((yval) => yval * 1000),
+      x: this.xData,
+      y: ydata.map((yval) => yval * 100),
       //  yaxis: 'y' + index,
       type: 'bar',
       xaxis: 'x1',
-      base: (zoneInfo.depthTo + zoneInfo.depthFrom) / 2,
-      width: 1000000,
+      base: zoneInfo.depthTo ,
+      // width: 30909090,
       customdata: zoneFlowData.zoneFlowProductionData,
       showgrid: true,
       showline: true,
       marker: {
-        color: this.getColorScale(zoneFlowData, 0.2),
-        //  colorscale: ,
+        // color: this.getColorScale(zoneFlowData, 0.2),
+        // colorscale: ,
+        color: ydata2,
+        colorscale: 'Blues',
         //reversescale: true,
         showcolorscale: true,
       },
-      // bargap:0,
+      bargap: 0,
       // bargroupgap:0,
       hovertemplate:
         'Oil: %{customdata.oil:,}<br>' +
