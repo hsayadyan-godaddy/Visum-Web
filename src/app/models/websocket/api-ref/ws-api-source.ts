@@ -20,6 +20,14 @@ export const WebSocketAPISource = {
             requestType: WSRequestType.Subscribe,
             operationSource: 'productionmonitoringwscontroller',
             methodName: 'zoneflowproductiondataupdates'
+        },
+ 
+        SUBSCRIBE_ZONE_FLOW_PRODATION_DATARATEUPDATE: {
+            requestType: WSRequestType.Subscribe,
+            operationSource: 'productionmonitoringwscontroller',
+            methodName: 'ZoneFlowProductionDataRatesUpdates'
         }
+
+
     }
 };
