@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnInit,
@@ -7,7 +6,6 @@ import {
 import * as Plotly from 'plotly.js-dist';
 import { DepthType } from 'src/app/enums/depth-type';
 import { Periodicity } from 'src/app/enums/periodicity';
-import { ZoneFlowTimeOilWaterGas } from 'src/app/models/productionmonitoring/ZoneFlowTimeOilWaterGas';
 import { WellboreProfileZonesCommand } from 'src/app/models/Request/WellboreProfileZonesCommand';
 import { WellboreProfileZonesResponse } from 'src/app/models/Response/WellboreProfileZonesResponse';
 import { ZoneFlowProductionHistoryDataResponse } from 'src/app/models/Response/ZoneFlowProductionHistoryDataResponse';
@@ -18,18 +16,17 @@ import { WsZoneFlowMonitoringService } from 'src/app/services/ws-production-moni
   selector: 'app-zone-flow-allocation-chart',
   templateUrl: './zone-flow-allocation-chart.component.html',
   styleUrls: ['./zone-flow-allocation-chart.component.css'],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
 export class ZoneFlowAllocationChartComponent implements OnInit {
   public graph: any;
-
-  private generalColorScale: string[][];
-  private totalZones: number = 0;
+  public depthTypes = Object.values(DepthType);
+  public selectedDepth: string = 'MD';
   public wellboreProfileZonesResponse: WellboreProfileZonesResponse;
+
+  private totalZones: number = 0;
   private request: WellboreProfileZonesCommand;
   private zoneFlowDataList: ZoneFlowProductionHistoryDataResponse[];
-  public depthTypes = Object.values(DepthType);
-  public selectedDepth: DepthType.MD;
   private zones: string[] = [];
   private zoneX: number[] = [];
   private depth: number[] = [];
@@ -40,7 +37,6 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
 
   constructor(
     private productionMonitoringService: ProductionMonitoringService,
-    private _cd: ChangeDetectorRef,
     private wsZoneFlowMonitoringService: WsZoneFlowMonitoringService
   ) { }
 
@@ -56,7 +52,7 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
     for (let zoneNum = 1; zoneNum <= this.totalZones; zoneNum++) {
       this.wsZoneFlowMonitoringService.subscribeUpdates(
         zoneNum,
-        this.selectedDepth,
+        this.selectedDepth as DepthType,
         this.period
       );
     }
@@ -65,12 +61,12 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
   getSubscribedData() {
       this.wsZoneFlowMonitoringService.onZoneFlowTimeOilWaterGas.subscribe(
         (data) => {
-          const y = (-data.value.oil - data.value.gas - data.value.water) * 100;
+          const y = (-data.value.oil - data.value.gas - data.value.water) * 200;
           const update = {
             y: [[y]],
             x: [[data.value.time]],
           };
-         Plotly.extendTraces('graph', update, [data.request.zoneNumber - 1]);           
+         Plotly.extendTraces('zoneFlowAllocation', update, [data.request.zoneNumber - 1]);           
         }
       ); 
   }
@@ -90,15 +86,16 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
     zoneInfoData.forEach((z , index) => {
       this.depth.push((z.depthTo + z.depthFrom) / 2);
       this.allDepths.push(z.depthFrom);
-      //if(index ==)
+      if(index == zoneInfoData.length - 1) {
       this.allDepths.push(z.depthTo);
+      }
       this.zoneX.push(0);
       this.zones.push(`ZONE ${z.zoneNumber}`);
       this.zoneDepth.push(`From: ${z.depthFrom} To: ${z.depthTo}`);
     });
     this.plotRefresh();
-  //  this.subscribeUpdates();
-   // this.getSubscribedData();
+   this.subscribeUpdates();
+   this.getSubscribedData();
   }
 
   plotRefresh() {
@@ -124,20 +121,33 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
   getShapes() {
     let shapes = [];
     for(let i = 0 ; i < this.totalZones; i++) {
-      if (i % 2 != 0) {
-       let shape = {
+      if (i % 2 == 0) {
+       let shapeForChart = {
         type: 'rect', 
         layer: 'below',
         xref: 'x', yref: 'y',
         x0: this.xData[0], x1: this.xData[this.xData.length - 1],
-        y0: this.allDepths[i+1], y1: this.allDepths[i+3],
+        y0: this.allDepths[i], y1: this.allDepths[i+1],
         opacity: 0.3,
         fillcolor:  'grey',
         line: {
           color: 'grey'
         }
       }
-      shapes.push(shape);
+      let shapeForZone = {
+        type: 'rect', 
+        layer: 'below',
+        xref: 'x2', yref: 'y',
+        x0: -1, x1: 2,
+        y0: this.allDepths[i], y1: this.allDepths[i+1],
+        opacity: 0.3,
+        fillcolor:  'grey',
+        line: {
+          color: 'grey'
+        }
+      }
+      shapes.push(shapeForChart);
+      shapes.push(shapeForZone);
     }
   }
     return shapes;
@@ -158,8 +168,9 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
     return {
       yaxis: {
         showline: true,
+        showgrid: false,
         ticks: 'outside',
-      //  range: [17500, 18700],
+        range: [this.allDepths[15], this.allDepths[0]],
         name: 'y1',
         ticklength: 8,
         tick0: this.depth[0],
@@ -174,9 +185,6 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
         titlefont: { color: '#1f77b4' },
         tickfont: { color: '#1f77b4' },
         tickcolor: '#1f77b4',
-        // gridcolor: 'lightgrey',
-        // gridwidth: 10,
-        autorange: 'reversed',
         anchor: 'free',
         overlaying: 'y',
         position: 1.01,
@@ -184,6 +192,7 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
       xaxis: {
         type: 'date',
         autorange: true,
+        showgrid: true,
         visible: true,
         title: {
           text: 'HOURS',
@@ -193,27 +202,17 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
         },
         titlefont: { color: '#1f77b4' },
         tickfont: { color: '#1f77b4' },
-        ticks: 'outside',
-        tickformat: '%H:%M',
-        tickmode: 'linear',
-        // tick0: '2000-01-01',
-        dtick: 60 * 60 * 1000,
-        ticklen: 8,
-        tickwidth: 2,
         tickcolor: '#1f77b4',
-        domain: [0.056, 1],
-        // anchor: 'y1',
+        domain: [0.05, 1],
       },
       xaxis2: {
         domain: [0, 0.05],
-        //  anchor: 'y1',
         visible: false,
         autorange: false,
         range: [-0.2, 1.5],
       },
       shapes: this.getShapes(),
       width: 1300,
-      // height: 800,
       paper_bgcolor: 'white',
       plot_bgcolor: 'white',
       showlegend: false,
@@ -225,7 +224,7 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
     const data = this.getData();
     const layout = this.getLayout();
 
-    Plotly.newPlot('graph', data, layout);
+    Plotly.newPlot('zoneFlowAllocation', data, layout);
   }
 
   getTraceForZone() {
@@ -264,34 +263,22 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
     this.xData = zoneFlowData.zoneFlowProductionData.map(
       (flow) => new Date(flow.time)
     );
-   // let width = [];
-    // let width = xData.map((date, index) => {
-    //   xData[index + 1].getTime() - date.getTime();
-    // });
-    // for (let i = 0; i < xData.length - 1; i++) {
-    //   width.push((xData[i].getTime() - xData[index + 1].getTime()) / 2);
-    // }
     const traces = {
       x: this.xData,
-      y: ydata.map((yval) => yval * 100),
-      //  yaxis: 'y' + index,
+      y: ydata.map((yval) => yval * 200),
       type: 'bar',
       xaxis: 'x1',
       base: zoneInfo.depthTo ,
-      // width: 30909090,
+      width: 6000,
       customdata: zoneFlowData.zoneFlowProductionData,
       showgrid: true,
       showline: true,
       marker: {
-        // color: this.getColorScale(zoneFlowData, 0.2),
-        // colorscale: ,
         color: ydata2,
         colorscale: 'Blues',
-        //reversescale: true,
         showcolorscale: true,
       },
       bargap: 0,
-      // bargroupgap:0,
       hovertemplate:
         'Oil: %{customdata.oil:,}<br>' +
         'Water: %{customdata.water:,}<br>' +
@@ -299,56 +286,6 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
         '<extra></extra>',
     };
     return traces;
-  }
-
-  getColorScale(
-    zoneFlowData: ZoneFlowProductionHistoryDataResponse,
-    maxLimit: number
-  ): string[] {
-    const colorScale = zoneFlowData.zoneFlowProductionData.map(
-      (zoneFlowData) => {
-        return this.getColor(zoneFlowData, 0.2);
-      }
-    );
-
-    return colorScale;
-  }
-
-  getColor(zoneFlowData: ZoneFlowTimeOilWaterGas, maxVal: number): string {
-    const oilColor = [0, 255, 0];
-    const waterColor = [0, 0, 255];
-    const gasColor = [255, 255, 0];
-
-    let oil = zoneFlowData.oil / maxVal;
-    let water = zoneFlowData.water / maxVal;
-    let gas = zoneFlowData.gas / maxVal;
-
-    const blendedColor = [
-      oil * oilColor[0] + water * waterColor[0] + gas * gasColor[0],
-      oil * oilColor[1] + water * waterColor[1] + gas * gasColor[1],
-      oil * oilColor[2] + water * waterColor[2] + gas * gasColor[2],
-    ];
-    // const blendedColor = [
-    //   zoneFlowData.oil * oilColor[0] +
-    //     zoneFlowData.water * waterColor[0] +
-    //     zoneFlowData.gas * gasColor[0],
-    //   zoneFlowData.oil * oilColor[1] +
-    //     zoneFlowData.water * waterColor[1] +
-    //     zoneFlowData.gas * gasColor[1],
-    //   zoneFlowData.oil * oilColor[2] +
-    //     zoneFlowData.water * waterColor[2] +
-    //     zoneFlowData.gas * gasColor[2],
-    // ];
-
-    return (
-      'rgb(' +
-      blendedColor[0] +
-      ',' +
-      blendedColor[1] +
-      ',' +
-      blendedColor[2] +
-      ')'
-    );
   }
 
   onChange(newDepth) {
