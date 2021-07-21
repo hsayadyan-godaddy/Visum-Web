@@ -124,7 +124,7 @@ export class ProductionMonitoringService {
         zoneNumber: i,
         depthType: depthType,
         periodicity: period,
-        snapshotSize: 100,
+        snapshotSize: 2000,
         projectId: 'sdsd',
         wellId: 'sju'
       };

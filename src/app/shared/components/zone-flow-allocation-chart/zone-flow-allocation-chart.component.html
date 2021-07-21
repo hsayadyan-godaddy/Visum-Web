@@ -1,23 +1,9 @@
-<!-- <div *ngIf="graph" class="chart">
-  <plotly-plot
-    [data]="graph.data"
-    [layout]="graph.layout"
-    [updateOnDataChange]="true"
-    [updateOnLayoutChange]="true"
-  >
-  </plotly-plot>
-</div> -->
-
-<div id="graph">
+<div id="zoneFlowAllocation">
 
 </div>
 
 <div>
-  <select
-    [(ngModel)]="selectedDepth"
-    (ngModelChange)="onChange($event)"
-    class="depth-select"
-  >
+  <select [(ngModel)]="selectedDepth" (ngModelChange)="onChange($event)" class="depth-select">
     <option *ngFor="let depthType of depthTypes" [value]="depthType">
       {{ depthType }}
     </option>
