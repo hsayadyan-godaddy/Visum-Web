@@ -1,5 +1,5 @@
 <div class="div-depth-time">
-  <mat-grid-list cols="3" class="timeline-grid-list" rowHeight="50px">
+  <mat-grid-list cols="3" class="timeline-grid-list" rowHeight="60px">
     <mat-grid-tile class="depth-tile">
       <div class="div-depth-tile">
         <mat-button-toggle-group name="fontStyle" aria-label="">
@@ -24,10 +24,10 @@
       <button aria-label="24H" (click)="onClickBtn('24H')">24H</button>
     </mat-grid-tile>
     <mat-grid-tile class="datapicker">
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <input matInput type="datetime-local" placeholder="start date">
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <input matInput type="datetime-local" placeholder="end date">
       </mat-form-field>
     </mat-grid-tile>

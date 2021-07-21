@@ -3,10 +3,36 @@ html, body {
 }
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif!important;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12pt;
+  font-weight: 400;
   min-height: 100vh;
   background: #e2e2e2;
 }
+h1,h2{
+  font-weight: 600;
+}
+h3,h4,h5,h6{
+  font-weight: 700;
+}
+h1{
+  font-size: 28pt;
+}
+h2{
+  font-size: 20pt;
+}
+h3{
+  font-size: 14pt;
+}
+h4{
+  font-size: 12pt;
+}
+.mat-body, .mat-body-1, .mat-typography{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12pt;
+  font-weight: 400;
+}
+
 .login-wrapper {
   height: 100%;
 }
@@ -93,8 +119,6 @@ body {
 .chart .layout {
   padding-top: 0!important;
 }
-
-
 /* well selector modal popup */
 .mat-table {
   font-family: 'Open Sans', sans-serif;
@@ -132,7 +156,6 @@ body {
   position: sticky;
   bottom: 0;
 }
-
 .title .mat-grid-tile-content{
   justify-content: flex-start;
   font-family: 'Open Sans', sans-serif;
@@ -176,7 +199,7 @@ body {
 .wellSelector .mat-checkbox{
   font-family: 'Open Sans', sans-serif;
 }
-.wellSelector  th.mat-header-cell:last-of-type, .wellSelector  td.mat-cell:last-of-type, .wellSelector  td.mat-footer-cell:last-of-type {
+.wellSelector th.mat-header-cell:last-of-type, .wellSelector td.mat-cell:last-of-type, .wellSelector td.mat-footer-cell:last-of-type {
   padding-right: 0;
 }
 .wellSelector .wellname, .wellSelector .padname{
