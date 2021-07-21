@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./well-sellection-with-buttons.component.scss']
 })
 export class WellSellectionWithButtonsComponent implements OnInit {
-  @Input('selectedWell') selectedWellname = "Select a Well";
+  @Input('selectedWell') selectedWellname = "SELECTED WELL NAME";
   selected = '';
   wells : Well[];
   pmData : Productionmonitoring;

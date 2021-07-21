@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {WellboreSearchCommand} from 'src/app/models/Request/WellboreSearchCommand';
-import {PeriodicElement} from '../../../models/WellSelector';
-import {ProductionMonitoringService} from '../../../services/productionMonitoring.service';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {WellboreSearchResponse} from '../../../models/Response/WellboreSearchResponse';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { WellboreSearchCommand } from '../../../models/Request/WellboreSearchCommand';
+import { PeriodicElement } from '../../../models/WellSelector';
+import { ProductionMonitoringService } from '../../../services/productionMonitoring.service';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { WellboreSearchResponse } from '../../../models/Response/WellboreSearchResponse';
 
 @Component({
   selector: 'dialog-table',
@@ -20,7 +20,9 @@ export class DialogTableComponent implements OnInit {
   pageSize: number = 15;
   pageIndex: number;
   private searchString: string;
-
+  public currentProject: string = "Current Project";
+  public recentWells: string = "Recent Wells";
+  public allWells: string = "All Wells";
   constructor(public productionMonitoringService: ProductionMonitoringService) {
   }
 
@@ -47,8 +49,9 @@ export class DialogTableComponent implements OnInit {
   private initTable(command: WellboreSearchCommand) {
     (async (context) => {
       const response: WellboreSearchResponse = await context.productionMonitoringService.getWellboreSearch(command);
-      console.log(response);
-
+      this.currentProject = "Current Project " + "(" + response.result.length + ")";
+      this.recentWells = "Recent Wells " + "(" + response.result.length + ")";
+      this.allWells = "All Wells " + "(" + response.result.length + ")";
       context.dataSource = new MatTableDataSource<PeriodicElement>(response
         .result.map(x => {
           const item: PeriodicElement = {
