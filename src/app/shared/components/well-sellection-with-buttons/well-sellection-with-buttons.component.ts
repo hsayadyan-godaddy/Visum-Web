@@ -3,14 +3,14 @@ import { Productionmonitoring } from '../../../models/productionmonitoring/produ
 import { Well } from '../../../models/well';
 import { ProductionMonitoringService } from '../../../services/productionMonitoring.service';
 import {MatDialog} from '@angular/material/dialog';
-
+import {ProductionMonitoringConstants} from '../../../models/constants/production-monitoring'
 @Component({
   selector: 'app-well-sellection-with-buttons',
   templateUrl: './well-sellection-with-buttons.component.html',
   styleUrls: ['./well-sellection-with-buttons.component.scss']
 })
 export class WellSellectionWithButtonsComponent implements OnInit {
-  @Input('selectedWell') selectedWellname = "Select a Well";
+  @Input('selectedWell')  selectedWellname = ProductionMonitoringConstants.selectedWellname;
   selected = '';
   wells : Well[];
   pmData : Productionmonitoring;
@@ -28,7 +28,8 @@ export class WellSellectionWithButtonsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.selectedWellname);
+    
+    
   }
 
 
