@@ -24,6 +24,7 @@ import { ParamBuilder } from '../shared/pipes/parambuilder';
 import { UrlHelper } from '../shared/pipes/urlhelper';
 import {WellboreSearchCommand} from '../models/Request/WellboreSearchCommand';
 import {WellboreSearchResponse} from '../models/Response/WellboreSearchResponse';
+import { TimeRange } from '../models/production-monitoring/time-range';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,7 @@ export class ProductionMonitoringService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   readonly AppUrl = environment.API_URL;
   public periodicity: BehaviorSubject<Periodicity> = new BehaviorSubject<Periodicity>(Periodicity.Hours24);
+  public timeRange: BehaviorSubject<TimeRange> = new BehaviorSubject<TimeRange>(null);
   constructor(
     private http: HttpClient
   ) { }

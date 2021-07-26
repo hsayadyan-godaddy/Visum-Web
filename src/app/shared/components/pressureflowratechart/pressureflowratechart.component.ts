@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Plotly from 'plotly.js-dist';
 import { Subscription } from 'rxjs';
+import { TimeRange } from '../../../models/production-monitoring/time-range';
 import { Periodicity } from '../../../enums/periodicity';
 import { FlowRateHistoryDataCommand } from '../../../models/Request/FlowRateHistoryDataCommand';
 import { FlowRateSensorsCommand } from '../../../models/Request/FlowRateSensorsCommand';
@@ -44,7 +45,7 @@ export class PressureflowratechartComponent implements OnInit {
   private yP3Array: Array<number> = [];
   private yMinorArray: Array<number> = [];
   private params: PressureDataUpdatesRequestParameters;
-
+  timeRange: TimeRange;
   flowSub: Subscription;
   private period: Periodicity;
   constructor(private productionMonitoringService: ProductionMonitoringService, private wsPressureService: WsPressureMoniteringService) { }
@@ -59,6 +60,14 @@ export class PressureflowratechartComponent implements OnInit {
       this.period = value
       this.plotRefresh(this.period);
 
+    });
+    this.productionMonitoringService.timeRange.subscribe(value => {
+      this.timeRange = value
+      this.period = null
+      if(this.timeRange !=null){
+        this.plotRefresh(this.period,this.timeRange);
+      }
+      
     });
     this.subscribeUpdates();
     this.getSubscribedData();
@@ -163,8 +172,8 @@ export class PressureflowratechartComponent implements OnInit {
     });
   }
 
-  plotRefresh(period: Periodicity) {
-    this.getPressureHistoryData(period);
+  plotRefresh(period: Periodicity,timeRange?:TimeRange) {
+    this.getPressureHistoryData(period,timeRange);
 
   }
 
@@ -188,13 +197,27 @@ export class PressureflowratechartComponent implements OnInit {
 
   }
 
-  async getPressureHistoryData(period: Periodicity) {
-    this.pressureHistoryDataCommand = {
-      sensorId: 'Bottom-Hole-Pressure-5000',
-      periodicity: period,
-      snapshotSize: 100,
-      projectId: 'project1',
-      wellId: 'well1'
+  async getPressureHistoryData(period: Periodicity,timeRange?:TimeRange) {
+    if(timeRange !=null){
+      this.pressureHistoryDataCommand = {
+        sensorId: 'Bottom-Hole-Pressure-5000',
+        periodicity: timeRange.periodicity,
+        snapshotSize: 100,
+        projectId: 'project1',
+        wellId: 'well1',
+        fromDate:timeRange.fromDate,
+        toDate:timeRange.toDate
+      }
+    }
+
+    if(period!=null){
+      this.pressureHistoryDataCommand = {
+        sensorId: 'Bottom-Hole-Pressure-5000',
+        periodicity: period,
+        snapshotSize: 100,
+        projectId: 'project1',
+        wellId: 'well1'
+      }
     }
     this.bhppressureHistoryDataResponse = await this.productionMonitoringService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
 
@@ -213,12 +236,25 @@ export class PressureflowratechartComponent implements OnInit {
 
 
 
-    this.pressureHistoryDataCommand = {
-      sensorId: 'Pressure-P1-100',
-      periodicity: period,
-      snapshotSize: 100,
-      projectId: 'project1',
-      wellId: 'well1'
+    if(timeRange!=null){
+      this.pressureHistoryDataCommand = {
+        sensorId: 'Pressure-P1-100',
+        periodicity: timeRange.periodicity,
+        snapshotSize: 100,
+        projectId: 'project1',
+        wellId: 'well1',
+        fromDate:timeRange.fromDate,
+        toDate:timeRange.toDate
+      }
+    }
+    if(period!=null){
+      this.pressureHistoryDataCommand = {
+        sensorId: 'Pressure-P1-100',
+        periodicity: period,
+        snapshotSize: 100,
+        projectId: 'project1',
+        wellId: 'well1'
+      }
     }
     this.p1pressureHistoryDataResponse = await this.productionMonitoringService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
 
@@ -234,12 +270,25 @@ export class PressureflowratechartComponent implements OnInit {
     }
 
 
-    this.pressureHistoryDataCommand = {
-      sensorId: 'Pressure-P2-1000',
-      periodicity: period,
-      snapshotSize: 100,
-      projectId: 'project1',
-      wellId: 'well1'
+    if(timeRange!=null){
+      this.pressureHistoryDataCommand = {
+        sensorId: 'Pressure-P2-1000',
+        periodicity: timeRange.periodicity,
+        snapshotSize: 100,
+        projectId: 'project1',
+        wellId: 'well1',
+        fromDate:timeRange.fromDate,
+        toDate:timeRange.toDate
+      }
+    }
+    if(period!=null){
+      this.pressureHistoryDataCommand = {
+        sensorId: 'Pressure-P2-1000',
+        periodicity: period,
+        snapshotSize: 100,
+        projectId: 'project1',
+        wellId: 'well1'
+      }
     }
     this.p2pressureHistoryDataResponse = await this.productionMonitoringService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
 
@@ -254,12 +303,25 @@ export class PressureflowratechartComponent implements OnInit {
 
     }
 
-    this.pressureHistoryDataCommand = {
-      sensorId: 'Pressure-P3-3000',
-      periodicity: period,
-      snapshotSize: 100,
-      projectId: 'project1',
-      wellId: 'well1'
+    if(timeRange!=null){
+      this.pressureHistoryDataCommand = {
+        sensorId: 'Pressure-P3-3000',
+        periodicity: timeRange.periodicity,
+        snapshotSize: 100,
+        projectId: 'project1',
+        wellId: 'well1',
+        fromDate:timeRange.fromDate,
+        toDate:timeRange.toDate
+      }  
+    }
+    if(period!=null){
+      this.pressureHistoryDataCommand = {
+        sensorId: 'Pressure-P3-3000',
+        periodicity: period,
+        snapshotSize: 100,
+        projectId: 'project1',
+        wellId: 'well1'
+      }
     }
     this.p3pressureHistoryDataResponse = await this.productionMonitoringService.getPressureHistoryDataAsync(this.pressureHistoryDataCommand);
 
@@ -273,19 +335,32 @@ export class PressureflowratechartComponent implements OnInit {
         this.yP3Array.push(v.value);
 
       });
-      this.getFlowRateHistoryData(period);
+      this.getFlowRateHistoryData(period,timeRange);
     }
 
   }
 
-  async getFlowRateHistoryData(period: Periodicity) {
+  async getFlowRateHistoryData(period: Periodicity,timeRange?:TimeRange) {
 
-    this.flowRateHistoryDataCommand = {
-      sensorId: 'Flow-Rate-Surface',
-      periodicity: period,
-      projectId: 'project1',
-      wellId: 'well1',
-      snapshotSize: 100
+    if(timeRange!=null){
+      this.flowRateHistoryDataCommand = {
+        sensorId: 'Flow-Rate-Surface',
+        periodicity: timeRange.periodicity,
+        projectId: 'project1',
+        wellId: 'well1',
+        snapshotSize: 100,
+        fromDate:timeRange.fromDate,
+        toDate:timeRange.toDate
+      }
+    }
+    if(period!=null){
+      this.flowRateHistoryDataCommand = {
+        sensorId: 'Flow-Rate-Surface',
+        periodicity: period,
+        projectId: 'project1',
+        wellId: 'well1',
+        snapshotSize: 100
+      }
     }
 
     this.flowRateHistoryDataResponse = await this.productionMonitoringService.getFlowRateHistoryDataAsync(this.flowRateHistoryDataCommand);

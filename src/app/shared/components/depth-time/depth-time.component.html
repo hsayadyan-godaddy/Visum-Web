@@ -23,22 +23,49 @@
       <button aria-label="7D" (click)="onClickBtn('7D')">7D</button>
       <button aria-label="24H" (click)="onClickBtn('24H')">24H</button>
     </mat-grid-tile>
+   
     <mat-grid-tile class="datapicker">
       <mat-form-field>
-        <input matInput type="datetime-local" placeholder="start date">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="datetime-local" placeholder="end date">
-      </mat-form-field>
+        <input matInput [ngxMatDatetimePicker]="picker1" placeholder="Start Date" [min]="minDate" [max]="maxDate"
+            [disabled]="disabled" (dateChange)="startDateChanged('change', $event)" >
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #picker1 [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+           [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+           [touchUi]="touchUi"  [enableMeridian]="enableMeridian" 
+           >
+        </ngx-mat-datetime-picker>
+     </mat-form-field>
+     <mat-form-field>
+      <input matInput [ngxMatDatetimePicker]="picker2" placeholder="End Date" [min]="minDate" [max]="maxDate"
+          [disabled]="disabled" (dateChange)="endDateChanged('change', $event)" >
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #picker2 [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+         [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+         [touchUi]="touchUi"  [enableMeridian]="enableMeridian" 
+         >
+      </ngx-mat-datetime-picker>
+   </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
 
 <div class="custom-slider-wrap" [ngClass]="rangeSlider ? 'showSlide' : 'hideSlide'">
   <div class="custom-slider">
-    <button mat-icon-button aria-label="">
+    <button mat-icon-button aria-label=""   (click)="scrollLeft()">
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
-    <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+    <div #widgetsContent class="scroll" [scrollLeft]="widgetsContent.scrollWidth">
+      <ng5-slider  
+      [(value)]="startDate"
+      [(highValue)]="endDate" 
+      [options]="options"
+      [ngStyle]="{width:'300%'}"
+      (userChangeEnd)="sliderChangeEnd()"
+      ></ng5-slider>
+    </div>
+    <button  mat-icon-button aria-label="" (click)="scrollRight()">
+      <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
   </div>
+  
 </div>

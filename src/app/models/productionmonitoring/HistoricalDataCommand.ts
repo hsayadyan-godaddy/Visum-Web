@@ -4,6 +4,6 @@ import { ProjectIdWellNameCommand } from "../Request/ProjectIdWellNameCommand";
 export interface HistoricalDataCommand extends ProjectIdWellNameCommand {
     periodicity : Periodicity;
     snapshotSize : number;
-    fromDate?: bigint;
-    toDate?: bigint;
+    fromDate?: number;
+    toDate?: number;
 }

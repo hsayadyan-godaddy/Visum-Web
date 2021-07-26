@@ -1,3 +1,16 @@
+div.scroll {
+	margin: 0px;
+	padding: 0px;
+	width: 300%;
+	overflow: hidden;
+	overflow-x: auto;
+	white-space: nowrap;
+	background-color: #e3e6e9;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+  }
+  
 .div-depth-time{
 	border-bottom: #afafaf solid 2px;
   }
@@ -28,11 +41,11 @@
 // range slider css start here
 .custom-slider-wrap{
     background-color: #fff;
-    padding: 10px 0;
+    padding: 7px 0;
 	.custom-slider{
-		background-color: #e3e6e9;
 		padding: 0px;
 		display: flex;
+		align-items: center;
 		.mat-icon-button{
 			background-color: #fff;
 			border-radius: 0;
@@ -41,8 +54,12 @@
 			height: 40px;
 			text-align: right;
 		}
+		.cdk-mouse-focused{
+			background-color: #fff;
+		}
 		.ng5-slider{
-			margin: 38px 0 0px;
+			
+			margin: 54px 0 0px;
 			height: 2px;
 		}
 	}
