@@ -9,7 +9,7 @@ import { WebsocketUsageExampleService } from '../../services/websocket/websocket
 @Component({
   selector: 'app-monitoring',
   templateUrl: './production-monitoring.component.html',
-  styleUrls: ['./production-monitoring.component.css']
+  styleUrls: ['./production-monitoring.component.scss']
 })
 export class ProductionMonitoringComponent implements OnInit {
   selected = '';

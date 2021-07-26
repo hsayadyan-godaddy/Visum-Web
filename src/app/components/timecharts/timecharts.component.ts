@@ -5,7 +5,7 @@ import * as Plotly from 'plotly.js-dist';
 @Component({
   selector: 'app-timecharts',
   templateUrl: './timecharts.component.html',
-  styleUrls: ['./timecharts.component.css']
+  styleUrls: ['./timecharts.component.scss']
 })
 export class TimechartsComponent {
   public graph = {

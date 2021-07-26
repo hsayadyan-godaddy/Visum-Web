@@ -14,7 +14,7 @@ export interface Well{
 @Component({
   selector: 'app-well',
   templateUrl: './well.component.html',
-  styleUrls: ['./well.component.css']
+  styleUrls: ['./well.component.scss']
 })
 export class WellComponent implements OnInit {
   ProjectId : string;

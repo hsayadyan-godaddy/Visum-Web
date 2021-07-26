@@ -22,7 +22,7 @@ export interface Project {
  */
 @Component({
   selector: 'table-selection-example',
-  styleUrls: ['./projects.component.css'],
+  styleUrls: ['./projects.component.scss'],
   templateUrl: './projects.component.html',
 })
 export class ProjectsComponent implements OnInit {
