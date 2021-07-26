@@ -74,22 +74,13 @@ export class WsZoneFlowMonitoringService {
     }
   }
 
-  subscribeUpdates(zoneNumber: number , depthType : DepthType , period : Periodicity): void {
+  subscribeUpdates(parameters: ZoneFlowProductionHistoryDataCommand): void {
     const opSource: WSRequestSource = WebSocketAPISource
       .PRODUCTION_MONITORING
       .SUBSCRIBE_ZONE_FLOW_PRODATION_DATARATEUPDATE;
 
-    const parameters: ZoneFlowProductionHistoryDataCommand = {
-      projectId: '0EA456-45CD89456-1237-8F8A',
-      wellId: 'LONG-HOLE-003',
-      zoneNumber,
-      depthType: depthType,
-      periodicity: period,
-      snapshotSize: 100
-    };
-
     const request: WSRequest = new WSRequest(opSource, parameters);
-    this.sendRequest(request , zoneNumber);
+    this.sendRequest(request , parameters.zoneNumber);
   }
 
   private sendRequest(request: WSRequest , zoneNumb : number) {

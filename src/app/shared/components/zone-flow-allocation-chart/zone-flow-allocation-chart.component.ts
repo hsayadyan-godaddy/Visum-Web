@@ -1,31 +1,40 @@
 import {
-  ChangeDetectorRef,
   Component,
   OnInit,
 } from '@angular/core';
+
 import * as Plotly from 'plotly.js-dist';
-import { DepthType } from 'src/app/enums/depth-type';
-import { Periodicity } from 'src/app/enums/periodicity';
-import { WellboreProfileZonesCommand } from 'src/app/models/Request/WellboreProfileZonesCommand';
-import { WellboreProfileZonesResponse } from 'src/app/models/Response/WellboreProfileZonesResponse';
-import { ZoneFlowProductionHistoryDataResponse } from 'src/app/models/Response/ZoneFlowProductionHistoryDataResponse';
-import { ProductionMonitoringService } from 'src/app/services/productionMonitoring.service';
-import { WsZoneFlowMonitoringService } from 'src/app/services/ws-production-monitoring/ws-zone-flow-monitoring.service';
+
+import { ZoneFlowProductionHistoryDataCommand } from '../../../models/Request/ZoneFlowProductionHistoryDataCommand';
+import { DepthType } from '../../../enums/depth-type';
+import { Periodicity } from '../../../enums/periodicity';
+import { WellboreProfileZonesCommand } from '../../../models/Request/WellboreProfileZonesCommand';
+import { WellboreProfileZonesResponse } from '../../../models/Response/WellboreProfileZonesResponse';
+import { ZoneFlowProductionHistoryDataResponse } from '../../../models/Response/ZoneFlowProductionHistoryDataResponse';
+import { ProductionMonitoringService } from '../../../services/productionMonitoring.service';
+import { WsZoneFlowMonitoringService } from '../../../services/ws-production-monitoring/ws-zone-flow-monitoring.service';
 
 @Component({
   selector: 'app-zone-flow-allocation-chart',
   templateUrl: './zone-flow-allocation-chart.component.html',
-  styleUrls: ['./zone-flow-allocation-chart.component.css'],
+  styleUrls: ['./zone-flow-allocation-chart.component.scss'],
 
 })
 export class ZoneFlowAllocationChartComponent implements OnInit {
-  public graph: any;
+
   public depthTypes = Object.values(DepthType);
-  public selectedDepth: string = 'MD';
+  public selectedDepth: string = DepthType.MD; // remove const
   public wellboreProfileZonesResponse: WellboreProfileZonesResponse;
 
   private totalZones: number = 0;
-  private request: WellboreProfileZonesCommand;
+  private wellId: string = 'WellId';
+  private projectId: string = 'ProjectId'
+  //TODO: replace this with data query parameter service
+  private request: WellboreProfileZonesCommand = {
+    wellId: this.wellId,
+    projectId: this.projectId,
+    depthType: DepthType[this.selectedDepth],
+  }
   private zoneFlowDataList: ZoneFlowProductionHistoryDataResponse[];
   private zones: string[] = [];
   private zoneX: number[] = [];
@@ -34,6 +43,7 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
   private zoneDepth: string[] = [];
   private period: Periodicity;
   private xData: Date[] = [];
+  private chartHeight: number = 0;
 
   constructor(
     private productionMonitoringService: ProductionMonitoringService,
@@ -50,52 +60,55 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
 
   subscribeUpdates() {
     for (let zoneNum = 1; zoneNum <= this.totalZones; zoneNum++) {
+      const parameters: ZoneFlowProductionHistoryDataCommand = {
+        projectId: '0EA456-45CD89456-1237-8F8A',
+        wellId: 'LONG-HOLE-003',
+        zoneNumber: zoneNum,
+        depthType: this.selectedDepth as DepthType,
+        periodicity: this.period,
+        snapshotSize: 100
+      };
       this.wsZoneFlowMonitoringService.subscribeUpdates(
-        zoneNum,
-        this.selectedDepth as DepthType,
-        this.period
+        parameters
       );
     }
   }
 
   getSubscribedData() {
-      this.wsZoneFlowMonitoringService.onZoneFlowTimeOilWaterGas.subscribe(
-        (data) => {
-          const y = (-data.value.oil - data.value.gas - data.value.water) * 200;
-          const update = {
-            y: [[y]],
-            x: [[data.value.time]],
-          };
-         Plotly.extendTraces('zoneFlowAllocation', update, [data.request.zoneNumber - 1]);           
+    this.wsZoneFlowMonitoringService.onZoneFlowTimeOilWaterGas.subscribe(
+      (data) => {
+        const y = (-data.value.oil - data.value.gas - data.value.water) * 200;
+        const update = {
+          y: [[y]],
+          x: [[data.value.time]],
+         'customdata': [[data.value]]
         }
-      ); 
+
+        Plotly.extendTraces('zoneFlowAllocation', update, [data.request.zoneNumber - 1]);
+      }
+    );
   }
 
   async getZoneDetailData() {
-    this.request = {
-      wellId: 'Well Id',
-      projectId: 'Project Id',
-      depthType: DepthType[this.selectedDepth],
-    };
     this.wellboreProfileZonesResponse =
       await this.productionMonitoringService.getWellboreProfileZones(
         this.request
       );
     var zoneInfoData = this.wellboreProfileZonesResponse.zoneInfoData;
     this.totalZones = zoneInfoData.length;
-    zoneInfoData.forEach((z , index) => {
+    zoneInfoData.forEach((z, index) => {
       this.depth.push((z.depthTo + z.depthFrom) / 2);
       this.allDepths.push(z.depthFrom);
-      if(index == zoneInfoData.length - 1) {
-      this.allDepths.push(z.depthTo);
+      if (index == zoneInfoData.length - 1) {
+        this.allDepths.push(z.depthTo);
       }
       this.zoneX.push(0);
       this.zones.push(`ZONE ${z.zoneNumber}`);
       this.zoneDepth.push(`From: ${z.depthFrom} To: ${z.depthTo}`);
     });
     this.plotRefresh();
-   this.subscribeUpdates();
-   this.getSubscribedData();
+    this.subscribeUpdates();
+    this.getSubscribedData();
   }
 
   plotRefresh() {
@@ -103,45 +116,58 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
   }
 
   async getZoneFlowAllocationData() {
+
+    let zoneFlowProductionHistoryDataCommand: ZoneFlowProductionHistoryDataCommand = {
+      zoneNumber: 1,
+      depthType: this.selectedDepth as DepthType,
+      periodicity: this.period,
+      snapshotSize: 500,
+      projectId: this.projectId,
+      wellId: this.wellId
+    };
+
     await this.productionMonitoringService
       .getZoneFlowRateDataFromMultipleZones(
-        this.totalZones,
-        DepthType.MD,
-        this.period
+        zoneFlowProductionHistoryDataCommand,
+        this.totalZones
       )
       .then((data) => {
+        this.chartHeight = 35 * this.totalZones;
         this.zoneFlowDataList = data;
       });
 
-    if (this.zoneFlowDataList) {
+    if (this.zoneFlowDataList.length > 0) {
+      this.xData = this.zoneFlowDataList[0].zoneFlowProductionData.map(
+        (flow) => new Date(flow.time)
+      );
       this.plotGraph();
     }
   }
 
-  getShapes() {
+
+  getShapes(zoneNum: number) {
     let shapes = [];
-    for(let i = 0 ; i < this.totalZones; i++) {
-      if (i % 2 == 0) {
-       let shapeForChart = {
-        type: 'rect', 
+    if (zoneNum % 2 == 0) {
+      let shapeForChart = {
+        type: 'rect',
         layer: 'below',
         xref: 'x', yref: 'y',
         x0: this.xData[0], x1: this.xData[this.xData.length - 1],
-        y0: this.allDepths[i], y1: this.allDepths[i+1],
+        y0: this.allDepths[zoneNum], y1: this.allDepths[zoneNum + 1],
         opacity: 0.3,
-        fillcolor:  'grey',
+        fillcolor: 'grey',
         line: {
           color: 'grey'
         }
       }
       let shapeForZone = {
-        type: 'rect', 
+        type: 'rect',
         layer: 'below',
         xref: 'x2', yref: 'y',
         x0: -1, x1: 2,
-        y0: this.allDepths[i], y1: this.allDepths[i+1],
+        y0: this.allDepths[zoneNum], y1: this.allDepths[zoneNum + 1],
         opacity: 0.3,
-        fillcolor:  'grey',
+        fillcolor: 'grey',
         line: {
           color: 'grey'
         }
@@ -149,30 +175,34 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
       shapes.push(shapeForChart);
       shapes.push(shapeForZone);
     }
-  }
     return shapes;
   }
 
-  getData() {
+  getTracesAndShapes() {
     let traces = [];
+    let shapes = [];
     if (this.zoneFlowDataList) {
+
       this.zoneFlowDataList.forEach((zoneFlowData, index) => {
-        traces.push(this.getBarChartTrace(zoneFlowData, index + 3));
+        traces.push(this.getBarChartTrace(zoneFlowData));
+        shapes = shapes.concat(this.getShapes(index));
       });
+
       traces.push(this.getTraceForZone());
     }
-    return traces;
+    return { 'traces': traces, 'shapes': shapes };
   }
 
-  getLayout() {
-    return {
+  plotGraph() {
+    const data = this.getTracesAndShapes();
+    const layout = {
       yaxis: {
         showline: true,
         showgrid: false,
         ticks: 'outside',
-        range: [this.allDepths[15], this.allDepths[0]],
         name: 'y1',
         ticklength: 8,
+
         tick0: this.depth[0],
         dtick: 2500,
         zeroline: false,
@@ -188,6 +218,7 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
         anchor: 'free',
         overlaying: 'y',
         position: 1.01,
+        autorange: 'reversed'
       },
       xaxis: {
         type: 'date',
@@ -203,28 +234,24 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
         titlefont: { color: '#1f77b4' },
         tickfont: { color: '#1f77b4' },
         tickcolor: '#1f77b4',
-        domain: [0.05, 1],
+        domain: [0.06, 1],
       },
       xaxis2: {
-        domain: [0, 0.05],
+        domain: [0, 0.06],
         visible: false,
         autorange: false,
         range: [-0.2, 1.5],
       },
-      shapes: this.getShapes(),
-      width: 1300,
+      shapes: data.shapes,
+      // width: 1300,
+      height: this.chartHeight,
       paper_bgcolor: 'white',
       plot_bgcolor: 'white',
       showlegend: false,
       hovermode: 'closest',
     };
-  }
 
-  plotGraph() {
-    const data = this.getData();
-    const layout = this.getLayout();
-
-    Plotly.newPlot('zoneFlowAllocation', data, layout);
+    Plotly.newPlot('zoneFlowAllocation', data.traces, layout, { responsive: true });
   }
 
   getTraceForZone() {
@@ -249,7 +276,6 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
 
   getBarChartTrace(
     zoneFlowData: ZoneFlowProductionHistoryDataResponse,
-    index: number
   ): {} {
     const zoneInfo = this.wellboreProfileZonesResponse.zoneInfoData.find(
       (z) => z.zoneNumber == zoneFlowData.zoneNumber
@@ -260,30 +286,27 @@ export class ZoneFlowAllocationChartComponent implements OnInit {
     let ydata2 = zoneFlowData.zoneFlowProductionData.map(
       (flow) => flow.oil + flow.water + flow.gas
     );
-    this.xData = zoneFlowData.zoneFlowProductionData.map(
-      (flow) => new Date(flow.time)
-    );
+
     const traces = {
       x: this.xData,
       y: ydata.map((yval) => yval * 200),
       type: 'bar',
       xaxis: 'x1',
-      base: zoneInfo.depthTo ,
+      base: zoneInfo.depthTo,
       width: 6000,
       customdata: zoneFlowData.zoneFlowProductionData,
       showgrid: true,
       showline: true,
       marker: {
         color: ydata2,
-        colorscale: 'Blues',
-        showcolorscale: true,
+        colorscale: 'Blues'
       },
       bargap: 0,
       hovertemplate:
         'Oil: %{customdata.oil:,}<br>' +
         'Water: %{customdata.water:,}<br>' +
         'Gas: %{customdata.gas:,}' +
-        '<extra></extra>',
+        '<extra></extra>'
     };
     return traces;
   }

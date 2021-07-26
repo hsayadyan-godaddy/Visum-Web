@@ -257,4 +257,50 @@
     }
   }
   /* range slider css end here */
+
+
+  .monitoring-charts{
+    padding: 5px 0 0 0;
+    .mat-grid-tile{
+    background-color: #fff;
+    .mat-grid-tile-content{
+    border: #b7b5b5 solid 1px;
+    .mat-grid-tile-header{
+    background-color: #ffffff;
+    color: #b7b5b5;
+    border-bottom: #b7b5b5 solid 1px;
+    justify-content: space-between;
+    color: #818f99;
+    font-weight: 600;
+    }
+    .content-container {
+    width: 100%;
+    height: 100%;
+    padding-top: 48px;
+    }
+    }
+    }
+    .chartWrap{
+    height: 100%;
+    border: #b7b5b5 solid 1px;
+    background-color: #ffffff;
+    .chartHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 15px;
+    border-bottom: #b7b5b5 solid 1px;
+    h3{
+    font-size: 14px;
+    margin: 0px;
+    color: #818f99;
+    font-weight: 600;
+    }
+    }
+    .chartContent{
+    width: 100%;
+    position:relative;
+    }
+    }
+   }
   

@@ -117,16 +117,17 @@ export class ProductionMonitoringService {
     return this.http.get<ZoneFlowProductionAcceptableLimitsResponse>(this.AppUrl + UrlHelper.ZoneFlowProductionHistoryDataRates, { params: params, headers: this.headers });
   }
 
-  async getZoneFlowRateDataFromMultipleZones(noOfZone: number, depthType: DepthType , period : Periodicity): Promise<ZoneFlowProductionHistoryDataResponse[]> {
+ 
+  async getZoneFlowRateDataFromMultipleZones(zoneFlowData : ZoneFlowProductionHistoryDataCommand ,noOfZone: number): Promise<ZoneFlowProductionHistoryDataResponse[]> {
     let ZoneResponses : Promise<ZoneFlowProductionHistoryDataResponse>[] = [];
     for(let i = 1 ; i <= noOfZone; i++) {
        let zoneFlowProductionHistoryDataCommand : ZoneFlowProductionHistoryDataCommand= {
         zoneNumber: i,
-        depthType: depthType,
-        periodicity: period,
-        snapshotSize: 2000,
-        projectId: 'sdsd',
-        wellId: 'sju'
+        depthType: zoneFlowData.depthType,
+        periodicity: zoneFlowData.periodicity,
+        snapshotSize: zoneFlowData.snapshotSize,
+        projectId: zoneFlowData.projectId,
+        wellId: zoneFlowData.wellId
       };
       let params = ParamBuilder.toQueries(zoneFlowProductionHistoryDataCommand);
       ZoneResponses.push(this.http.get<ZoneFlowProductionHistoryDataResponse>(this.AppUrl + UrlHelper.ZoneFlowRateProductionHistoryData, { params: params, headers: this.headers }).toPromise());
