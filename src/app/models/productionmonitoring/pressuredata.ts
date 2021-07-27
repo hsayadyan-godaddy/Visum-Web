@@ -1,6 +1,6 @@
-import { TimeValue } from "./timevalue";
+import { TimeValue } from './timevalue';
 
 export interface PressureData {
-    sensorId : string;
-    data : TimeValue[];
+  sensorId : string;
+  data : TimeValue[];
 }

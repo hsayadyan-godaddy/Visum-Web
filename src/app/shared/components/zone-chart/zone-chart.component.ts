@@ -8,20 +8,31 @@ import { ProductionMonitoringService } from '../../../services/productionMonitor
 @Component({
   selector: 'app-zone-chart',
   templateUrl: './zone-chart.component.html',
-  styleUrls: ['./zone-chart.component.scss']
+  styleUrls: ['./zone-chart.component.scss'],
 })
 export class ZoneChartComponent implements OnInit {
   public wellboreProfileZonesResponse: WellboreProfileZonesResponse;
+
   public request: WellboreProfileZonesCommand;
+
   public depthTypes = Object.values(DepthType);
+
   public selectedDepth: string = 'MD';
+
   private zones: string[] = [];
+
   private zoneX: number[] = [];
+
   private depth: number[] = [];
+
   private allDepths: number[] = [];
+
   private zoneDepth: string[] = [];
+
   private zeroTick: number = 0;
+
   private ticksize: number = 500;
+
   private unitOfMeasureLabel: string;
 
   constructor(public pmService: ProductionMonitoringService) { }
@@ -40,14 +51,14 @@ export class ZoneChartComponent implements OnInit {
     this.request = {
       wellId: 'Well Id',
       projectId: 'Project Id',
-      depthType: DepthType[this.selectedDepth]
+      depthType: DepthType[this.selectedDepth],
     };
-    await this.pmService.getWellboreProfileZones(this.request).then(data => {
+    await this.pmService.getWellboreProfileZones(this.request).then((data) => {
       this.wellboreProfileZonesResponse = data;
     });
-    var zoneInfoData = this.wellboreProfileZonesResponse.zoneInfoData;
+    const { zoneInfoData } = this.wellboreProfileZonesResponse;
     this.unitOfMeasureLabel = this.wellboreProfileZonesResponse.unitOfMeasureInfo.label;
-    zoneInfoData.forEach(z => {
+    zoneInfoData.forEach((z) => {
       this.depth.push((z.depthTo + z.depthFrom) / 2);
       this.allDepths.push(z.depthFrom);
       this.allDepths.push(z.depthTo);
@@ -55,14 +66,17 @@ export class ZoneChartComponent implements OnInit {
       this.zones.push(`Zone ${z.zoneNumber}`);
       this.zoneDepth.push(`From: ${z.depthFrom} To: ${z.depthTo}`);
     });
-    this.zeroTick = this.allDepths[0];
-    this.ticksize = this.allDepths[1];
+
+    const index0: number = 0;
+    const index1: number = 1;
+    this.zeroTick = this.allDepths[index0];
+    this.ticksize = this.allDepths[index1];
 
     this.createZoneChartGraph();
-  };
+  }
 
   createZoneChartData() {
-    var trace1 = {
+    const trace1 = {
       type: 'scatter',
       x: this.zoneX,
       y: this.depth,
@@ -75,25 +89,25 @@ export class ZoneChartComponent implements OnInit {
         color: 'rgba(156, 165, 196, 0.95)',
         symbol: 'circle',
         size: 10,
-        sizeref: 4000
+        sizeref: 4000,
       },
-      hovertemplate: '<b>Zone Range</b><br> %{customdata}'
+      hovertemplate: '<b>Zone Range</b><br> %{customdata}',
     };
-    var data = [trace1];
+    const data = [trace1];
     return data;
-  };
+  }
 
   createLayout(unitOfMeasureLabel: string) {
-    var layout = {
+    const layout = {
       title: '',
       xaxis: {
         visible: false,
         showticklabels: false,
-        fixedrange: true
+        fixedrange: true,
       },
       yaxis: {
         showline: true,
-        title: "Measured Depth (" + unitOfMeasureLabel + ")",
+        title: `Measured Depth (${unitOfMeasureLabel})`,
         titlefont: { color: '#1f77b4' },
         tickfont: { color: '#1f77b4' },
         ticks: 'outside',
@@ -103,12 +117,12 @@ export class ZoneChartComponent implements OnInit {
         dtick: this.ticksize,
         zeroline: false,
         autorange: 'reversed',
-        fixedrange: true
+        fixedrange: true,
       },
       paper_bgcolor: 'white',
       plot_bgcolor: 'white',
       showlegend: false,
-      hovermode: "closest"
+      hovermode: 'closest',
     };
     return layout;
   }
@@ -119,9 +133,9 @@ export class ZoneChartComponent implements OnInit {
   }
 
   createZoneChartGraph() {
-    var data = this.createZoneChartData();
-    var layout = this.createLayout(this.unitOfMeasureLabel);
+    const data = this.createZoneChartData();
+    const layout = this.createLayout(this.unitOfMeasureLabel);
 
-    Plotly.newPlot("zonechart", data, layout, { displayModeBar: false });
+    Plotly.newPlot('zonechart', data, layout, { displayModeBar: false });
   }
 }

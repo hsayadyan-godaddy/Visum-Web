@@ -1,6 +1,6 @@
-import { TimeValue } from "./timevalue";
+import { TimeValue } from './timevalue';
 
 export interface FlowRateData{
-    sensorId : string;
-    data:TimeValue[];
+  sensorId : string;
+  data:TimeValue[];
 }

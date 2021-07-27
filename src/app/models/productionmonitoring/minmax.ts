@@ -1,4 +1,5 @@
-export class MinMax<T>{
-    Min: T;
-    Max: T;
+export class MinMax<T> {
+  Min: T;
+
+  Max: T;
 }

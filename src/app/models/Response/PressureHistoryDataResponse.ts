@@ -1,7 +1,7 @@
-import { PressureData } from "../productionmonitoring/pressuredata";
-import { UnitOfMeasure } from "../productionmonitoring/unit-of-measure";
+import { PressureData } from '../productionmonitoring/pressuredata';
+import { UnitOfMeasure } from '../productionmonitoring/unit-of-measure';
 
 export interface PressureHistoryDataResponse {
-    unitOfMeasureInfo : UnitOfMeasure;
-    pressureData : PressureData;
+  unitOfMeasureInfo : UnitOfMeasure;
+  pressureData : PressureData;
 }

@@ -8,9 +8,9 @@ describe('ZoneFlowAllocationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ZoneFlowAllocationComponent ]
+      declarations: [ZoneFlowAllocationComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

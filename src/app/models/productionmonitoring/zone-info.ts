@@ -1,5 +1,5 @@
 export interface ZoneInfo {
-    depthFrom : number;
-    depthTo : number;
-    zoneNumber: number;
+  depthFrom : number;
+  depthTo : number;
+  zoneNumber: number;
 }

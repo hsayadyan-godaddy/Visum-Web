@@ -10,8 +10,8 @@ import { PressureDataUpdatesRequestParameters } from '../../models/websocket/ws-
 
 @Injectable()
 export class WebsocketUsageExampleService {
-
-  public onNewTimeValueResponse = new EventEmitter<{ request: WSRequest, value: TimeValue }>(true); // subscribe and TODO something
+  public onNewTimeValueResponse =
+  new EventEmitter<{ request: WSRequest, value: TimeValue }>(true); // subscribe and TODO something
 
   private readonly requestDictionary: { [key: string]: { request: WSRequest } } = {};
 
@@ -32,7 +32,6 @@ export class WebsocketUsageExampleService {
   private resetContext(initialization: boolean = true) {
     if (initialization) {
       this.webSocketService.onNewMessage.subscribe((message: WSResponse<TimeValue>) => {
-
         const expectedOperation = WebSocketAPISource
           .PRODUCTION_MONITORING
           .SUBSCRIBE_PRESSURE_DATA_UPDATES;
@@ -44,9 +43,7 @@ export class WebsocketUsageExampleService {
           if (refRequest) {
             this.todoHandleUpdates(refRequest.request, message.response);
           }
-
         } else if (message.statusCode >= 500) {
-
           // reasonable to reset subscription on internal server error
           setTimeout(() => {
             this.resetContext(false);
@@ -55,16 +52,15 @@ export class WebsocketUsageExampleService {
       });
     }
 
-    for (const k in this.requestDictionary) {
+    Object.keys(this.requestDictionary).forEach((k) => {
       if (this.requestDictionary[k]) {
         const value = this.requestDictionary[k];
         this.webSocketService.send(value.request);
       }
-    }
+    });
   }
 
   private subscribeUpdates(): void {
-
     const opSource: WSRequestSource = WebSocketAPISource
       .PRODUCTION_MONITORING
       .SUBSCRIBE_PRESSURE_DATA_UPDATES;
@@ -72,7 +68,7 @@ export class WebsocketUsageExampleService {
     const parameters: PressureDataUpdatesRequestParameters = {
       projectId: '0EA456-45CD89456-1237-8F8A',
       wellId: 'LONG-HOLE-003',
-      sensorId: 'ABC-PRESS-'
+      sensorId: 'ABC-PRESS-',
     };
 
     const request: WSRequest = new WSRequest(opSource, parameters);
@@ -81,7 +77,7 @@ export class WebsocketUsageExampleService {
 
   private sendRequest(request: WSRequest) {
     const key = request.sequenceId;
-    this.requestDictionary[key] = {request};
+    this.requestDictionary[key] = { request };
     this.webSocketService.send(request);
   }
 

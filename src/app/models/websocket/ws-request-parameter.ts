@@ -1,6 +1,5 @@
 export class WSRequestParameter {
+  public name: string;
 
-    public name: string;
-    public value: any;
+  public value: any;
 }
-

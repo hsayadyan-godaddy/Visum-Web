@@ -1,7 +1,7 @@
 export enum MeasureType {
-    oil,
-    gas,
-    water,
-    depth,
-    pressure
+  oil,
+  gas,
+  water,
+  depth,
+  pressure,
 }

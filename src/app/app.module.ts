@@ -1,32 +1,34 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SharedService} from './services/shared.service';
-import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PlotlyModule } from 'angular-plotly.js';
+import * as PlotlyJS from 'plotly.js-dist';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng5SliderModule } from 'ng5-slider';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
+import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
+import { AngularMaterialModule } from './angular-material.module';
+
 import { AuthInterceptor } from './interceptor/aouthconfig.interceptor';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { RoutingModule } from './routing/routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { WellComponent } from './components/well/well.component';
-import { SidebarComponent } from "./shared/components/sidebar/sidebar.component";
-import { FooterComponent } from "./shared/components/footer/footer.component";
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 import { TimechartsComponent } from './components/timecharts/timecharts.component';
-import { PlotlyModule } from 'angular-plotly.js';
-import * as PlotlyJS from 'plotly.js-dist';
 import { ProductionMonitoringComponent } from './components/production-monitoring/production-monitoring.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { Ng5SliderModule } from 'ng5-slider';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 import { PressureflowratechartComponent } from './shared/components/pressureflowratechart/pressureflowratechart.component';
 import { DepthTimeComponent } from './shared/components/depth-time/depth-time.component';
 import { WellSellectionWithButtonsComponent } from './shared/components/well-sellection-with-buttons/well-sellection-with-buttons.component';
@@ -35,11 +37,13 @@ import { ZoneFlowAllocationComponent } from './components/production-monitoring/
 import { WebSocketService } from './services/websocket/websocket.service';
 import { WebsocketUsageExampleService } from './services/websocket/websocket-usage-example-service';
 import { WsFlowMonitoringService } from './services/ws-production-monitoring/ws-flow-monitoring.service';
-import { WsPressureMoniteringService } from "./services/ws-production-monitoring/ws-pressure-monitoring.service";
-import {DemoMaterialModule} from './shared/components/well-sellection-with-buttons/material-module';
-import {DialogContent} from './shared/components/well-sellection-with-buttons/well-sellection-with-buttons.component';
-import {DialogTableComponent} from './shared/components/well-sellection-with-buttons/dialog-table.component'
+import { WsPressureMoniteringService } from './services/ws-production-monitoring/ws-pressure-monitoring.service';
+import { DemoMaterialModule } from './shared/components/well-sellection-with-buttons/material-module';
+
+import { DialogTableComponent } from './shared/components/well-sellection-with-buttons/dialog-table.component';
 import { ZoneChartComponent } from './shared/components/zone-chart/zone-chart.component';
+import { DialogContentComponent } from './shared/components/well-sellection-with-buttons/dialog-content.component';
+
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
@@ -59,8 +63,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     ZoneFlowAllocationComponent,
     MonitoringChartsComponent,
     ZoneChartComponent,
-    DialogContent,
-    DialogTableComponent
+    DialogTableComponent,
+    DialogContentComponent,
   ],
   imports: [
     DemoMaterialModule,
@@ -77,24 +81,24 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatButtonToggleModule,
     MatDatepickerModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: '/', pathMatch : 'full'},
-      {path: 'login', component: LoginComponent},
-      {path: 'projects', component: ProjectsComponent}
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
+      { path: 'projects', component: ProjectsComponent },
     ]),
     RoutingModule,
-      NgbModule 
+    NgbModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
     WebSocketService,
     WebsocketUsageExampleService,
     WsFlowMonitoringService,
-    WsPressureMoniteringService
+    WsPressureMoniteringService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
-export class TimeValue
-{
-   time: Date;
-   value: number;
+export class TimeValue {
+  time: Date;
+
+  value: number;
 }

@@ -8,9 +8,9 @@ describe('PressureflowratechartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PressureflowratechartComponent ]
+      declarations: [PressureflowratechartComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

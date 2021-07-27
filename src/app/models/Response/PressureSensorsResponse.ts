@@ -1,5 +1,5 @@
-import { SensorInfo } from "../productionmonitoring/sensorinfo";
+import { SensorInfo } from '../productionmonitoring/sensorinfo';
 
 export interface PressureSensorsResponse {
-    info : SensorInfo[];
+  info : SensorInfo[];
 }

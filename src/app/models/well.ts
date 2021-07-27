@@ -1,4 +1,5 @@
 export class Well {
-    Id: string;
-    Name: string;
+  Id: string;
+
+  Name: string;
 }

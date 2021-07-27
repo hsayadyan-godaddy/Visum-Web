@@ -8,9 +8,9 @@ describe('WellSellectionWithButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WellSellectionWithButtonsComponent ]
+      declarations: [WellSellectionWithButtonsComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

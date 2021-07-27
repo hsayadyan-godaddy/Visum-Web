@@ -8,9 +8,9 @@ describe('ZoneChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ZoneChartComponent ]
+      declarations: [ZoneChartComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

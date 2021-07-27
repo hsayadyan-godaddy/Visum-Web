@@ -1,37 +1,37 @@
-import {Component, OnInit} from '@angular/core';
-import {ProductionMonitoringService} from '../../../services/productionMonitoring.service';
-import {Periodicity} from '../../../enums/periodicity';
-import {ZoneFlowProductionHistoryDataCommand} from '../../../models/Request/ZoneFlowProductionHistoryDataCommand';
-import {DepthType} from '../../../enums/depth-type';
-import {ZoneFlowTimeOilWaterGas} from '../../../models/productionmonitoring/ZoneFlowTimeOilWaterGas';
-import {WsFlowMonitoringService} from '../../../services/ws-production-monitoring/ws-flow-monitoring.service';
+import { Component, OnInit } from '@angular/core';
+import { ProductionMonitoringService } from '../../../services/productionMonitoring.service';
+import { Periodicity } from '../../../enums/periodicity';
+import { ZoneFlowProductionHistoryDataCommand } from '../../../models/Request/ZoneFlowProductionHistoryDataCommand';
+import { DepthType } from '../../../enums/depth-type';
+import { ZoneFlowTimeOilWaterGas } from '../../../models/productionmonitoring/ZoneFlowTimeOilWaterGas';
+import { WsFlowMonitoringService } from '../../../services/ws-production-monitoring/ws-flow-monitoring.service';
 
 @Component({
   selector: 'app-zone-flow-allocation',
   templateUrl: './zone-flow-allocation.component.html',
-  styleUrls: ['./zone-flow-allocation.component.scss']
+  styleUrls: ['./zone-flow-allocation.component.scss'],
 })
 
 export class ZoneFlowAllocationComponent implements OnInit {
   displayedColumns: string[] = ['zone', 'oil', 'water', 'gas'];
+
   dataSource: ZoneFlowTimeOutOfLimitOilWaterGas[] = [];
 
   constructor(
     private productionMonitoringService: ProductionMonitoringService,
-    private wsFlowMonitoringService: WsFlowMonitoringService
+    private wsFlowMonitoringService: WsFlowMonitoringService,
   ) { }
 
   private command: ZoneFlowProductionHistoryDataCommand;
 
   ngOnInit() {
-    this.wsFlowMonitoringService.onZoneFlowTimeOilWaterGas.subscribe(data => {
+    this.wsFlowMonitoringService.onZoneFlowTimeOilWaterGas.subscribe((data) => {
       let oilTotal = 0;
       let waterTotal = 0;
       let gasTotal = 0;
 
-      for (let i = 0; i < this.dataSource.length - 1; i++)
-      {
-        if (this.dataSource[i].zone === data.request.zoneNumber.toString()){
+      for (let i = 0; i < this.dataSource.length - 1; i += 1) {
+        if (this.dataSource[i].zone === data.request.zoneNumber.toString()) {
           this.dataSource[i].oil = data.value.oil;
           this.dataSource[i].water = data.value.water;
           this.dataSource[i].gas = data.value.gas;
@@ -48,7 +48,7 @@ export class ZoneFlowAllocationComponent implements OnInit {
     });
 
     const snapshotSize = 7;
-    for (let i = 1; i < snapshotSize; i++){
+    for (let i = 1; i < snapshotSize; i += 1) {
       this.wsFlowMonitoringService.subscribeUpdates(i);
     }
 
@@ -60,12 +60,12 @@ export class ZoneFlowAllocationComponent implements OnInit {
       // fromDate?: ,
       // toDate?: ,
       projectId: '60af3d5cdc4e604afc4f8437',
-      wellId: 'wellId222'
+      wellId: 'wellId222',
     };
 
     this.plotRefresh(this.command);
 
-    this.productionMonitoringService.periodicity.subscribe(periodicity => {
+    this.productionMonitoringService.periodicity.subscribe((periodicity) => {
       this.command.periodicity = periodicity;
       this.plotRefresh(this.command);
     });
@@ -77,7 +77,7 @@ export class ZoneFlowAllocationComponent implements OnInit {
     let waterTotal = 0;
     let gasTotal = 0;
 
-    for ( let i = 0; i < zoneFlowProductionData.length; i++){
+    for (let i = 0; i < zoneFlowProductionData.length; i += 1) {
       const dd = zoneFlowProductionData[i];
 
       oilTotal += dd.oil;
@@ -95,7 +95,7 @@ export class ZoneFlowAllocationComponent implements OnInit {
       time: new Date(),
       oil: oilTotal,
       water: waterTotal,
-      gas: gasTotal
+      gas: gasTotal,
     };
     data.push(this.createItem(d, new Date(), 'Total', false));
 
@@ -109,7 +109,7 @@ export class ZoneFlowAllocationComponent implements OnInit {
       outOfLimit,
       oil: data.oil,
       water: data.water,
-      gas: data.gas
+      gas: data.gas,
     };
     return item;
   }
@@ -121,12 +121,14 @@ export class ZoneFlowAllocationComponent implements OnInit {
   }
 
   private plotRefresh(command: ZoneFlowProductionHistoryDataCommand) {
-    this.productionMonitoringService.getZoneFlowProductionHistoryData(command).subscribe((response) => {
-      this.dataSource = this.getDataSource(response.zoneFlowProductionData);
-      console.log(response);
-    }, (error) => {
-      console.log(error);
-    });
+    this.productionMonitoringService.getZoneFlowProductionHistoryData(command).subscribe(
+      (response) => {
+        this.dataSource = this.getDataSource(response.zoneFlowProductionData);
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      },
+    );
   }
 }
 

@@ -8,9 +8,9 @@ describe('TimechartsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TimechartsComponent ]
+      declarations: [TimechartsComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

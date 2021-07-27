@@ -8,9 +8,9 @@ describe('DepthTimeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DepthTimeComponent ]
+      declarations: [DepthTimeComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

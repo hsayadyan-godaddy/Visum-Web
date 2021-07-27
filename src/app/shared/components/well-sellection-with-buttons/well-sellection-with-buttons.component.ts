@@ -1,64 +1,55 @@
-import { Component, OnInit, Input  } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Productionmonitoring } from '../../../models/productionmonitoring/productionmonitoring';
 import { Well } from '../../../models/well';
 import { ProductionMonitoringService } from '../../../services/productionMonitoring.service';
-import {MatDialog} from '@angular/material/dialog';
-import {ProductionMonitoringConstants} from '../../../models/constants/production-monitoring'
+import { ProductionMonitoringConstants } from '../../../models/constants/production-monitoring';
+import { DialogContentComponent } from './dialog-content.component';
+
 @Component({
   selector: 'app-well-sellection-with-buttons',
   templateUrl: './well-sellection-with-buttons.component.html',
-  styleUrls: ['./well-sellection-with-buttons.component.scss']
+  styleUrls: ['./well-sellection-with-buttons.component.scss'],
 })
-export class WellSellectionWithButtonsComponent implements OnInit {
-  @Input('selectedWell')  selectedWellname = ProductionMonitoringConstants.selectedWellname;
+export class WellSellectionWithButtonsComponent {
+  @Input() selectedWell = ProductionMonitoringConstants.selectedWellname;
+
   selected = '';
-  wells : Well[];
-  pmData : Productionmonitoring;
+
+  wells: Well[];
+
+  pmData: Productionmonitoring;
 
   constructor(
-    private _pmService: ProductionMonitoringService,
-    public dialog: MatDialog
-    ) { }
+    private pmService: ProductionMonitoringService,
+    public dialog: MatDialog,
+  ) { }
 
-  getWells() : void
-  {
-    this._pmService.getWells().subscribe((data: Well[])=>{
+  getWells(): void {
+    this.pmService.getWells().subscribe((data: Well[]) => {
       this.wells = data;
     });
   }
 
-  ngOnInit(): void {
-    
-    
-  }
-
-
-
-  onClickCompare(){
+  onClickCompare() {
     // this._pmService.Compare()
-    alert("compare");
+    alert('compare');
   }
 
-  onClickComment(){
-    alert("comment");
-   //this._pmSService.Comment() alert('Comment');
+  onClickComment() {
+    alert('comment');
+    // this._pmSService.Comment() alert('Comment');
   }
 
-  onClickDisplay(){
+  onClickDisplay() {
     alert('Display');
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContent);
-
+    this.dialog.open(DialogContentComponent);
+    // const dialogRef = this.dialog.open(DialogContent);
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log(`Dialog result: ${result}`);
     // });
   }
 }
-
-@Component({
-  selector: 'dialog-content',
-  templateUrl: 'dialog-content.html',
-})
-export class DialogContent {}

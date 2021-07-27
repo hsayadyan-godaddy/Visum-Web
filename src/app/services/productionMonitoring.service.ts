@@ -1,9 +1,8 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { DepthType } from '../enums/depth-type';
 import { Periodicity } from '../enums/periodicity';
 import { Productionmonitoring } from '../models/productionmonitoring/productionmonitoring';
 import { FlowRateHistoryDataCommand } from '../models/Request/FlowRateHistoryDataCommand';
@@ -22,94 +21,150 @@ import { ZoneFlowProductionAcceptableLimitsResponse } from '../models/Response/Z
 import { ZoneFlowProductionHistoryDataResponse } from '../models/Response/ZoneFlowProductionHistoryDataResponse';
 import { ParamBuilder } from '../shared/pipes/parambuilder';
 import { UrlHelper } from '../shared/pipes/urlhelper';
-import {WellboreSearchCommand} from '../models/Request/WellboreSearchCommand';
-import {WellboreSearchResponse} from '../models/Response/WellboreSearchResponse';
+import { WellboreSearchCommand } from '../models/Request/WellboreSearchCommand';
+import { WellboreSearchResponse } from '../models/Response/WellboreSearchResponse';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductionMonitoringService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
+
   readonly AppUrl = environment.API_URL;
-  public periodicity: BehaviorSubject<Periodicity> = new BehaviorSubject<Periodicity>(Periodicity.Hours24);
+
+  public periodicity: BehaviorSubject<Periodicity> =
+  new BehaviorSubject<Periodicity>(Periodicity.Hours24);
+
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   getWells(): Observable<any> {
-    return this.http.get(this.AppUrl + "/Wells/")
+    return this.http.get(`${this.AppUrl}/Wells/`);
   }
 
   getDataByDepthType(type: string): Observable<any> {
-    return this.http.get(this.AppUrl + "/Data/" + type)
+    return this.http.get(`${this.AppUrl}/Data/${type}`);
   }
 
   getData(pmRequest: Productionmonitoring): Observable<Productionmonitoring> {
-    return this.http.post<Productionmonitoring>(this.AppUrl + "url", pmRequest, { headers: this.headers });
+    return this.http.post<Productionmonitoring>(`${this.AppUrl}url`, pmRequest, { headers: this.headers });
   }
 
-
-  async getWellboreProfileZones(wellboreProfileZonesCommand : WellboreProfileZonesCommand): Promise<WellboreProfileZonesResponse> {
-    let params = ParamBuilder.toQueries(wellboreProfileZonesCommand);
-    return this.http.get<WellboreProfileZonesResponse>(this.AppUrl + UrlHelper.WellboreProfileZones, { params : params, headers: this.headers }).toPromise();
+  async getWellboreProfileZones(
+    wellboreProfileZonesCommand: WellboreProfileZonesCommand,
+  ): Promise<WellboreProfileZonesResponse> {
+    const params = ParamBuilder.toQueries(wellboreProfileZonesCommand);
+    return this.http.get<WellboreProfileZonesResponse>(
+      this.AppUrl + UrlHelper.WellboreProfileZones, { params, headers: this.headers },
+    ).toPromise();
   }
 
-  async getWellboreSearch(wellboreSearchCommand : WellboreSearchCommand): Promise<WellboreSearchResponse> {
-    let params = ParamBuilder.toQueries(wellboreSearchCommand);
-    return this.http.get<WellboreSearchResponse>(this.AppUrl + UrlHelper.WellboreSearch, { params : params, headers: this.headers }).toPromise();
+  async getWellboreSearch(
+    wellboreSearchCommand: WellboreSearchCommand,
+  ): Promise<WellboreSearchResponse> {
+    const params = ParamBuilder.toQueries(wellboreSearchCommand);
+    return this.http.get<WellboreSearchResponse>(
+      this.AppUrl + UrlHelper.WellboreSearch, { params, headers: this.headers },
+    ).toPromise();
   }
 
-  getPressureSensors(pressureSensorsCommand : PressureSensorsCommand): Observable<PressureSensorsResponse> {
-    let params = ParamBuilder.toQueries(pressureSensorsCommand);
-    return this.http.get<PressureSensorsResponse>(this.AppUrl + UrlHelper.PressureSensors, {params : params, headers: this.headers });
+  getPressureSensors(
+    pressureSensorsCommand: PressureSensorsCommand,
+  ): Observable<PressureSensorsResponse> {
+    const params = ParamBuilder.toQueries(pressureSensorsCommand);
+    return this.http.get<PressureSensorsResponse>(
+      this.AppUrl + UrlHelper.PressureSensors, { params, headers: this.headers },
+    );
   }
 
-  async getPressureSensorsAsync(pressureSensorsCommand : PressureSensorsCommand): Promise<PressureSensorsResponse> {
-    let params = ParamBuilder.toQueries(pressureSensorsCommand);
-    return this.http.get<PressureSensorsResponse>(this.AppUrl + UrlHelper.PressureSensors, {params : params, headers: this.headers }).toPromise();
+  async getPressureSensorsAsync(
+    pressureSensorsCommand: PressureSensorsCommand,
+  ): Promise<PressureSensorsResponse> {
+    const params = ParamBuilder.toQueries(pressureSensorsCommand);
+    return this.http.get<PressureSensorsResponse>(
+      this.AppUrl + UrlHelper.PressureSensors, { params, headers: this.headers },
+    ).toPromise();
   }
 
-  getFlowRateSensors(flowRateSensorsCommand : FlowRateSensorsCommand): Observable<FlowRateSensorsResponse> {
-    let params = ParamBuilder.toQueries(flowRateSensorsCommand);
-    return this.http.get<FlowRateSensorsResponse>(this.AppUrl + UrlHelper.FlowRateSensors, {params: params, headers: this.headers });
+  getFlowRateSensors(
+    flowRateSensorsCommand: FlowRateSensorsCommand,
+  ): Observable<FlowRateSensorsResponse> {
+    const params = ParamBuilder.toQueries(flowRateSensorsCommand);
+    return this.http.get<FlowRateSensorsResponse>(
+      this.AppUrl + UrlHelper.FlowRateSensors, { params, headers: this.headers },
+    );
   }
 
-  async getFlowRateSensorsAsync(flowRateSensorsCommand : FlowRateSensorsCommand): Promise<FlowRateSensorsResponse> {
-    let params = ParamBuilder.toQueries(flowRateSensorsCommand);
-    return this.http.get<FlowRateSensorsResponse>(this.AppUrl + UrlHelper.FlowRateSensors, {params: params, headers: this.headers }).toPromise();
+  async getFlowRateSensorsAsync(
+    flowRateSensorsCommand: FlowRateSensorsCommand,
+  ): Promise<FlowRateSensorsResponse> {
+    const params = ParamBuilder.toQueries(flowRateSensorsCommand);
+    return this.http.get<FlowRateSensorsResponse>(
+      this.AppUrl + UrlHelper.FlowRateSensors, { params, headers: this.headers },
+    ).toPromise();
   }
 
-  getPressureHistoryData(pressureHistoryDataCommand : PressureHistoryDataCommand): Observable<PressureHistoryDataResponse> {
-    let params = ParamBuilder.toQueries(pressureHistoryDataCommand);
-    return this.http.get<PressureHistoryDataResponse>(this.AppUrl + UrlHelper.PressureHistoryData, {params: params, headers: this.headers });
-  }
-  async getPressureHistoryDataAsync(pressureHistoryDataCommand : PressureHistoryDataCommand): Promise<PressureHistoryDataResponse> {
-    let params = ParamBuilder.toQueries(pressureHistoryDataCommand);
-    return this.http.get<PressureHistoryDataResponse>(this.AppUrl + UrlHelper.PressureHistoryData, {params: params, headers: this.headers }).toPromise();
-  }
-  getFlowRateHistoryData(flowRateHistoryDataCommand : FlowRateHistoryDataCommand): Observable<FlowRateHistoryDataResponse> {
-    let params = ParamBuilder.toQueries(flowRateHistoryDataCommand);
-    return this.http.get<FlowRateHistoryDataResponse>(this.AppUrl + UrlHelper.FlowRateHistoryData, {params: params, headers: this.headers });
+  getPressureHistoryData(
+    pressureHistoryDataCommand: PressureHistoryDataCommand,
+  ): Observable<PressureHistoryDataResponse> {
+    const params = ParamBuilder.toQueries(pressureHistoryDataCommand);
+    return this.http.get<PressureHistoryDataResponse>(
+      this.AppUrl + UrlHelper.PressureHistoryData, { params, headers: this.headers },
+    );
   }
 
-  async getFlowRateHistoryDataAsync(flowRateHistoryDataCommand : FlowRateHistoryDataCommand): Promise<FlowRateHistoryDataResponse> {
-    let params = ParamBuilder.toQueries(flowRateHistoryDataCommand);
-    return this.http.get<FlowRateHistoryDataResponse>(this.AppUrl + UrlHelper.FlowRateHistoryData, {params: params, headers: this.headers }).toPromise();
+  async getPressureHistoryDataAsync(
+    pressureHistoryDataCommand: PressureHistoryDataCommand,
+  ): Promise<PressureHistoryDataResponse> {
+    const params = ParamBuilder.toQueries(pressureHistoryDataCommand);
+    return this.http.get<PressureHistoryDataResponse>(
+      this.AppUrl + UrlHelper.PressureHistoryData, { params, headers: this.headers },
+    ).toPromise();
   }
 
-  getZoneFlowProductionHistoryData(zoneFlowProductionHistoryDataCommand : ZoneFlowProductionHistoryDataCommand): Observable<ZoneFlowProductionHistoryDataResponse> {
-    let params = ParamBuilder.toQueries(zoneFlowProductionHistoryDataCommand);
-    return this.http.get<ZoneFlowProductionHistoryDataResponse>(this.AppUrl + UrlHelper.ZoneFlowProductionHistoryData, { params: params, headers: this.headers });
+  getFlowRateHistoryData(
+    flowRateHistoryDataCommand: FlowRateHistoryDataCommand,
+  ): Observable<FlowRateHistoryDataResponse> {
+    const params = ParamBuilder.toQueries(flowRateHistoryDataCommand);
+    return this.http.get<FlowRateHistoryDataResponse>(
+      this.AppUrl + UrlHelper.FlowRateHistoryData, { params, headers: this.headers },
+    );
   }
 
-  getZoneFlowProductionAcceptableLimits(zoneFlowProductionAcceptableLimitsCommand : ZoneFlowProductionAcceptableLimitsCommand): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
-    let params = ParamBuilder.toQueries(zoneFlowProductionAcceptableLimitsCommand);
-    return this.http.get<ZoneFlowProductionAcceptableLimitsResponse>(this.AppUrl + UrlHelper.ZoneFlowProductionAcceptableLimits, { params: params, headers: this.headers });
+  async getFlowRateHistoryDataAsync(
+    flowRateHistoryDataCommand: FlowRateHistoryDataCommand,
+  ): Promise<FlowRateHistoryDataResponse> {
+    const params = ParamBuilder.toQueries(flowRateHistoryDataCommand);
+    return this.http.get<FlowRateHistoryDataResponse>(
+      this.AppUrl + UrlHelper.FlowRateHistoryData, { params, headers: this.headers },
+    ).toPromise();
   }
 
-  getZoneFlowProductionHistoryDataRates(zoneFlowProductionHistoryDataCommand : ZoneFlowProductionHistoryDataCommand): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
-    let params = ParamBuilder.toQueries(zoneFlowProductionHistoryDataCommand);
-    return this.http.get<ZoneFlowProductionAcceptableLimitsResponse>(this.AppUrl + UrlHelper.ZoneFlowProductionHistoryDataRates, { params: params, headers: this.headers });
+  getZoneFlowProductionHistoryData(
+    zoneFlowProductionHistoryDataCommand: ZoneFlowProductionHistoryDataCommand,
+  ): Observable<ZoneFlowProductionHistoryDataResponse> {
+    const params = ParamBuilder.toQueries(zoneFlowProductionHistoryDataCommand);
+    return this.http.get<ZoneFlowProductionHistoryDataResponse>(
+      this.AppUrl + UrlHelper.ZoneFlowProductionHistoryData, { params, headers: this.headers },
+    );
   }
 
+  getZoneFlowProductionAcceptableLimits(
+    zoneFlowProductionAcceptableLimitsCommand: ZoneFlowProductionAcceptableLimitsCommand,
+  ): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
+    const params = ParamBuilder.toQueries(zoneFlowProductionAcceptableLimitsCommand);
+    return this.http.get<ZoneFlowProductionAcceptableLimitsResponse>(
+      this.AppUrl + UrlHelper.ZoneFlowProductionAcceptableLimits, { params, headers: this.headers },
+    );
+  }
+
+  getZoneFlowProductionHistoryDataRates(
+    zoneFlowProductionHistoryDataCommand: ZoneFlowProductionHistoryDataCommand,
+  ): Observable<ZoneFlowProductionAcceptableLimitsResponse> {
+    const params = ParamBuilder.toQueries(zoneFlowProductionHistoryDataCommand);
+    return this.http.get<ZoneFlowProductionAcceptableLimitsResponse>(
+      this.AppUrl + UrlHelper.ZoneFlowProductionHistoryDataRates, { params, headers: this.headers },
+    );
+  }
 }

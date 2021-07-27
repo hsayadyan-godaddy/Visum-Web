@@ -1,7 +1,7 @@
-import { DepthType } from "src/app/enums/depth-type";
-import { HistoricalDataCommand } from "../productionmonitoring/HistoricalDataCommand";
+import { DepthType } from 'src/app/enums/depth-type';
+import { HistoricalDataCommand } from '../productionmonitoring/HistoricalDataCommand';
 
 export interface ZoneFlowProductionHistoryDataCommand extends HistoricalDataCommand {
-    depthType : DepthType;
-    zoneNumber: number;
+  depthType : DepthType;
+  zoneNumber: number;
 }

@@ -1,10 +1,11 @@
-import {DepthType} from '../../../enums/depth-type';
+import { DepthType } from '../../../enums/depth-type';
 
 export class ZoneFlowProductionDataUpdatesRequestParameters {
+  public projectId: string;
 
-    public projectId: string;
-    public wellId: string;
-    public depthType: DepthType;
-    public zoneNumber: number;
+  public wellId: string;
+
+  public depthType: DepthType;
+
+  public zoneNumber: number;
 }
-

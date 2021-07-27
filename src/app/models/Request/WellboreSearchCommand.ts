@@ -1,4 +1,4 @@
-export interface WellboreSearchCommand  {
+export interface WellboreSearchCommand {
   SearchString: string;
   NearbyWellsOnly: boolean;
   RecentWells: boolean;
